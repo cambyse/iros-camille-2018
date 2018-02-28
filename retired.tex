@@ -1,0 +1,146 @@
+\section{The (PO)LGP Framework}
+Our Partially Observable Logic Geometric Programming approach (POLGP) build on the Logic-Geometric-Programming framework (LGP) presented in prior work.
+Under the LGP framework, each agent state-action on the symbolic level is "grounded" on the geometric level, it puts specific costs, constraints and kinematic switches on the path. 
+"Therefore, a given sequence of agent state-actions, defines a constrained trajectory optimization problem that is solved leveraging non-linear mathematical
+programming (NLP) techniques to efficiently find smooth
+(locally) optimal paths. "
+The geometric level is itself decomposed into several levels. One being the "key-frame" level, the world kinematic is optimized at the end of each action leading to a sequence of key-frames.
+ The optimization at this level is fast and can quickly give inform the symbolic search about the costs and the feasibility a qn action sequence. 
+Another level is the path level at which the path is solved much more finely considering for example 50 steps between each key frame. This phase is performed only on the most solutions that seem the most promising on the symbolic and key-frame level.
+
+\section{Introduction}
+We address the problem of joint symbolic and geometric planning under partial observability. As an example, we consider a robot equipped with a vision sensor and having to fetch  an object placed in a box, the robot is surrounded by several boxes and doesn't know which one contains the object to fetch (cf Figure 1). To perform its task, the robot has to "take a look" inside boxes, it may imply moving its sensor, alternatively, the robot can grasp and move boxes to place them in the sensor field of view, or a combination of those two. Some boxes being potentially closed, the robot may have to open them first. Our approach aims at planning optimal paths for all the robot joints. In addition to object manipulation, this TAMP approach features elements traditionally referred to as "Sensor placement optimization" and "Active perception".
+
+Our approach continues and generalizes the Logic-Geometric-Program (LGP) framework presented in previous works[X]. The LGP approach is generalized to handle partial observability. Within the LGP framework a TAMP problem is framed as an optimization problem, the planner makes categorical
+decisions about the type and order of manipulations. Those categorical decisions imply optimization costs and constraints as well as kinematic switches that are used by the planner to optimizes paths for the robot joints. The result of the the path optimization pass then inform the symbolic search to finally converge toward an optimal sequence of actions and associated paths. We call this kind of problems Partially Observable Logic Geometric Program (PO-LGP). As the prior 
+
+// a bit more about LGP, how it is different from rest
+// what implies the partial observability
+
+// here put related work
+
+// our main contributions are
+
+// "To our knowledge, this is the first.."
+%\section{Related work}
+
+// next best view
+// papers from Marc
+// papers from MIT
+// papers containers
+
+\subsection{Subsection Heading Here}
+Subsection text here.
+
+\subsubsection{Subsubsection Heading Here}
+Subsubsection text here.
+
+\section{Logic-Geometric-Programming}
+We recap here the Logic Geometric Programming formulation, for more details, we refer the reader to [Y][Z]. As a starting point the 
+
+\section{Problem statement}
+
+\subsection{LGP formalism}
+Subsection text here.
+
+\subsection{State representation}
+Subsection text here.
+
+\subsection{Actions}
+Subsection text here.
+
+\subsection{Trajectory tree formulation}
+
+\section{Solver}
+
+\section{Conclusion} 
+
+
+
+\begin{tikzpicture}
+\begin{axis}[
+    title={Policy value evaluation},
+    xlabel={Iterations},
+    ylabel={Value},
+    xmin=0, xmax=14,
+    ymin=-2, ymax=0.5,
+    xtick={0,5,10,15,20},
+    ytick={-2,-1.5,-1,-0.5,0,0.5},
+    legend pos=north west,
+    legend columns=2, 
+    ymajorgrids=true,
+    grid style=dashed,
+]
+\addplot[ 
+    color=orange,
+    dashed,
+    ]
+    table [col sep=comma]{data/1m1/-0.015/10/policy-candidates.data};
+    \addlegendentry{$candidate, R_0=-0.015$}
+    
+\addplot[ 
+    color=orange,
+    ]
+    table [col sep=comma]{data/1m1/-0.015/10/policy-results.data};
+    \addlegendentry{$results, R_0=-0.015$}
+    
+\addplot[ 
+    color=blue,
+    dashed,
+    ]
+    table [col sep=comma]{data/1m1/-0.1/10/policy-candidates.data};
+    \addlegendentry{$candidate, R_0=-0.1$}
+    
+\addplot[ 
+    color=blue,
+    ]
+    table [col sep=comma]{data/1m1/-0.1/10/policy-results.data};
+    \addlegendentry{$results, R_0=-0.1$}
+            
+\end{axis}
+\label{figure:convergence-A}
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\begin{axis}[
+    title={Policy value evaluation},
+    xlabel={Iterations},
+    ylabel={Value},
+    xmin=0, xmax=20,
+    ymin=-2, ymax=0.5,
+    xtick={0,5,10,15,20},
+    ytick={-2,-1.5,-1,-0.5,0,0.5},
+    legend pos=north west,
+    legend columns=2, 
+    ymajorgrids=true,
+    grid style=dashed,
+]
+\addplot[ 
+    color=orange,
+    dashed,
+    ]
+    table [col sep=comma]{data/1m2/-0.015/10/policy-candidates.data};
+    \addlegendentry{$candidate, R_0=-0.015$}
+    
+\addplot[ 
+    color=orange,
+    ]
+    table [col sep=comma]{data/1m2/-0.015/10/policy-results.data};
+    \addlegendentry{$results, R_0=-0.015$}
+    
+\addplot[ 
+    color=blue,
+    dashed,
+    ]
+    table [col sep=comma]{data/1m2/-0.1/10/policy-candidates.data};
+    \addlegendentry{$candidate, R_0=-0.1$}
+    
+\addplot[ 
+    color=blue,
+    ]
+    table [col sep=comma]{data/1m2/-0.1/10/policy-results.data};
+    \addlegendentry{$results, R_0=-0.1$}
+            
+\end{axis}
+\label{figure:convergence-A2}
+\end{tikzpicture}

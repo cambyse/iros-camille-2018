@@ -1,0 +1,61 @@
+digraph g{
+label="value=-0.320592"
+labelloc=top
+0->4 [ label="(unstack block_3 block_1)
+r=-0.0196266" ];
+4->16 [ label="(stack block_3 block_2)
+r=-0.123966" ];
+"16'" [ shape=box ] ;
+16->"16'" [ label="(check block_1)" ];
+"16'"->37 [ label="
+r=-0.015
+p=0.4
+q=0.4" ];
+37->10 [ label="(unstack block_3 block_2)
+r=-0.015" ];
+10->28 [ label="(put-down block_3 tableC_right)
+r=-0.015" ];
+28->46 [ label="(pick-up block_2 tableC_left)
+r=-0.0458884" ];
+46->77 [ label="(stack block_2 block_3)
+r=-0.015" ];
+77->124 [ label="(pick-up block_1 tableC_center)
+r=-0.015" ];
+124->183 [ label="(put-down block_1 tableC_left)
+r=-0.015" ];
+183->245 [ label="(unstack block_2 block_3)
+r=-0.015" ];
+245->311 [ label="(stack block_2 block_1)
+r=-0.015" ];
+311->378 [ label="(pick-up block_3 tableC_right)
+r=-0.015" ];
+378->445 [ label="(stack block_3 block_2)
+r=-0.015" ];
+"16'"->38 [ label="
+(is block_1 block_a),
+(is block_3 block_c),
+(on block_c block_b),
+r=-0.015
+p=0.6
+q=0.6" ];
+38->12 [ label="(unstack block_3 block_2)
+r=-0.015" ];
+12->23 [ label="(stack block_3 block_1)
+r=-0.015" ];
+23->11 [ label="(pick-up block_2 tableC_left)
+r=-0.015" ];
+11->24 [ label="(put-down block_2 tableC_right)
+r=-0.015" ];
+24->40 [ label="(unstack block_3 block_1)
+r=-0.015" ];
+40->65 [ label="(put-down block_3 tableC_left)
+r=-0.015" ];
+65->107 [ label="(pick-up block_2 tableC_right)
+r=-0.015" ];
+107->159 [ label="(stack block_2 block_3)
+r=-0.015" ];
+159->225 [ label="(pick-up block_1 tableC_center)
+r=-0.015" ];
+225->284 [ label="(stack block_1 block_2)
+r=-0.015" ];
+}

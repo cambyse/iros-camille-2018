@@ -1,0 +1,18 @@
+digraph g{
+label="value=-10.5"
+labelloc=top
+0->3 [ label="(unstack block_3 block_1)
+r=-1.5" ];
+3->5 [ label="(check block_3)
+r=-1.5" ];
+5->12 [ label="(put-down block_3 tableC_right)
+r=-1.5" ];
+12->20 [ label="(pick-up block_2 tableC_left)
+r=-1.5" ];
+20->35 [ label="(stack block_2 block_3)
+r=-1.5" ];
+35->52 [ label="(pick-up block_1 tableC_center)
+r=-1.5" ];
+52->81 [ label="(stack block_1 block_2)
+r=-1.5" ];
+}

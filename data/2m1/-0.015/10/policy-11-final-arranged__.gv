@@ -1,0 +1,23 @@
+digraph g{
+node[margin=0];
+edge[fontsize = 35];
+graph[];
+136 [style=filled, fillcolor=green]
+147 [style=filled, fillcolor=green]
+0 [style=filled, fillcolor=blue]
+0->2 [ label="(grasp block_3)" ];
+"2'" [ shape=box ] ;
+2->"2'" [ label="(look block_3)" ];
+"2'"->5 [ label="[is block_3 red]" ];
+5->10 [ label="(place block_3 table_right)" ];
+10->24 [ label="(grasp block_2)" ];
+24->54 [ label="(place block_2 block_1)" ];
+54->91 [ label="(grasp block_3)" ];
+91->136 [ label="(place block_3 block_2)" ];
+"2'"->6 [ label="[is block_3 blue]" ];
+6->13 [ label="(place block_3 table_right)" ];
+13->29 [ label="(grasp block_2)" ];
+29->62 [ label="(place block_2 block_3)" ];
+62->97 [ label="(grasp block_1)" ];
+97->147 [ label="(place block_1 block_2)" ];
+}

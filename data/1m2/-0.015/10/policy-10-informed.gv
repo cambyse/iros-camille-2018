@@ -1,0 +1,30 @@
+digraph g{
+label="value=-1.18848"
+labelloc=top
+0->3 [ label="(unstack block_3 block_1)
+r=-0.0196016" ];
+3->8 [ label="(put-down block_3 tableC_right)
+r=-0.15325" ];
+8->12 [ label="(check block_3)
+r=-0.183375" ];
+12->19 [ label="(pick-up block_1 tableC_center)
+r=-0.0545554" ];
+19->33 [ label="(stack block_1 block_3)
+r=-0.144646" ];
+33->50 [ label="(pick-up block_2 tableC_left)
+r=-0.0406335" ];
+50->77 [ label="(put-down block_2 tableC_center)
+r=-0.113966" ];
+77->98 [ label="(unstack block_1 block_3)
+r=-0.0397458" ];
+98->127 [ label="(put-down block_1 tableC_left)
+r=-0.112052" ];
+127->99 [ label="(pick-up block_2 tableC_center)
+r=-0.0285471" ];
+99->80 [ label="(stack block_2 block_3)
+r=-0.123189" ];
+80->52 [ label="(pick-up block_1 tableC_left)
+r=-0.042639" ];
+52->81 [ label="(stack block_1 block_2)
+r=-0.132277" ];
+}

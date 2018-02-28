@@ -1,0 +1,4 @@
+graph_building_s=0.559327
+task_planning_s=0.016733
+motion_planning_s=2.85995
+joint_motion_planning_s=21.5142

@@ -1,0 +1,219 @@
+** compiled at:     Jan 24 2018 18:03:09
+** execution start: 1970-01-01 01:00:00.000000
+initCmdLine:util.cpp:650(1) ** cmd line arguments: '/home/camille/Dev/Phd/mlr-build/17-camille-obsTask/apps/lgp-tree-po-self-driving/lgp-tree-po-self-driving '
+clockSeed:util.cpp:1140(3) random clock seed: 3209098365
+
+getIs:util.cpp:1105(3) opening input file `LGP-overtaking-kin-2w_bis.g'
+
+getIs:util.cpp:1105(3) opening input file `LGP-overtaking-kin-2w_bis.g'
+
+getIs:util.cpp:1105(3) opening input file `LGP-overtaking-kin-2w_bis.g'
+
+getIs:util.cpp:1105(3) opening input file `LGP-overtaking-2w.g'
+
+getIs:util.cpp:1105(3) opening input file `data/keywords.g'
+
+changeDir:util.cpp:1069(3) entering path `data' from '/home/camille/Dev/Phd/mlr-build/17-camille-obsTask/apps/lgp-tree-po-self-driving'
+
+unchangeDir:util.cpp:1077(3) leaving path `data' back to '/home/camille/Dev/Phd/mlr-build/17-camille-obsTask/apps/lgp-tree-po-self-driving'
+
+getIs:util.cpp:1105(3) opening input file `LGP-overtaking-2w.g'
+
+getIs:util.cpp:1105(3) opening input file `data/keywords.g'
+
+changeDir:util.cpp:1069(3) entering path `data' from '/home/camille/Dev/Phd/mlr-build/17-camille-obsTask/apps/lgp-tree-po-self-driving'
+
+unchangeDir:util.cpp:1077(3) leaving path `data' back to '/home/camille/Dev/Phd/mlr-build/17-camille-obsTask/apps/lgp-tree-po-self-driving'
+
+open:util.cpp:117(3) opening output file `z.FOL_World'
+
+getIs:util.cpp:1105(3) opening input file `LGP-overtaking-2w.g'
+
+getIs:util.cpp:1105(3) opening input file `data/keywords.g'
+
+changeDir:util.cpp:1069(3) entering path `data' from '/home/camille/Dev/Phd/mlr-build/17-camille-obsTask/apps/lgp-tree-po-self-driving'
+
+unchangeDir:util.cpp:1077(3) leaving path `data' back to '/home/camille/Dev/Phd/mlr-build/17-camille-obsTask/apps/lgp-tree-po-self-driving'
+
+open:util.cpp:117(3) opening output file `z.FOL_World'
+
+RegistryInitializer:graph.cpp:1047(3) opening config file 'MT.cfg'
+getParameterBase:util.tpp:75(3)         KOMO/verbose =     1 [i] (default!)
+getOs:util.cpp:1093(3) opening output file `z.komo.model'
+
+getParameterBase:util.tpp:75(3) Motion/TaskMapTransition/posCoeff =     0 [d] (default!)
+getParameterBase:util.tpp:52(3) Motion/TaskMapTransition/velCoeff =     0 [d] (graph!)
+getParameterBase:util.tpp:52(3) Motion/TaskMapTransition/accCoeff =    80 [d] (graph!)
+getParameterBase:util.tpp:75(3)                Hrate =     1 [d] (default!)
+getParameterBase:util.tpp:75(3)          swiftCutoff =  0.11 [d] (default!)
+getParameterBase:util.tpp:52(3)          opt/verbose =     2 [j] (graph!)
+getParameterBase:util.tpp:52(3)    opt/stopTolerance = 0.001 [d] (graph!)
+getParameterBase:util.tpp:75(3)   opt/stopFTolerance =   0.1 [d] (default!)
+getParameterBase:util.tpp:75(3)   opt/stopGTolerance =    -1 [d] (default!)
+getParameterBase:util.tpp:75(3)        opt/stopEvals =  1000 [j] (default!)
+getParameterBase:util.tpp:52(3)        opt/stopIters =  1000 [j] (graph!)
+getParameterBase:util.tpp:75(3)    opt/stopLineSteps =    10 [j] (default!)
+getParameterBase:util.tpp:75(3)    opt/stopTinySteps =    10 [j] (default!)
+getParameterBase:util.tpp:75(3)         opt/initStep =     1 [d] (default!)
+getParameterBase:util.tpp:75(3)          opt/minStep =    -1 [d] (default!)
+getParameterBase:util.tpp:52(3)          opt/maxStep =   0.2 [d] (graph!)
+getParameterBase:util.tpp:52(3)          opt/damping =   0.5 [d] (graph!)
+getParameterBase:util.tpp:75(3)          opt/stepInc =     2 [d] (default!)
+getParameterBase:util.tpp:75(3)          opt/stepDec =   0.1 [d] (default!)
+getParameterBase:util.tpp:75(3)       opt/dampingInc =     2 [d] (default!)
+getParameterBase:util.tpp:75(3)       opt/dampingDec =   0.5 [d] (default!)
+getParameterBase:util.tpp:75(3)            opt/wolfe =  0.01 [d] (default!)
+getParameterBase:util.tpp:75(3)   opt/nonStrictSteps =     0 [j] (default!)
+getParameterBase:util.tpp:75(3)    opt/allowOverstep =     0 [b] (default!)
+getParameterBase:util.tpp:52(3) opt/constrainedMethod =     2 [i] (graph!)
+getParameterBase:util.tpp:75(3)           opt/muInit =     1 [d] (default!)
+getParameterBase:util.tpp:75(3)         opt/muLBInit =     1 [d] (default!)
+getParameterBase:util.tpp:52(3)        opt/aulaMuInc =     1 [d] (graph!)
+getParameterBase:util.tpp:75(3)         KOMO/verbose =     1 [i] (default!)
+getOs:util.cpp:1093(3) opening output file `z.komo.model'
+
+getParameterBase:util.tpp:75(3) Motion/TaskMapTransition/posCoeff =     0 [d] (default!)
+getParameterBase:util.tpp:52(3) Motion/TaskMapTransition/velCoeff =     0 [d] (graph!)
+getParameterBase:util.tpp:52(3) Motion/TaskMapTransition/accCoeff =    80 [d] (graph!)
+getParameterBase:util.tpp:75(3)                Hrate =     1 [d] (default!)
+getParameterBase:util.tpp:75(3)          swiftCutoff =  0.11 [d] (default!)
+getParameterBase:util.tpp:75(3)         KOMO/verbose =     1 [i] (default!)
+getOs:util.cpp:1093(3) opening output file `z.komo.model'
+
+getParameterBase:util.tpp:75(3) Motion/TaskMapTransition/posCoeff =     0 [d] (default!)
+getParameterBase:util.tpp:52(3) Motion/TaskMapTransition/velCoeff =     0 [d] (graph!)
+getParameterBase:util.tpp:52(3) Motion/TaskMapTransition/accCoeff =    80 [d] (graph!)
+getParameterBase:util.tpp:75(3)                Hrate =     1 [d] (default!)
+getParameterBase:util.tpp:75(3)          swiftCutoff =  0.11 [d] (default!)
+getParameterBase:util.tpp:75(3)         KOMO/verbose =     1 [i] (default!)
+getOs:util.cpp:1093(3) opening output file `z.komo.model'
+
+getParameterBase:util.tpp:75(3) Motion/TaskMapTransition/posCoeff =     0 [d] (default!)
+getParameterBase:util.tpp:52(3) Motion/TaskMapTransition/velCoeff =     0 [d] (graph!)
+getParameterBase:util.tpp:52(3) Motion/TaskMapTransition/accCoeff =    80 [d] (graph!)
+getParameterBase:util.tpp:75(3)                Hrate =     1 [d] (default!)
+getParameterBase:util.tpp:75(3)          swiftCutoff =  0.11 [d] (default!)
+getParameterBase:util.tpp:75(3)         KOMO/verbose =     1 [i] (default!)
+getOs:util.cpp:1093(3) opening output file `z.komo.model'
+
+getParameterBase:util.tpp:75(3) Motion/TaskMapTransition/posCoeff =     0 [d] (default!)
+getParameterBase:util.tpp:52(3) Motion/TaskMapTransition/velCoeff =     0 [d] (graph!)
+getParameterBase:util.tpp:52(3) Motion/TaskMapTransition/accCoeff =    80 [d] (graph!)
+getParameterBase:util.tpp:75(3)                Hrate =     1 [d] (default!)
+getParameterBase:util.tpp:75(3)          swiftCutoff =  0.11 [d] (default!)
+getParameterBase:util.tpp:75(3)         KOMO/verbose =     1 [i] (default!)
+getOs:util.cpp:1093(3) opening output file `z.komo.model'
+
+getParameterBase:util.tpp:75(3) Motion/TaskMapTransition/posCoeff =     0 [d] (default!)
+getParameterBase:util.tpp:52(3) Motion/TaskMapTransition/velCoeff =     0 [d] (graph!)
+getParameterBase:util.tpp:52(3) Motion/TaskMapTransition/accCoeff =    80 [d] (graph!)
+getParameterBase:util.tpp:75(3)                Hrate =     1 [d] (default!)
+getParameterBase:util.tpp:75(3)          swiftCutoff =  0.11 [d] (default!)
+getParameterBase:util.tpp:75(3)         KOMO/verbose =     1 [i] (default!)
+getOs:util.cpp:1093(3) opening output file `z.komo.model'
+
+getParameterBase:util.tpp:75(3) Motion/TaskMapTransition/posCoeff =     0 [d] (default!)
+getParameterBase:util.tpp:52(3) Motion/TaskMapTransition/velCoeff =     0 [d] (graph!)
+getParameterBase:util.tpp:52(3) Motion/TaskMapTransition/accCoeff =    80 [d] (graph!)
+getParameterBase:util.tpp:75(3)                Hrate =     1 [d] (default!)
+getParameterBase:util.tpp:75(3) Motion/TaskMapTransition/posCoeff =     0 [d] (default!)
+getParameterBase:util.tpp:52(3) Motion/TaskMapTransition/velCoeff =     0 [d] (graph!)
+getParameterBase:util.tpp:52(3) Motion/TaskMapTransition/accCoeff =    80 [d] (graph!)
+getParameterBase:util.tpp:75(3)                Hrate =     1 [d] (default!)
+getParameterBase:util.tpp:75(3)          swiftCutoff =  0.11 [d] (default!)
+getOs:util.cpp:1093(3) opening output file `z.plotcmd'
+
+getParameterBase:util.tpp:75(3)         KOMO/verbose =     1 [i] (default!)
+getOs:util.cpp:1093(3) opening output file `z.komo.model'
+
+getParameterBase:util.tpp:75(3) Motion/TaskMapTransition/posCoeff =     0 [d] (default!)
+getParameterBase:util.tpp:52(3) Motion/TaskMapTransition/velCoeff =     0 [d] (graph!)
+getParameterBase:util.tpp:52(3) Motion/TaskMapTransition/accCoeff =    80 [d] (graph!)
+getParameterBase:util.tpp:75(3)                Hrate =     1 [d] (default!)
+getParameterBase:util.tpp:75(3) Motion/TaskMapTransition/posCoeff =     0 [d] (default!)
+getParameterBase:util.tpp:52(3) Motion/TaskMapTransition/velCoeff =     0 [d] (graph!)
+getParameterBase:util.tpp:52(3) Motion/TaskMapTransition/accCoeff =    80 [d] (graph!)
+getParameterBase:util.tpp:75(3)                Hrate =     1 [d] (default!)
+getParameterBase:util.tpp:75(3)          swiftCutoff =  0.11 [d] (default!)
+getOs:util.cpp:1093(3) opening output file `z.plotcmd'
+
+getParameterBase:util.tpp:75(3)         KOMO/verbose =     1 [i] (default!)
+getOs:util.cpp:1093(3) opening output file `z.komo.model'
+
+getParameterBase:util.tpp:75(3) Motion/TaskMapTransition/posCoeff =     0 [d] (default!)
+getParameterBase:util.tpp:52(3) Motion/TaskMapTransition/velCoeff =     0 [d] (graph!)
+getParameterBase:util.tpp:52(3) Motion/TaskMapTransition/accCoeff =    80 [d] (graph!)
+getParameterBase:util.tpp:75(3)                Hrate =     1 [d] (default!)
+getParameterBase:util.tpp:75(3) Motion/TaskMapTransition/posCoeff =     0 [d] (default!)
+getParameterBase:util.tpp:52(3) Motion/TaskMapTransition/velCoeff =     0 [d] (graph!)
+getParameterBase:util.tpp:52(3) Motion/TaskMapTransition/accCoeff =    80 [d] (graph!)
+getParameterBase:util.tpp:75(3)                Hrate =     1 [d] (default!)
+getParameterBase:util.tpp:75(3)          swiftCutoff =  0.11 [d] (default!)
+getOs:util.cpp:1093(3) opening output file `z.plotcmd'
+
+getParameterBase:util.tpp:75(3)         KOMO/verbose =     1 [i] (default!)
+getOs:util.cpp:1093(3) opening output file `z.komo.model'
+
+getParameterBase:util.tpp:75(3) Motion/TaskMapTransition/posCoeff =     0 [d] (default!)
+getParameterBase:util.tpp:52(3) Motion/TaskMapTransition/velCoeff =     0 [d] (graph!)
+getParameterBase:util.tpp:52(3) Motion/TaskMapTransition/accCoeff =    80 [d] (graph!)
+getParameterBase:util.tpp:75(3)                Hrate =     1 [d] (default!)
+getParameterBase:util.tpp:75(3) Motion/TaskMapTransition/posCoeff =     0 [d] (default!)
+getParameterBase:util.tpp:52(3) Motion/TaskMapTransition/velCoeff =     0 [d] (graph!)
+getParameterBase:util.tpp:52(3) Motion/TaskMapTransition/accCoeff =    80 [d] (graph!)
+getParameterBase:util.tpp:75(3)                Hrate =     1 [d] (default!)
+getParameterBase:util.tpp:75(3)          swiftCutoff =  0.11 [d] (default!)
+getOs:util.cpp:1093(3) opening output file `z.plotcmd'
+
+getParameterBase:util.tpp:75(3)         KOMO/verbose =     1 [i] (default!)
+getOs:util.cpp:1093(3) opening output file `z.komo.model'
+
+getParameterBase:util.tpp:75(3) Motion/TaskMapTransition/posCoeff =     0 [d] (default!)
+getParameterBase:util.tpp:52(3) Motion/TaskMapTransition/velCoeff =     0 [d] (graph!)
+getParameterBase:util.tpp:52(3) Motion/TaskMapTransition/accCoeff =    80 [d] (graph!)
+getParameterBase:util.tpp:75(3)                Hrate =     1 [d] (default!)
+getParameterBase:util.tpp:75(3) Motion/TaskMapTransition/posCoeff =     0 [d] (default!)
+getParameterBase:util.tpp:52(3) Motion/TaskMapTransition/velCoeff =     0 [d] (graph!)
+getParameterBase:util.tpp:52(3) Motion/TaskMapTransition/accCoeff =    80 [d] (graph!)
+getParameterBase:util.tpp:75(3)                Hrate =     1 [d] (default!)
+getParameterBase:util.tpp:75(3)          swiftCutoff =  0.11 [d] (default!)
+getParameterBase:util.tpp:75(3)         KOMO/verbose =     1 [i] (default!)
+getOs:util.cpp:1093(3) opening output file `z.komo.model'
+
+getParameterBase:util.tpp:75(3) Motion/TaskMapTransition/posCoeff =     0 [d] (default!)
+getParameterBase:util.tpp:52(3) Motion/TaskMapTransition/velCoeff =     0 [d] (graph!)
+getParameterBase:util.tpp:52(3) Motion/TaskMapTransition/accCoeff =    80 [d] (graph!)
+getParameterBase:util.tpp:75(3)                Hrate =     1 [d] (default!)
+getParameterBase:util.tpp:75(3) Motion/TaskMapTransition/posCoeff =     0 [d] (default!)
+getParameterBase:util.tpp:52(3) Motion/TaskMapTransition/velCoeff =     0 [d] (graph!)
+getParameterBase:util.tpp:52(3) Motion/TaskMapTransition/accCoeff =    80 [d] (graph!)
+getParameterBase:util.tpp:75(3)                Hrate =     1 [d] (default!)
+getParameterBase:util.tpp:75(3)          swiftCutoff =  0.11 [d] (default!)
+getParameterBase:util.tpp:75(3)         KOMO/verbose =     1 [i] (default!)
+getOs:util.cpp:1093(3) opening output file `z.komo.model'
+
+getParameterBase:util.tpp:75(3) Motion/TaskMapTransition/posCoeff =     0 [d] (default!)
+getParameterBase:util.tpp:52(3) Motion/TaskMapTransition/velCoeff =     0 [d] (graph!)
+getParameterBase:util.tpp:52(3) Motion/TaskMapTransition/accCoeff =    80 [d] (graph!)
+getParameterBase:util.tpp:75(3)                Hrate =     1 [d] (default!)
+getParameterBase:util.tpp:75(3) Motion/TaskMapTransition/posCoeff =     0 [d] (default!)
+getParameterBase:util.tpp:52(3) Motion/TaskMapTransition/velCoeff =     0 [d] (graph!)
+getParameterBase:util.tpp:52(3) Motion/TaskMapTransition/accCoeff =    80 [d] (graph!)
+getParameterBase:util.tpp:75(3)                Hrate =     1 [d] (default!)
+getParameterBase:util.tpp:75(3)          swiftCutoff =  0.11 [d] (default!)
+getOs:util.cpp:1093(3) opening output file `z.plotcmd'
+
+getParameterBase:util.tpp:75(3)         KOMO/verbose =     1 [i] (default!)
+getOs:util.cpp:1093(3) opening output file `z.komo.model'
+
+getParameterBase:util.tpp:75(3) Motion/TaskMapTransition/posCoeff =     0 [d] (default!)
+getParameterBase:util.tpp:52(3) Motion/TaskMapTransition/velCoeff =     0 [d] (graph!)
+getParameterBase:util.tpp:52(3) Motion/TaskMapTransition/accCoeff =    80 [d] (graph!)
+getParameterBase:util.tpp:75(3)                Hrate =     1 [d] (default!)
+getParameterBase:util.tpp:75(3) Motion/TaskMapTransition/posCoeff =     0 [d] (default!)
+getParameterBase:util.tpp:52(3) Motion/TaskMapTransition/velCoeff =     0 [d] (graph!)
+getParameterBase:util.tpp:52(3) Motion/TaskMapTransition/accCoeff =    80 [d] (graph!)
+getParameterBase:util.tpp:75(3)                Hrate =     1 [d] (default!)
+getParameterBase:util.tpp:75(3)          swiftCutoff =  0.11 [d] (default!)
+getOs:util.cpp:1093(3) opening output file `z.plotcmd'
+

@@ -1,0 +1,25 @@
+frame car_ego(_6) 	{ frame car_ego(_6) 	{  shape=ST_ssBox size=[  0.2 0.1 0.1 0.003  ] color=[ 0 1 1 ] contact,  }
+ }
+frame truck(_8) 	{ frame truck(_8) 	{  shape=ST_ssBox size=[  0.5 0.12 0.2 0.05  ] color=[ 1 0 1 ] contact,  }
+ }
+frame car_op(_10) 	{ frame car_op(_10) 	{  shape=ST_ssBox size=[  0.2 0.1 0.1 0.003  ] color=[ 1 0 0 ] contact,  }
+ }
+frame lane_1 	{ frame lane_1 	{  X=<T 0 -0.1 0 1 0 0 0 >  shape=ST_ssBox size=[  5 0.2 0.04 0.01  ] color=[ 0.3 0.3 0.3 ]  }
+ }
+frame line 	{ frame line 	{  shape=ST_ssBox size=[  5 0.02 0.041 0.01  ] color=[ 1 1 1 ]  }
+ }
+frame lane_2 	{ frame lane_2 	{  X=<T 0 0.1 0 1 0 0 0 >  shape=ST_ssBox size=[  5 0.2 0.04 0.01  ] color=[ 0.3 0.3 0.3 ]  }
+ }
+frame _6(_7) 	{ frame _6(_7) 	{  joint=JT_transXY ctrl_H=1 }
+ }
+frame _7(lane_1) 	{ frame _7(lane_1) 	{  Q=<T -2 0.01 0.05 1 0 0 0 >  }
+ }
+frame _8(_9) 	{ frame _8(_9) 	{  joint=JT_transX ctrl_H=1 }
+ }
+frame _9(lane_1) 	{ frame _9(lane_1) 	{  Q=<T -1.3 0 0.05 1 0 0 0 >  }
+ }
+frame _10(_11) 	{ frame _10(_11) 	{  joint=JT_transX ctrl_H=1 }
+ }
+frame _11(lane_2) 	{ frame _11(lane_2) 	{  Q=<T 2.3 0 0.05 1 0 0 0 >  }
+ }
+
