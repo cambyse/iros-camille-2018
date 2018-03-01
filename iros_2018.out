@@ -2,22 +2,21 @@
 \BOOKMARK [1][-]{section.2}{RELATED WORK}{}% 2
 \BOOKMARK [1][-]{section.3}{Problem statement}{}% 3
 \BOOKMARK [2][-]{subsection.3.1}{Decision graph}{section.3}% 4
-\BOOKMARK [3][-]{subsubsection.3.1.1}{Example of decision graph}{subsection.3.1}% 5
+\BOOKMARK [3][-]{subsubsection.3.1.1}{Example for a decision graph}{subsection.3.1}% 5
 \BOOKMARK [3][-]{subsubsection.3.1.2}{Policy}{subsection.3.1}% 6
 \BOOKMARK [1][-]{section.4}{TAMP Algorithm}{}% 7
 \BOOKMARK [2][-]{subsection.4.1}{Graph Building}{section.4}% 8
 \BOOKMARK [2][-]{subsection.4.2}{Value Iteration on the decision graph}{section.4}% 9
 \BOOKMARK [2][-]{subsection.4.3}{Fast Motion Planning}{section.4}% 10
-\BOOKMARK [3][-]{subsubsection.4.3.1}{Early stopping : Pose level optimization}{subsection.4.3}% 11
+\BOOKMARK [3][-]{subsubsection.4.3.1}{Pose level optimization}{subsection.4.3}% 11
 \BOOKMARK [3][-]{subsubsection.4.3.2}{Trajectory optimization}{subsection.4.3}% 12
-\BOOKMARK [2][-]{subsection.4.4}{Backup Mechanism}{section.4}% 13
-\BOOKMARK [2][-]{subsection.4.5}{Rewards initialization and graph exploration}{section.4}% 14
-\BOOKMARK [2][-]{subsection.4.6}{Joint Motion Planning}{section.4}% 15
-\BOOKMARK [1][-]{section.5}{Experimental Results}{}% 16
-\BOOKMARK [2][-]{subsection.5.1}{Overtaking behavior}{section.5}% 17
-\BOOKMARK [2][-]{subsection.5.2}{Sussman anomaly under partial observability}{section.5}% 18
-\BOOKMARK [3][-]{subsubsection.5.2.1}{Influence of initial rewards}{subsection.5.2}% 19
-\BOOKMARK [3][-]{subsubsection.5.2.2}{Influence of the action precondition}{subsection.5.2}% 20
-\BOOKMARK [3][-]{subsubsection.5.2.3}{Execution time and scalability}{subsection.5.2}% 21
-\BOOKMARK [1][-]{section.6}{Conclusion \046 Future Work}{}% 22
-\BOOKMARK [1][-]{section*.10}{References}{}% 23
+\BOOKMARK [2][-]{subsection.4.4}{Rewards initialization and graph exploration}{section.4}% 13
+\BOOKMARK [2][-]{subsection.4.5}{Joint Motion Planning}{section.4}% 14
+\BOOKMARK [1][-]{section.5}{Experimental Results}{}% 15
+\BOOKMARK [2][-]{subsection.5.1}{Overtaking behavior}{section.5}% 16
+\BOOKMARK [2][-]{subsection.5.2}{Sussman anomaly under partial observability}{section.5}% 17
+\BOOKMARK [3][-]{subsubsection.5.2.1}{Influence of initial rewards}{subsection.5.2}% 18
+\BOOKMARK [3][-]{subsubsection.5.2.2}{Influence of the action precondition}{subsection.5.2}% 19
+\BOOKMARK [3][-]{subsubsection.5.2.3}{Execution time and scalability}{subsection.5.2}% 20
+\BOOKMARK [1][-]{section.6}{Conclusion \046 Future Work}{}% 21
+\BOOKMARK [1][-]{section*.11}{References}{}% 22
