@@ -121,8 +121,8 @@ the discretization of the configuration spaces or action/skeleton parameters to 
 Planning for autonomous driving also entails a layered decision making process with a combination of symbolic decisions and planning in a continuous space. [6][7] provide a surveys about planning for self-driving cars. To our knowledge, there exists no literature on TAMP approaches for decision making in the automotive context. 
 
 \section{Problem statement}
-
-We model the task planning part as a particular kind of POMDP $(S, A, T, R, \Omega, O, \gamma)$, where $S$ is a set of symbolic states, and $A$ is a set of symbolic actions. Trajectory cost and constraint functions are associated to each action. These functions implicitly define the action reward \marc{return...} and geometric effect of actions: Given a geometric start configuration, the cost and constraint functions of an action define an optimal trajectory. The action reward is the negative cost of this optimal trajectory, the geometric configuration reached after this action is the last configuration of this optimal trajectory.
+%\marc{return...}
+We model the task planning part as a particular kind of POMDP $(S, A, T, R, \Omega, O, \gamma)$, where $S$ is a set of symbolic states, and $A$ is a set of symbolic actions. Trajectory cost and constraint functions are associated to each action. These functions implicitly define the action return and their geometric effect : Given a geometric start configuration, the cost and constraint functions of an action define an optimal trajectory. The action reward is the negative cost of this optimal trajectory, the geometric configuration reached after this action is the last configuration of this optimal trajectory.
 From this definition, it follows that the transition model is deterministic and that a unique geometric configuration is associated to each reachable symbolic state.
 
 More formally, let $\rchi$ be the configuration space of the whole environment, including the robot and all object configurations.
