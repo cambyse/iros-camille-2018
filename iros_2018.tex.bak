@@ -265,9 +265,13 @@ The initial rewards of decision graph are replaced with the trajectory costs res
 \subsection{Rewards initialization and graph exploration}\label{ssec:explo}
 %Rmax Algorithm
 
-\marc{Did you lookup Rmax? You need to compare it to this and describe it in that manner.}
-  
-The initial rewards influence drastically the search behavior. Optimistic initial rewards encourage exploration. This can be intuitively understood, since unexplored actions have big rewards, the Value iteration tends to converge to a policy having unexplored actions. On the other hand, with pessimistic initial rewards, the equilibrium is attained after a first policy has been successfully optimized by the motion planner. Higher initial rewards converge to better policies at the expense of the overall planning time. 
+%\marc{Did you lookup Rmax? You need to compare it to this and describe it in that manner.}
+    
+The initial reward value is used to control the exploration / exploitation trade-off of the policy search behavior. An optimistic initial reward value encourages exploration. In the context of model based reinforcement learning, this is the Rmax algorithm [3]. Rmax is used for learning the rewards values of a MDP or a zero sum stochastic game. In Rmax, the reward model is initialized in an optimistic fashion. The agent acts based on the optimal policy derived from its current reward model and update its model with the observed rewards. Rmax can attain near-optimal average reward in polynomial time. Our case is different, we are not, in a reinforcement learning setting, and the decision process that we consider is not a MDP but a POMDP. However, the same paradigm of "Optimism in the face of uncertainty" to explore applies in our case.
+
+%This can be intuitively understood, since unexplored actions have big rewards, the Value iteration tends to converge to a policy having unexplored actions.
+
+On the other hand, with pessimistic initial rewards, the equilibrium is attained after a first policy has been successfully optimized by the motion planner. Higher initial rewards converge to better policies at the expense of the overall planning time. The influence of initial reward values on the number of iterations are given in the experimental  
  
 \subsection{Joint Motion Planning}
 Optimizing actions independently cannot capture long-term effects on the trajectories. When considering a policy as one single optimization problem, final actions potentially influence motions earlier on the trajectory-tree. The autonomous driving example of the experimental results exemplifies this idea. Moreover, planning parameters (e.g. number of key frames) may be different when planning for informing the search or planning for outputting the final policy. This final stage of optimization allows for reaching a better optimum and smoother motions. Although it takes much longer but this is done on one single policy. \\
@@ -296,14 +300,12 @@ We consider the overtaking problem introduced previously. Fig.~\ref{fig:overtaki
   \begin{subfigure}[t]{0.5\textwidth}
       \includegraphics[width=\textwidth]{data/cars/start-0.png}
       \includegraphics[width=\textwidth]{data/cars/start-1.png}
-      \caption{two start configurations}
-      \label{fig:overtaking-start-configurations}
+      \caption{\label{fig:overtaking-start-configurations}two start configurations}
   \end{subfigure}   
       
   \begin{subfigure}[t]{0.5\textwidth}
       \includegraphics[width=\textwidth]{data/cars/look.png}
-        \caption{\textit{Look} action, the ego vehicle moved to the road center to observe the lanes}
-          \label{fig:overtaking-look}
+        \caption{\label{fig:overtaking-look}\textit{Look} action, the ego vehicle moved to the road center to observe the lanes}   
   \end{subfigure} 
   \begin{subfigure}[t]{0.5\textwidth}
       \includegraphics[width=\textwidth]{data/cars/overtaking.png}
@@ -313,7 +315,6 @@ We consider the overtaking problem introduced previously. Fig.~\ref{fig:overtaki
       \includegraphics[width=\textwidth]{data/cars/follow.png}
       \caption{the ego vehicle moves back to its lane (opposite lane not free)}
   \end{subfigure}
-  \label{fig:overtaking-configurations}
 \end{figure}
 
 This example emphasizes the improvement brought by the joint trajectory optimization. The curves on Fig.~\ref{fig:overtaking-speeds} represent the longitudinal velocities of the trajectory-tree for different planning configurations. At $t=6.5 s$, the car receives the percept $[lane\ free]$ or $[NOT\ lane\ free]$. This is the branching point of the trajectory-tree. If the lane is free, the car accelerates to overtake and then slows down once the truck is overtaken. Otherwise, the car slows down and move back to follow the truck.
@@ -380,8 +381,7 @@ This example emphasizes the improvement brought by the joint trajectory optimiza
     
 \end{axis}
 \end{tikzpicture}
-  \caption{Longitudinal speed of the overtaking maneuver}
-  \label{fig:overtaking-speeds}
+  \caption{\label{fig:overtaking-speeds}Longitudinal speed of the overtaking maneuver}
 \end{figure}
 
 The gray curve results from the fast motion planning. Actions are optimized in isolation, when looking at the lanes, the car keeps exactly the same speed (gray curve is flat for $t<6.5s$). When starting to overtake, the car is, still quite far from the truck and accelerates strongly to overtake. On the other hand, the blue and purple curves (Joint Optimization) are much smoother. To avoid a too strong acceleration, the car anticipates and accelerates slightly when looking. If overtaking is possible, the car pursues its acceleration, otherwise, it slows down and go back in the lane. We think that this mimics what human drivers do in case of ``tense'' overtaking maneuver. The initial belief state also influences the behavior. If it is likely that overtaking is possible ($0.7$ likelihood for the blue curve), the car will accelerate more when looking. In practice, the initial belief state could come from a service providing global information about the traffic in the area.
@@ -392,22 +392,19 @@ We consider an humanoid robot (see Fig.~\ref{fig:sussman} ). There are three blo
 \centering
         \begin{subfigure}[t]{0.15\textwidth}
             \includegraphics[width=\textwidth]{images/start-a.png}
-            \caption{first start configuration with model B}
-        \label{fig:start-1}
+            \caption{\label{fig:start-1}first start configuration with model B}
         \end{subfigure}
         \hfill
         \begin{subfigure}[t]{0.15\textwidth}
             \includegraphics[width=\textwidth]{images/start-b.png}
-            \caption{second start configuration with model B}
-        \label{fig:start-2}
+            \caption{\label{fig:start-2}second start configuration with model B}
         \end{subfigure}
         \hfill
         \begin{subfigure}[t]{0.15\textwidth}
             \includegraphics[width=\textwidth]{images/suss-c.png}
             \caption{example of goal configuration}
         \end{subfigure}
-        \caption{Example of configurations. The robot must stack the blocks in a given color order. The block colors are not visible from behind}
-\label{fig:sussman}
+        \caption{\label{fig:sussman}Example of configurations. The robot must stack the blocks in a given color order. The block colors are not visible from behind}
 \end{figure}
 The table is subdivided in 3 different locations (table left, center and right), if a block is already at a location, the location is occupied (no block can be added on the same table part). There are 3 possible actions: 
 \begin{itemize}
@@ -423,18 +420,15 @@ We evaluate two different action models. In the first variation (Variation 1), t
         \hfill
         \begin{subfigure}[t]{0.15\textwidth}
             \includegraphics[width=\textwidth]{images/suss-b.png}
-            \caption{\textit{Look} with the block in hand}
-        \label{fig:look-1}
+            \caption{\label{fig:look-1}\textit{Look} with the block in hand}
         \end{subfigure}
         \hfill
         \begin{subfigure}[t]{0.15\textwidth}
             \includegraphics[width=\textwidth]{images/check-no-lift.png}
-            \caption{\textit{Look} just after having posed a block}
-            \label{fig:look-2}
+            \caption{\label{fig:look-2}\textit{Look} just after having posed a block}
         \end{subfigure}
         \hfill
-        \caption{Example of geometric configurations reached after the \textit{Look} action}
-\label{fig:checks}
+        \caption{\label{fig:checks}Example of geometric configurations reached after the \textit{Look} action}
 \end{figure}
 
 To evaluate the scalability, we test with three different initial belief states configurations. In the first configuration (A), the agent has a prior knowledge of the color of each block. This boils down to the fully observable case. To keep the action model unchanged, we still impose that the agent has to look one block to complete its task. In the second configuration (B), 2 blocks are unknown. Fig.~\ref{fig:start-1} and ~\ref{fig:start-2} show the two possible start configurations with this model. In the third case (C), there are no prior knowledge which leads to 6 possible initial configurations. The different start configurations are summed up in the table \ref{table:problems}. In all cases, the initial belief state is uniform (e.g. 1/2 likelihood for each possible start configuration with the model B, 1/6 likelihood for model C).
@@ -648,14 +642,14 @@ Fig.~\ref{fig:policy-B2} shows an optimized policy for the model B. The agent fi
 
 \subsubsection{Influence of initial rewards} With an initial reward of -0.25 (pessimistic initial reward), the search finishes as soon as a first policy is found. This happens after one single iteration with the B1. With the B2, the search encounters infeasible actions, the first possible policy is found at the 7th iteration. This policy is less optimal than the results found with the other initial rewards.\\The highest initial reward (-0.015) is always optimistic and leads to the most exploratory behavior. The value of candidate policies (containing at least one unexplored action) are consequently always higher than the result policies (see the orange curves on Fig.~\ref{fig:convergences}. It requires the biggest number of iterations. In particular, task planning also explores deeper policies (with more steps). In some cases a slightly deeper policy results in a better trajectory cost (see B2 with $R_0$ = -0.015). The search converges to a better policy than with the other initial reward values. The small improvements in the last iterations are due to small rearrangements of the target location when placing blocks (e.g. place a block on table-left instead of table-center). \\
 
-\subsubsection{Influence of the action precondition} Removing the pre-condition increases strongly the decision graph size, more iterations are needed, and a majority of candidate policies are infeasible geometrically. This is visible on Fig.~\ref{fig:convergences} for the model B2 (below), the curves of result policies are very discontinuous because the majority of them are infeasible. Most of the time, Motion planning fails due to one single action. The policy value is minus infinity, but the resulting rewards of each possible actions still inform the decision graph leading to an overall improvement. The search reaches an optimal policy which is as good as the policy obtained with the model with pre-condition. We think that this is an important quality of the proposed solution. Adding domain specific knowledge in the task planning (to ensure that motion planning will succeed) speeds up the search. However, in the general case, we think that it is not always possible / convenient to incorporate such geometric reasoning (reachability of a view point, reachability of an object) in the logical reasoning. 
+\subsubsection{Influence of the action precondition} Removing the precondition increases strongly the decision graph size, more iterations are needed, and a majority of candidate policies are infeasible geometrically. This is visible on Fig.~\ref{fig:convergences} for the model B2 (below), the curves of result policies are very discontinuous because the majority of them are infeasible. Most of the time, Motion planning fails due to one single action. The policy value is minus infinity, but the resulting rewards of each possible actions still inform the decision graph leading to an overall improvement. The search reaches an optimal policy which is as good as the policy obtained with the model with precondition. We think that this is an important quality of the proposed solution. Adding domain specific knowledge in the task planning (to ensure that motion planning will succeed) speeds up the search. However, in the general case, we think that it is not always possible / convenient to incorporate such geometric reasoning (reachability of a view point, reachability of an object) in the logical reasoning. 
 
 \subsubsection{Execution time and scalability}
 The overall planning time is dominated by the motion planning (see table.~\ref{table:times} As long as the model is simple (A or B) or the exploration kept low ($R_0$ = -0.25), motion planning is dominated by the single pass of joint optimization. The execution time of this pass mainly depends on the total number of action steps in the policy and on the belief state size but is independent from the number of iterations occurring before. In the configurations requiring the biggest number of iterations (C1 and C2 with $R_0$ = -0.015), motion planning and the overall planning time are dominated by the fast motion planning phases of the policy improvement iterations. It also appears clearly that scalability is a crucial problematic here. All the parameters of the problem increase drastically with the size of the belief state (graph size, required number of iterations, size of the resulting policy, computation time). Parameterizing the search with a very exploratory behavior may be feasible for problems of small sizes but suffers from the curse of dimensionality. One way to still enable some exploration while maintaining a bounded planning time is to save the best candidate policy planned so far and interrupt the iterations when a given time limit is reached.
 
 \section{Conclusion \& Future Work}
 We proposed a new, optimization-based approach to TAMP problems. It handles partial observability by reasoning over the agent + environment belief state and by optimizing trajectory-trees that can account for the observation branching. It can plan policies that combine exploratory actions (mostly sensor trajectories) and exploitative actions (e.g grasp, place). The degree of exploration over the vast space of all possible manipulations policies can be controlled by one single parameter (initial heuristic reward). As motion optimization is time consuming, the ability to quickly detect if an an action is infeasible is crucial and we perform it by performing a fast pose-level optimization. Moreover, the policy iteration process naturally copes with motion planning failures that simply inform the decision graph with the real cost (albeit infinitely big) of a given action. Scalability becomes an issue when the number of manipulations and or the size of the belief state increases. An efficient way to speed-up the search is to have a task-level model that is accurately tailored for the problem to solve (example of the grasp precondition), this prevents too many motion planning failures and limits the branching factor. In future work, we intend to explore, how the task-level model can be refined and learned using the results from multiple planning queries.\\
-Our current method computes policies that address every possible outcome during the possibility execution. To scale better, we plan to investigate an approach where the policy is planned only for handling the most probable belief state trajectories. As such a policy couldn't handle every outcome at execution time, replanning would be triggered once the execution layer detects that the system is evolving toward a belief state which is not covered by the current policy.
+Our current method computes policies that address every possible outcome during the possibility execution. To scale better, we plan to investigate an approach where the policy is planned only for handling the most probable belief state trajectories. As such a policy couldn't handle every outcome at execution time, re-planning would be triggered once the execution layer detects that the system is evolving toward a belief state which is not covered by the current policy.
 
 %biblio
 \begin{thebibliography}{99}
@@ -669,10 +663,6 @@ Our current method computes policies that address every possible outcome during 
 \bibitem{c7} Paden, B., Cap, M., Yong, S.Z., Yershov, D., Frazzoli, E.: A survey of motion planning and control techniques for self-driving urban vehicles. IEEE Trans. Intell. Veh. 1(1), 33-55, 2016
 \bibitem{c8} F. Lagriffoul, D. Dimitrov, A. Saffiotti, and L. Karlsson. Constraint propagation on interval bounds for dealing with geometric back-tracking. In Intelligent Robots and Systems (IROS), 2012 IEEE/RSJ International Conference on, pages 957-964. IEEE, 2012
 \bibitem{c9} F. Lagriffoul, D. Dimitrov, J. Bidot, A. Saffiotti, and L. Karlsson. Efficiently combining task and motion planning using geometric constraints. The International Journal of Robotics Research, 2014
-
-
-
-
 
 
 \end{thebibliography}

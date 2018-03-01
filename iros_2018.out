@@ -12,7 +12,7 @@
 \BOOKMARK [3][-]{subsubsection.4.3.2}{Trajectory optimization}{subsection.4.3}% 12
 \BOOKMARK [2][-]{subsection.4.4}{Rewards initialization and graph exploration}{section.4}% 13
 \BOOKMARK [2][-]{subsection.4.5}{Joint Motion Planning}{section.4}% 14
-\BOOKMARK [1][-]{section.5}{Experimental Results}{}% 15
+\BOOKMARK [1][-]{section.5}{ Experimental Results}{}% 15
 \BOOKMARK [2][-]{subsection.5.1}{Overtaking behavior}{section.5}% 16
 \BOOKMARK [2][-]{subsection.5.2}{Sussman anomaly under partial observability}{section.5}% 17
 \BOOKMARK [3][-]{subsubsection.5.2.1}{Influence of initial rewards}{subsection.5.2}% 18
