@@ -190,7 +190,7 @@ The expected return of a policy $\pi$, starting from the belief state $b_0$ and 
 U^{\pi}(b_0) = \\R(a, b_0) + \gamma \sum_{o \in \Omega } O( o | b, a ) U^{\pi}(T(b_0, a, o)) ~.
 \end{equation}
 %
-In the above expression, $\Omega$ refers to the observation space, $O$ refers to the observation model, and $T(b, a, o)$ is the successor belief state after observing $o$. In the example of the last section (\ref{fig:graph}), $b_2 = T(b_0, (look\ lane), [NOT\ lane\ free])$.
+In the above expression, $\Omega$ refers to the observation space, $O$ refers to the observation model, and $T(b, a, o)$ is the successor belief state after observing $o$. In the example of the last section (\ref{fig:overtaking-decision-graph}), $b_2 = T(b_0, (look\ lane), [NOT\ lane\ free])$.
 
 The optimal policy is the policy maximizing the return,
 \begin{equation}

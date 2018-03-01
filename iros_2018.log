@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.1.24)  1 MAR 2018 23:43
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.1.24)  1 MAR 2018 23:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1149,9 +1149,6 @@ LaTeX Warning: Reference `overtaking-decision-graph' on page 2 undefined on inp
 ut line 184.
 
 
-LaTeX Warning: Reference `fig:graph' on page 2 undefined on input line 193.
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 198--200
 []\T1/pcr/b/n/10 please do potential commas before an
  []
@@ -1211,7 +1208,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 254--255
 
  []
 
-[3] <images/tree-joint_2.png, id=140, 502.87875pt x 251.43938pt>
+[3] <images/tree-joint_2.png, id=141, 502.87875pt x 251.43938pt>
 File: images/tree-joint_2.png Graphic file (type png)
 
 <use images/tree-joint_2.png>
@@ -1228,7 +1225,7 @@ rted-to.pdf data/cars/policy.eps>
 (epstopdf)             \includegraphics on input line 293.
 Package epstopdf Info: Output file is already uptodate.
 
-<data/cars/policy-eps-converted-to.pdf, id=145, 717.68124pt x 102.3825pt>
+<data/cars/policy-eps-converted-to.pdf, id=146, 717.68124pt x 102.3825pt>
 File: data/cars/policy-eps-converted-to.pdf Graphic file (type pdf)
 
 <use data/cars/policy-eps-converted-to.pdf>
@@ -1240,14 +1237,14 @@ Overfull \hbox (7.22688pt too wide) in paragraph at lines 293--294
  [][] 
  []
 
-<data/cars/start-0.png, id=146, 1321.93875pt x 178.6675pt>
+<data/cars/start-0.png, id=147, 1321.93875pt x 178.6675pt>
 File: data/cars/start-0.png Graphic file (type png)
 
 <use data/cars/start-0.png>
 Package pdftex.def Info: data/cars/start-0.png used on input line 301.
 (pdftex.def)             Requested size: 252.94499pt x 34.18707pt.
 
-<data/cars/start-1.png, id=147, 1321.93875pt x 178.6675pt>
+<data/cars/start-1.png, id=148, 1321.93875pt x 178.6675pt>
 File: data/cars/start-1.png Graphic file (type png)
 
 <use data/cars/start-1.png>
@@ -1258,21 +1255,21 @@ Overfull \hbox (7.22688pt too wide) in paragraph at lines 300--305
  [][] 
  []
 
-<data/cars/look.png, id=148, 1321.93875pt x 178.6675pt>
+<data/cars/look.png, id=149, 1321.93875pt x 178.6675pt>
 File: data/cars/look.png Graphic file (type png)
 
 <use data/cars/look.png>
 Package pdftex.def Info: data/cars/look.png used on input line 307.
 (pdftex.def)             Requested size: 252.94499pt x 34.18707pt.
 
-<data/cars/overtaking.png, id=149, 1321.93875pt x 178.6675pt>
+<data/cars/overtaking.png, id=150, 1321.93875pt x 178.6675pt>
 File: data/cars/overtaking.png Graphic file (type png)
 
 <use data/cars/overtaking.png>
 Package pdftex.def Info: data/cars/overtaking.png used on input line 311.
 (pdftex.def)             Requested size: 252.94499pt x 34.18707pt.
 
-<data/cars/follow.png, id=150, 1321.93875pt x 178.6675pt>
+<data/cars/follow.png, id=151, 1321.93875pt x 178.6675pt>
 File: data/cars/follow.png Graphic file (type png)
 
 <use data/cars/follow.png>
@@ -1306,14 +1303,14 @@ PGFPlots: reading {data/cars/fast/1.csv}
 [4 <./images/tree-joint_2.png> <./data/cars/policy-eps-converted-to.pdf> <./dat
 a/cars/start-0.png> <./data/cars/start-1.png> <./data/cars/look.png> <./data/ca
 rs/overtaking.png> <./data/cars/follow.png>]
-<images/start-a.png, id=173, 344.28625pt x 314.17375pt>
+<images/start-a.png, id=174, 344.28625pt x 314.17375pt>
 File: images/start-a.png Graphic file (type png)
 
 <use images/start-a.png>
 Package pdftex.def Info: images/start-a.png used on input line 394.
 (pdftex.def)             Requested size: 75.8804pt x 69.24307pt.
 
-<images/start-b.png, id=174, 344.28625pt x 314.17375pt>
+<images/start-b.png, id=175, 344.28625pt x 314.17375pt>
 File: images/start-b.png Graphic file (type png)
 
 <use images/start-b.png>
@@ -1329,13 +1326,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 400--400
 \T1/ptm/m/n/9 con-fig-u-ra-tion with
  []
 
-<images/suss-c.png, id=175, 308.65312pt x 303.38344pt>
+<images/suss-c.png, id=176, 308.65312pt x 303.38344pt>
 File: images/suss-c.png Graphic file (type png)
  <use images/suss-c.png>
 Package pdftex.def Info: images/suss-c.png used on input line 404.
 (pdftex.def)             Requested size: 75.8804pt x 74.58188pt.
 
-<images/suss-b.png, id=178, 319.1925pt x 293.59688pt>
+<images/suss-b.png, id=179, 319.1925pt x 293.59688pt>
 File: images/suss-b.png Graphic file (type png)
  <use images/suss-b.png>
 Package pdftex.def Info: images/suss-b.png used on input line 422.
@@ -1345,7 +1342,7 @@ Underfull \hbox (badness 2158) in paragraph at lines 423--423
 []\T1/ptm/m/n/9 (a) |[][]\T1/ptm/m/it/9 Look \T1/ptm/m/n/9 with the
  []
 
-<images/check-no-lift.png, id=179, 385.44pt x 319.1925pt>
+<images/check-no-lift.png, id=180, 385.44pt x 319.1925pt>
 File: images/check-no-lift.png Graphic file (type png)
 
 <use images/check-no-lift.png>
@@ -1376,7 +1373,7 @@ ged.eps>
 (epstopdf)             \includegraphics on input line 465.
 Package epstopdf Info: Output file is already uptodate.
 
-<data/2m1/-0.015/10/policy-11-final-arranged-eps-converted-to.pdf, id=196, 817.
+<data/2m1/-0.015/10/policy-11-final-arranged-eps-converted-to.pdf, id=197, 817.
 0525pt x 935.495pt>
 File: data/2m1/-0.015/10/policy-11-final-arranged-eps-converted-to.pdf Graphic 
 file (type pdf)
@@ -1397,7 +1394,7 @@ rted-to.pdf>
 (epstopdf)             \includegraphics on input line 470.
 Package epstopdf Info: Output file is already uptodate.
 
-<data/1m2/-0.25/10/policy-2-final-eps-converted-to.pdf, id=197, 439.6425pt x 10
+<data/1m2/-0.25/10/policy-2-final-eps-converted-to.pdf, id=198, 439.6425pt x 10
 98.1025pt>
 File: data/1m2/-0.25/10/policy-2-final-eps-converted-to.pdf Graphic file (type 
 pdf)
@@ -1466,10 +1463,10 @@ LaTeX Warning: There were undefined references.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 673.
  ) 
 Here is how much of TeX's memory you used:
- 29513 strings out of 493029
- 688141 string characters out of 6136234
- 924833 words of memory out of 5000000
- 32443 multiletter control sequences out of 15000+600000
+ 29512 strings out of 493029
+ 688130 string characters out of 6136234
+ 923833 words of memory out of 5000000
+ 32442 multiletter control sequences out of 15000+600000
  150383 words of font info for 203 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  62i,19n,89p,1718b,2111s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1484,10 +1481,10 @@ re/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/t
 ype1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/
 utmri8a.pfb>
-Output written on iros_2018.pdf (7 pages, 550190 bytes).
+Output written on iros_2018.pdf (7 pages, 550224 bytes).
 PDF statistics:
- 287 PDF objects out of 1000 (max. 8388607)
- 232 compressed objects within 3 object streams
+ 288 PDF objects out of 1000 (max. 8388607)
+ 233 compressed objects within 3 object streams
  56 named destinations out of 1000 (max. 500000)
  269 words of extra memory for PDF output out of 10000 (max. 10000000)
 
