@@ -121,9 +121,9 @@ More formally, let $\rchi$ be the configuration space of the whole environment, 
 
 Let $X_k \in \rchi$ be the geometric configuration at time $t_k$. The agent takes an action $a \in A$ which takes effect over the interval $[t_k, t_{k+1}]$. Costs and constraints functions $f_a, g_a, h_a$ are associated to the action $a$. We call $C(X_k)$, the space of all trajectories starting from $X_k$ over the interval $[t_k, t_{k+1}]$.
 
-The cost of a trajectory $x \in C(X_k)$ under the action $a$ for the time interval $[t_k, t_{k+1}]$ is \marc{why all these larger and ?? ?}
+The cost of a trajectory $x \in C(X_k)$ under the action $a$ for the time interval $[t_k, t_{k+1}]$ is,
 \begin{align*}
-c(a, x) = \mathlarger{\mathlarger{??\int}}_{t_k}^{t_{k+1}} & {f_a(x(t), \dot{x}(t), \ddot{x(t)})dt}\\
+c(a, x) = \int_{t_k}^{t_{k+1}} & {f_a(x(t), \dot{x}(t), \ddot{x(t)})dt}\\
 s.t\ \  & g_a(x(t), \dot{x}(t), \ddot{x(t)}) <= 0\\
 & h_a(x(t), \dot{x}(t), \ddot{x(t)}) = 0 ~.
 \end{align*}
@@ -142,7 +142,7 @@ R(a, X_k) =\left\{\begin{matrix}
 \end{align*}
 A belief state is a probability distribution over the state space. Since a geometric configuration is associated to each symbolic state, it is also probability distribution over geometric configurations. In particular, the reward of an action taken in a belief state $b_k$ is
 \begin{align*}
- R(a, b_k) = \mathlarger{\sum}_{X \in b_k} b_k(X) R(a, X) ~.
+ R(a, b_k) = \sum_{X \in b_k} b_k(X) R(a, X) ~.
 \end{align*}
 
 \subsection{Decision graph}
@@ -157,7 +157,7 @@ When planning from an initial belief state and observations are discrete, the se
 
 We consider a car behind a truck, the car wishes to overtake but cannot see the opposite lane because of the truck, see Fig.~\ref{fig:overtaking-decision-graph}. The car can take three actions: look into the opposite lane, overtake the truck, or continue to follow the truck. After looking into the lane (move slowly toward the center of the road), the car receives an observation (lane free or not). Figure \ref{fig:graph} is the decision graph of this problem.
 
-\marc{use the figure environments!! Here is one example:}
+%\marc{use the figure environments!! Here is one example:}
 
 \begin{figure}\centering
   \includegraphics[width=0.5\textwidth]{images/overtaking.png}
@@ -166,12 +166,10 @@ We consider a car behind a truck, the car wishes to overtake but cannot see the 
     in the opposite direction because of the truck.}
 \end{figure}
     
-  \begin{center}
+\begin{figure}\centering
   \includegraphics[height=0.25\textwidth]{images/graph.eps}
-  \captionof{figure}{Decision graph for overtaking}   
-%  \caption{Example of decision graph, the thick edges represent a possible policy}
-  \label{fig:graph}
-  \end{center}
+  \caption{\label{fig:overtaking-decision-graph} Decision graph for overtaking, the thick edges represent a possible policy}
+\end{figure}
   
 \subsubsection{Policy}
 
@@ -180,7 +178,7 @@ A policy $\pi$ is a mapping from belief states to actions. Optimizing a policy c
 The expected return \marc{(not reward)} of a policy $\pi$, starting from the belief state $b_0$ and configuration $X_0$, is defined recursively as
 %
 \begin{equation}
-U^{\pi}(b_0) = \\R(a, b_0) + \gamma \mathlarger{\sum}_{o \in \Omega } O( o | b, a ) U^{\pi}(T(b_0, a, o)) ~.
+U^{\pi}(b_0) = \\R(a, b_0) + \gamma \sum_{o \in \Omega } O( o | b, a ) U^{\pi}(T(b_0, a, o)) ~.
 \end{equation}
 %
 In the above expression, $\Omega$ refers to the observation space, $O$ refers to the observation model, and $T(b, a, o)$ is the successor belief state after observing $o$. In the example of the last section (\ref{fig:graph}), $b_2 = T(b_0, (look\ lane), [NOT\ lane\ free])$.
@@ -230,12 +228,12 @@ The decision graph \marc{throughout: replace graph by tree?}, is expanded from t
 
 Under the optimal policy, the value of each action node obeys the Bellman equation, \marc{use big or bigg in equations, not mathlarger}
 \begin{equation}
-V^{\star}(b) = \max_{a} \mathlarger{\mathlarger{[}} R(a, b) + \gamma \mathlarger{\sum}_{o \in \Omega } O( o | b, a ) V^{\star}(T(b, a, o)) \mathlarger{\mathlarger{]}} ~.
+V^{\star}(b) = \max_{a} \big[ R(a, b) + \gamma \sum_{o \in \Omega } O( o | b, a ) V^{\star}(T(b, a, o)) \big] ~.
 \end{equation} 
 At each pass, the algorithm goes through each action node and updates its current value based on the values of its children. The update process is iterated until the values are stable i.e. the Bellman equilibrium has been reached,
 \begin{equation}
-V^{\star}_{i+1}(b) \leftarrow \max_{a} \mathlarger{\mathlarger{[}} R(a, b) + \gamma \mathlarger{\sum}_{o \in O(b, a) } O( o | b, a ) V^{\star}_{i}(T(b, a, o))
-\mathlarger{\mathlarger{]}} ~.
+V^{\star}_{i+1}(b) \leftarrow \max_{a} \big[ R(a, b) + \gamma \sum_{o \in O(b, a) } O( o | b, a ) V^{\star}_{i}(T(b, a, o))
+\big] ~.
 \end{equation} 
 Once the value is know, the optimal policy is retrieved by selecting at each action node the action leading to the children with the highest expected value.
 
