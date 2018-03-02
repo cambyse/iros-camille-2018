@@ -118,7 +118,7 @@ The second stage of the algorithm is the Joint Optimization. The trajectory tree
 \section{RELATED WORK}
 
 Concerning Combined Task and Motion Planning, a number of approaches [5][8][9] rely on
-the discretization of the configuration spaces or action/skeleton parameters to leverage CSP methods. Our prior work presented in [1][2] states TAMP problems as an optimization problem. These approaches assume full observability, and plans are linear sequences of actions. To our knowledge, the system developed by Lozano-Perez and Kaebling [4] is the only other TAMP planner considering partial observability. A \textit{Look} action is used to actively move the robot sensor to acquire information. This approach (Hierarchical Planning in the Now) interweaves planning with execution (in the now). Sequences of actions are planned by approximating the system dynamics (results of actions and observations). Replanning is triggered once the robot ends up in a state not covered by the plan. Our approach aims at planning a full policy from the starting state to the final state. In addition, we aim for smooth and locally optimal trajectories.
+the discretization of the configuration spaces or action/skeleton parameters to leverage CSP methods. Our prior work presented in [1][2] states TAMP problems as an optimization problem. These approaches assume full observability, and plans are linear sequences of actions. To our knowledge, the system developed by Lozano-Perez and Kaebling [4] is the only other TAMP planner considering partial observability. A \textit{Look} action is used to actively move the robot sensor to acquire information. This approach (Hierarchical Planning in the Now) interweaves planning with execution (in the now). Sequences of actions are planned by approximating the system dynamics (results of actions and observations). Re-planning is triggered once the robot ends up in a state not covered by the plan. Our approach aims at planning a full policy from the starting state to the final state. In addition, we aim for smooth and locally optimal trajectories.
 
 Planning for autonomous driving also entails a layered decision making process with a combination of symbolic decisions and planning in a continuous space. [6][7] provide a surveys about planning for self-driving cars. To our knowledge, there exists no literature on TAMP approaches for decision making in the automotive context. 
 
@@ -223,9 +223,16 @@ Finding the optimal TAMP policy $\Pi^*$ from an initial belief state $b_0$, cons
  
 \section{TAMP Algorithm}
 
-Our approach for optimizing a TAMP policy (solve equation (1)) is schematized on Fig.~\ref{fig:algo}. First, the decision graph is built. Secondly, iterations of task planning and fast motion planning are performed: Task planning computes a candidate policy based on the last reward values. The policy is given to the motion planner which computes the trajectories and costs of each action. The resulting costs are used to update the rewards associated to the actions. Task planning is re-run which potentially results in a new policy candidate. This process is iterated until an equilibrium is reached (no more policy improvement).
+Our approach for optimizing a TAMP policy (solve equation (1)) is schematized on Fig.~\ref{fig:algo}. First, the decision graph is built. In a second stage, the solver optimizes a policy by optimizing motions step by step, we call it the piecewise approach. At this stage, we define the reward of an action as the negative trajectory costs its motion. The reward only depends on the geometric state of agent when starting the action. In other words, we assume the problem markovian. This assumption allows us to leverage classic algorithms from the MDP litterature. 
+In the final stage, joint trajectory optimization is performed on the best policy found. The trajectory-tree as a whole. It is typically slower but gives smoother and more optimal results. Different optimization parameters (more time steps) can be used in this final stage.
 
-Finally, a pass of joint trajectory optimization is performed on the best policy found. This pass optimizes the trajectory-tree as a whole. It is typically slower but gives smoother and more optimal results. Different optimization parameters (more time steps) can be used in this final stage.
+The validity of our method relies on the underlying assumption that the markovian version of the problem is a good heuristic for solving the original problem. This is true in practice. However, since this approximation is pessimistic, not optimistic, it compromises the completeness and optimality of the method.
+%\begin{align*}
+%\min\sum_{b\in\pi}p(b | \pi, b_0) c(\pi(b), %\psi(b)) \approx \sum_{b\in\pi}p(b | \pi, b_0) %\min c(\pi(b), \psi(b))
+%\end{align*}
+% , iterations of task planning and piecewise motion planning are performed: Task planning computes a candidate policy based on the last reward values. The policy is given to the motion planner which computes the trajectories and costs of each action. The resulting costs are used to update the rewards associated to the actions. Task planning is re-run which potentially results in a new policy candidate. This process is iterated until an equilibrium is reached (no more policy improvement).
+
+
 
 \begin{figure}
 \begin{tikzpicture}

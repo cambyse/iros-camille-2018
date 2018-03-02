@@ -103,10 +103,11 @@ We test our approach on autonomous driving and object manipulation examples. To 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\marc{use bibtex!!! Oh oh}% I change to bibtex as soon as I find time
 \section{INTRODUCTION}
 %\marc{please do a spellcheck}
 Robots must combine the ability to reason symbolically about discrete actions (Task planning) and geometrically about their realization in the real world (Motion planning). Integrated approaches are referred to in the literature as  Task and Motion Planning (TAMP). 
-With the exception of  [4] \marc{use bibtex!!! Oh oh}, current TAMP research assumes full observability. However partial observability is pervasive in many real world situations, e.g.\ when objects are hidden or partially hidden. If some objects to manipulate
+With the exception of [4], current TAMP research assumes full observability. However partial observability is pervasive in many real world situations, e.g.\ when objects are hidden or partially hidden. If some objects to manipulate
 are inside containers, the robot has to explore its environment to perform its task. Self driving cars face the same problem when operating in the presence of other vehicles limiting the field of view of the ego vehicle.
 
 In this paper we extend the Logic-Geometric Programming approach (LGP) presented in prior work to handle Partial Observability. Under partial observability, policies have branching points due to observations. On the geometric level, it means that Motion Planning consists in optimizing a trajectory-tree i.e.\ trajectories with ramifications. Our TAMP solver works in two stages : First piecewise optimization and then joint optimization.  During the first stage, the trajectories of actions are optimized independently (piecewise). This allows the problem to be considered as a Partially Observable Markov Decision Process (POMDP) that we solve from a start belief state. We focus on the case where the true start state is uncertain and partially observable, while the transition model of the underlying MDP is not stochastic. The POMDP is solved in an iterative process. It starts with initial heuristic reward values. A policy is computed using Value Iteration. This candidate policy is given to the motion planner. The resulting trajectory costs are used to replace the initial heuristic reward values of the POMDP. This process is iterated until an equilibrium is reached (no more policy improvement).\\
@@ -117,7 +118,7 @@ The second stage of the algorithm is the Joint Optimization. The trajectory tree
 \section{RELATED WORK}
 
 Concerning Combined Task and Motion Planning, a number of approaches [5][8][9] rely on
-the discretization of the configuration spaces or action/skeleton parameters to leverage CSP methods. Our prior work presented in [1][2] states TAMP problems as an optimization problem. These approaches assume full observability, and plans are linear sequences of actions. To our knowledge, the system developed by Lozano-Perez and Kaebling [4] is the only other TAMP planner considering partial observability. A \textit{Look} action is used to actively move the robot sensor to acquire information. This approach (Hierarchical Planning in the Now) interweaves planning with execution (in the now). Sequences of actions are planned by approximating the system dynamics (results of actions and observations). Replanning is triggered once the robot ends up in a state not covered by the plan. Our approach aims at planning a full policy from the starting state to the final state. In addition, we aim for smooth and locally optimal trajectories.
+the discretization of the configuration spaces or action/skeleton parameters to leverage CSP methods. Our prior work presented in [1][2] states TAMP problems as an optimization problem. These approaches assume full observability, and plans are linear sequences of actions. To our knowledge, the system developed by Lozano-Perez and Kaebling [4] is the only other TAMP planner considering partial observability. A \textit{Look} action is used to actively move the robot sensor to acquire information. This approach (Hierarchical Planning in the Now) interweaves planning with execution (in the now). Sequences of actions are planned by approximating the system dynamics (results of actions and observations). Re-planning is triggered once the robot ends up in a state not covered by the plan. Our approach aims at planning a full policy from the starting state to the final state. In addition, we aim for smooth and locally optimal trajectories.
 
 Planning for autonomous driving also entails a layered decision making process with a combination of symbolic decisions and planning in a continuous space. [6][7] provide a surveys about planning for self-driving cars. To our knowledge, there exists no literature on TAMP approaches for decision making in the automotive context. 
 
@@ -138,7 +139,14 @@ Although such a 7-tuple is very similar to a POMDP, it differs in several ways :
 
 
 
-After having taken an action and eventually received an observation, the relation between the current belief state $b$ and the new  $b'$ obeys the same equation than a POMDP. %For a belief state $b$. We note $b(s)$ the probability of being in state $s$.
+After having taken an action $a$ and received an observation $o$, the relation between the current belief state $b$ and the new  $b'$ obeys the same equation than a POMDP. 
+
+\begin{align*}
+b'(s') = \alpha O(o | s', a)\sum_{s} T(s'|s, a)b(s), \forall s \in S, \forall s' \in S
+\end{align*}
+
+In the above equation, $\alpha$ is a normalization constant.
+%For a belief state $b$. We note $b(s)$ the probability of being in state $s$.
 
 %The set of all the belief states that can be reached from an initial belief state and their relations can be represented as a graph, that we call the decision graph. 
 
@@ -212,89 +220,19 @@ Finding the optimal TAMP policy $\Pi^*$ from an initial belief state $b_0$, cons
 \begin{equation}
 \Pi^* = \{\pi^*, \psi^*\} = \argminB_{\pi, \psi}  \sum_{b\in\pi}p(b | \pi, b_0) c(\pi(b), \psi(b)) ~.
 \end{equation}
-
-%\Pi
-%\marc{(not reward)}
-%The expected return of a policy $\pi$, starting from the belief state $b_0$ and configuration $X_0$, is defined recursively as
-%
-%\begin{equation}
-%U^{\pi}(b_0) = \\R(a, b_0) + \gamma \sum_{o \in \Omega } O( o | b, a ) U^{\pi}(T(b_0, a, o)) ~.
-%\end{equation}
-%
-%In the above expression, $\Omega$ refers to the observation space, $O$ refers to the observation model, and $T(b, a, o)$ is the successor belief state after observing $o$. In the example of the last section (\ref{fig:overtaking-decision-graph}), $b_2 = T(b_0, (look\ lane), [NOT\ lane\ free])$.
-
-%The optimal policy is the policy maximizing the return,
-%\begin{equation}
-%\pi^{\star} = \argmaxB_{\pi} U^{\pi}(b_0) ~.
-%\end{equation} 
-%\marc{please do potential commas before an equation (not :), and . at the end of an equation}
-
-%\marc{No, that's not a proper problem statement. What you optimize for here is just the sum of independent piece costs. But what you eventually want is the joint optimum along time, and joint across observations. That's different to summing independent piece costs.}
-
-%We model the task planning part as a particular kind of POMDP $(S, A, T, R, \Omega, O, \gamma)$, where $S$ is a set of symbolic states, and $A$ is a set of symbolic actions. Trajectory cost and constraint functions are associated to each action. These functions implicitly define the action return and their geometric effect : Given a geometric start configuration, the cost and constraint functions of an action define an optimal trajectory. The action reward is the negative cost of this optimal trajectory, the geometric configuration reached after this action is the last configuration of this optimal trajectory.
-%From this definition, it follows that the transition model is deterministic and that a unique geometric configuration is associated to each reachable symbolic state.
-
-%More formally, let $\rchi$ be the configuration space of the whole environment, including the robot and all object configurations.
-
-%Let $X_k \in \rchi$ be the geometric configuration at time $t_k$. The agent takes an action $a \in A$ which takes effect over the interval $[t_k, t_{k+1}]$. Costs and constraints functions $f_a, g_a, h_a$ are associated to the action $a$. We call $C(X_k)$, the space of all trajectories starting from $X_k$ over the interval $[t_k, t_{k+1}]$.
-
-%The cost of a trajectory $x \in C(X_k)$ under the action $a$ for the time interval $[t_k, t_{k+1}]$ is,
-%\begin{align*}
-%c(a, x) = \int_{t_k}^{t_{k+1}} & {f_a(x(t), \dot{x}(t), \ddot{x(t)})dt}\\
-%s.t\ \  & g_a(x(t), \dot{x}(t), \ddot{x(t)}) <= %0\\
-%& h_a(x(t), \dot{x}(t), \ddot{x(t)}) = 0 ~.
-%\end{align*}
-%The optimal trajectory is: $x^\star = \argminB_{x \in C(X_k)} c(a, x)$\\
-
-%The successor geometric configuration $X_{k+1}$ is the last geometric configuration of the optimal trajectory,
-%\begin{align*}
-%X_{k+1} = x^\star(t_{k+1}) ~.
-%\end{align*}
-%The reward of the action $a$ is the negative trajectory cost of the optimal trajectory if the constraints are satisfied, minus infinity otherwise,
-%\begin{align*}
-%R(a, X_k) =\left\{\begin{matrix}
-%- c(a, x^\star), \text{if $g$ and $h$ satisfied}\\ 
-%-\infty,\ \text{otherwise}
-%\end{matrix}\right. ~.
-%\end{align*}
-%A belief state is a probability distribution over the state space. Since a geometric configuration is associated to each symbolic state, it is also probability distribution over geometric configurations. In particular, the reward of an action taken in a belief state $b_k$ is
-%\begin{align*}
-% R(a, b_k) = \sum_{X \in b_k} b_k(X) R(a, X) ~.
-%\end{align*}
-
-%\subsection{Decision graph}
-
-%When planning from an initial belief state and observations are discrete, the set of all possible reachable belief states is a graph. Each node is a belief state. There are two kinds of nodes: 
-%\begin{itemize}
-%\item Action nodes: the agent has to choose which action to take. The edges starting from the node are the different possible actions. The reward received after executing the action is associated to each action-edge.
-%\item Observation nodes: the agent receives an observation, each edge starting from an observation node is a possible observation.
-%\end{itemize}
-
-%\subsubsection{Example for a decision graph}
-
-%We consider a car behind a truck, the car wishes to overtake but cannot see the opposite lane because of the truck, see Fig.~\ref{fig:overtaking}. The car can take three actions: look into the opposite lane, overtake the truck, or continue to follow the truck. After looking into the lane (move slowly toward the center of the road), the car receives an observation (lane free or not). Fig.~\ref{fig:overtaking-decision-graph} is the decision graph of this problem.
-
-%\marc{use the figure environments!! Here is one example:}
-
-%\begin{figure}\centering
-%  \includegraphics[width=0.5\textwidth]{images/overtaking.png}
-%  \caption{\label{fig:overtaking} The ego vehicle
-%    (cyan) wants to overtake but cannot observe if a vehicle arrives
-%    in the opposite direction because of the truck.}
-%\end{figure}
-    
-%\begin{figure}\centering
-%  \includegraphics[height=0.25\textwidth]{images/graph.eps}
-%  \caption{\label{fig:overtaking-decision-graph} Decision graph for overtaking, the thick edges represent a possible policy}
-%\end{figure}
-  
-
-  
+ 
 \section{TAMP Algorithm}
 
-Our approach for optimizing a TAMP policy (solve equation (1)) is schematized on Fig.~\ref{fig:algo}. First, the decision graph is built. Secondly, iterations of task planning and fast motion planning are performed: Task planning computes a candidate policy based on the last reward values. The policy is given to the motion planner which computes the trajectories and costs of each action. The resulting costs are used to update the rewards associated to the actions. Task planning is re-run which potentially results in a new policy candidate. This process is iterated until an equilibrium is reached (no more policy improvement).
+Our approach for optimizing a TAMP policy (solve equation (1)) is schematized on Fig.~\ref{fig:algo}. First, the decision graph is built. In a second stage, the solver optimizes a policy by optimizing motions step by step, we call it the piecewise approach. At this stage, we define the reward of an action as the negative trajectory costs its motion. The reward only depends on the geometric state of agent when starting the action. In other words, we assume the problem markovian. This assumption allows us to leverage classic algorithms from the MDP litterature. 
+In the final stage, joint trajectory optimization is performed on the best policy found. The trajectory-tree as a whole. It is typically slower but gives smoother and more optimal results. Different optimization parameters (more time steps) can be used in this final stage.
 
-Finally, a pass of joint trajectory optimization is performed on the best policy found. This pass optimizes the trajectory-tree as a whole. It is typically slower but gives smoother and more optimal results. Different optimization parameters (more time steps) can be used in this final stage.
+The validity of our method relies on the underlying assumption that the markovian version of the problem is a good heuristic for solving the original problem. This is true in practice. However, since this approximation is pessimistic, not optimistic, it compromises the completeness and optimality of the method.
+%\begin{align*}
+%\min\sum_{b\in\pi}p(b | \pi, b_0) c(\pi(b), %\psi(b)) \approx \sum_{b\in\pi}p(b | \pi, b_0) %\min c(\pi(b), \psi(b))
+%\end{align*}
+% , iterations of task planning and piecewise motion planning are performed: Task planning computes a candidate policy based on the last reward values. The policy is given to the motion planner which computes the trajectories and costs of each action. The resulting costs are used to update the rewards associated to the actions. Task planning is re-run which potentially results in a new policy candidate. This process is iterated until an equilibrium is reached (no more policy improvement).
+
+
 
 \begin{figure}
 \begin{tikzpicture}
