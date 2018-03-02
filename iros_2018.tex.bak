@@ -201,11 +201,17 @@ If $x$ is infeasible under $a$, we define its cost as $+\infty$.
 Implementing a policy geometrically consists in determining trajectories for each actions, this is a mapping from belief state to actions. Taken as a whole, it is a trajectory-tree i.e a trajectory with ramifications. We will note $\psi$ such a trajectory tree.
 
 \subsection{Optimal policy}
+A TAMP policy is the couple formed by a policy $\pi$ and its trajectory tree $\psi$. Its cost is given by,
+
+\begin{equation}
+c(\pi, \psi) = \sum_{b\in\pi}p(b | \pi, b_0) c(\pi(b), \psi(b))~.
+\end{equation}
+
 Finding the optimal TAMP policy $\Pi^*$ from an initial belief state $b_0$, consists in determining a policy $\pi^*$ and its trajectory-tree $\psi^*$ which minimize the overall trajectory costs,
 
-\begin{align*}
+\begin{equation}
 \Pi^* = \{\pi^*, \psi^*\} = \argminB_{\pi, \psi}  \sum_{b\in\pi}p(b | \pi, b_0) c(\pi(b), \psi(b)) ~.
-\end{align*}
+\end{equation}
 
 %\Pi
 %\marc{(not reward)}
@@ -286,9 +292,9 @@ Finding the optimal TAMP policy $\Pi^*$ from an initial belief state $b_0$, cons
   
 \section{TAMP Algorithm}
 
-Our approach for optimizing a TAMP policy (solve equation (2)) is schematized on Fig.~\ref{fig:algo}. First, the decision graph is built with heuristic reward values. Secondly, iterations of task planning and fast motion planning are performed: Task planning computes a candidate policy based on the last reward values. The policy is given to the motion planner which computes the trajectories and costs of each action. The resulting costs are used to update the rewards associated to the actions. Task planning is re-run which potentially results in a new policy candidate. This process is iterated until an equilibrium is reached (no more policy improvement).
+Our approach for optimizing a TAMP policy (solve equation (1)) is schematized on Fig.~\ref{fig:algo}. First, the decision graph is built. Secondly, iterations of task planning and fast motion planning are performed: Task planning computes a candidate policy based on the last reward values. The policy is given to the motion planner which computes the trajectories and costs of each action. The resulting costs are used to update the rewards associated to the actions. Task planning is re-run which potentially results in a new policy candidate. This process is iterated until an equilibrium is reached (no more policy improvement).
 
-Finally, a pass of joint trajectory optimization is performed on the best policy found. This pass doesn't plan each action trajectory in isolation but optimizes the trajectories as a whole. It is typically slower but gives smoother and more optimal results. Different optimization parameters (more time steps) can be used in this final stage.
+Finally, a pass of joint trajectory optimization is performed on the best policy found. This pass optimizes the trajectory-tree as a whole. It is typically slower but gives smoother and more optimal results. Different optimization parameters (more time steps) can be used in this final stage.
 
 \begin{figure}
 \begin{tikzpicture}
