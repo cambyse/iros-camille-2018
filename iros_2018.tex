@@ -23,9 +23,7 @@
 % See the \addtolength command later in the file to balance the column lengths
 % on the last page of the document
 
-% The following packages can be found on http:\\www.ctan.org
-%\usepackage{graphics} % for pdf, bitmapped graphics files
-%\usepackage{epsfig} % for postscript graphics files
+
 \usepackage{mathptmx} % assumes new font selection scheme installed
 %\usepackage{times} % assumes new font selection scheme installed
 \usepackage{amsmath} % assumes amsmath package installed
@@ -52,10 +50,10 @@
 
 \newcommand{\marc}[1]{\textbf{\texttt{\color[rgb]{0,0,.8}#1}}}
 
-\DeclareMathOperator*{\maxB}{max} % Jan Hlavacek
-\DeclareMathOperator*{\argmaxB}{argmax}   % Jan Hlavacek
-\DeclareMathOperator*{\minB}{min} % Jan Hlavacek
-\DeclareMathOperator*{\argminB}{argmin}   % Jan Hlavacek
+\DeclareMathOperator*{\maxB}{max}
+\DeclareMathOperator*{\argmaxB}{argmax} 
+\DeclareMathOperator*{\minB}{min}
+\DeclareMathOperator*{\argminB}{argmin}
 
 \usetikzlibrary{positioning,fit,calc}
 \tikzset{
@@ -90,9 +88,6 @@ Machine Learning \& Robotic Lab, University of Stuttgart\\
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{abstract}
-
-%We present new algorithms \marc{multiple?} for Task and Motion Planning (TAMP) under partial observability. Our approach builds upon the Logic-Geometric Programming approach (LGP) presentend in prior work, and extends the framework to handle partial observability. We model the problem as a particular kind of POMDP (Partially Observable Markov Decision Process) that we solve assuming a start belief state. Trajectory cost and constraint functions are associated to each action. These functions link symbolic actions with continuous geometric motions. The reward of an action is defined as the negative costs of the optimal trajectory defined by these functions. \marc{I'm still not sure about calling this reward: the path cost is not a sum of independent step rewards; but in a Markovian MDP, all rewards are independent per step. If at all, path costs relate to return. No?} Reward evaluation requires motion planning and is costly to compute. The presented algoritm aims at optimizing policies while limiting the number of reward computations (motion planning queries). Our method explores the policy space in an iterative process. Motion planning is used to evaluate policies. Task planning decides which policy should be evaluated next. The trajectories of the best policy are re-optimized jointly as a holistic optimization problem. To enable the robot to explore its environment, we add ``perceptual actions'' (for example Look) to the robot's classic actions (Pick, Place, etc.) used for manipulation problems. The perceptual actions aim at placing the robot sensor where it can gain information. We evaluate our approach in simulation on object manipulation and autonomous driving examples.
-%\marc{shorten the abstract}
 
 We propose a new algorithm for Combined Task and Motion Planning (TAMP) under partial observability. Our approach builds on the Logic-Geometric Programming framework (LGP) presented in prior work [1, 2]. To represent partial observability,
 the decision tree is formulated in belief space. The presented algorithm plans policies that react to the observations that the agent receives, both on the symbolic the motion level. To this end, we optimize \emph{trajectory trees} that describe the branchings of optimal motions depending on the observations. The algorithm works in two stages:
