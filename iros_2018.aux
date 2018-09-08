@@ -16,70 +16,70 @@
 \gdef\HyperFirstAtBeginDocument#1{#1}
 \providecommand\HyField@AuxAddToFields[1]{}
 \providecommand\HyField@AuxAddToCoFields[2]{}
-\@writefile{toc}{\contentsline {section}{\numberline {I}INTRODUCTION}{1}{section.1}}
-\@writefile{toc}{\contentsline {section}{\numberline {II}RELATED WORK}{1}{section.2}}
-\@writefile{toc}{\contentsline {section}{\numberline {III}Problem statement}{1}{section.3}}
+\@writefile{toc}{\contentsline {section}{\numberline {I}Introduction}{1}{section.1}}
+\@writefile{toc}{\contentsline {section}{\numberline {II}Related Work}{1}{section.2}}
+\@writefile{toc}{\contentsline {section}{\numberline {III}Problem Formulation}{1}{section.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {III-A}Overview}{1}{subsection.3.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {III-B}Decision Process}{1}{subsection.3.2}}
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces  The ego vehicle (cyan) wants to overtake but cannot observe if a vehicle arrives in the opposite direction because of the truck.\relax }}{2}{figure.caption.1}}
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
 \newlabel{fig:overtaking}{{1}{2}{The ego vehicle (cyan) wants to overtake but cannot observe if a vehicle arrives in the opposite direction because of the truck.\relax }{figure.caption.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {III-A}Decision graph}{2}{subsection.3.1}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {III-A.1}Example for a decision graph}{2}{subsubsection.3.1.1}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {III-A.2}Policy}{2}{subsubsection.3.1.2}}
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces  Decision graph for overtaking, the thick edges represent a possible policy\relax }}{2}{figure.caption.2}}
 \newlabel{fig:overtaking-decision-graph}{{2}{2}{Decision graph for overtaking, the thick edges represent a possible policy\relax }{figure.caption.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {III-B}Action grounding}{2}{subsection.3.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {III-C}Optimal policy}{2}{subsection.3.3}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {III-B.1}Example for a decision graph}{2}{subsubsection.3.2.1}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {III-B.2}Policy}{2}{subsubsection.3.2.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {III-C}Trajectory Trees}{2}{subsection.3.3}}
+\newlabel{eqCost}{{1}{2}{Trajectory Trees}{equation.3.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {III-D}Optimal Policy and Trajectory Tree}{2}{subsection.3.4}}
+\@writefile{toc}{\contentsline {section}{\numberline {IV}Solver}{2}{section.4}}
 \@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces TAMP algorithm\relax }}{3}{figure.caption.3}}
 \newlabel{fig:algo}{{3}{3}{TAMP algorithm\relax }{figure.caption.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {IV}TAMP Algorithm}{3}{section.4}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {IV-A}Graph Building}{3}{subsection.4.1}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {IV-B}Value Iteration on the decision graph}{3}{subsection.4.2}}
 \newlabel{ssec:dp}{{IV-B}{3}{Value Iteration on the decision graph}{subsection.4.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {IV-C}Piecewise Motion Planning}{3}{subsection.4.3}}
-\newlabel{ssec:top}{{IV-C}{3}{Piecewise Motion Planning}{subsection.4.3}{}}
-\newlabel{ssec:fast}{{IV-C.1}{3}{Pose level optimization}{subsubsection.4.3.1}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {IV-C.1}Pose level optimization}{3}{subsubsection.4.3.1}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {IV-C.2}Trajectory optimization}{3}{subsubsection.4.3.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {IV-D}Rewards initialization and graph exploration}{4}{subsection.4.4}}
-\newlabel{ssec:explo}{{IV-D}{4}{Rewards initialization and graph exploration}{subsection.4.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {IV-E}Joint Motion Planning}{4}{subsection.4.5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {IV-C}Piece-wise Trajectory Optimization}{3}{subsection.4.3}}
+\newlabel{ssec:top}{{IV-C}{3}{Piece-wise Trajectory Optimization}{subsection.4.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {IV-D}Initialization of $c(a,b)$ and graph exploration}{3}{subsection.4.4}}
+\newlabel{ssec:explo}{{IV-D}{3}{Initialization of $c(a,b)$ and graph exploration}{subsection.4.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {IV-E}Joint Optimization of the Trajectory Tree}{3}{subsection.4.5}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Joint optimization\relax }}{4}{figure.caption.4}}
+\newlabel{fig:joint}{{4}{4}{Joint optimization\relax }{figure.caption.4}{}}
 \newlabel{sec:experiments}{{V}{4}{Experimental Results}{section.5}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {V} Experimental Results}{4}{section.5}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {V-A}Overtaking behavior}{4}{subsection.5.1}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Joint optimization\relax }}{4}{figure.caption.4}}
-\newlabel{fig:joint}{{4}{4}{Joint optimization\relax }{figure.caption.4}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Overtaking optimal policy\relax }}{4}{figure.caption.5}}
 \newlabel{fig:overtaking-policy}{{5}{4}{Overtaking optimal policy\relax }{figure.caption.5}{}}
 \newlabel{fig:overtaking-start-configurations}{{6a}{4}{two start configurations\relax }{figure.caption.6}{}}
 \newlabel{sub@fig:overtaking-start-configurations}{{a}{4}{two start configurations\relax }{figure.caption.6}{}}
 \newlabel{fig:overtaking-look}{{6b}{4}{\textit {Look} action, the ego vehicle moved to the road center to observe the lanes\relax }{figure.caption.6}{}}
 \newlabel{sub@fig:overtaking-look}{{b}{4}{\textit {Look} action, the ego vehicle moved to the road center to observe the lanes\relax }{figure.caption.6}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Longitudinal speed of the overtaking maneuver\relax }}{5}{figure.caption.7}}
-\newlabel{fig:overtaking-speeds}{{7}{5}{Longitudinal speed of the overtaking maneuver\relax }{figure.caption.7}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {V-B}Sussman anomaly under partial observability}{5}{subsection.5.2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Longitudinal speed of the overtaking maneuver\relax }}{4}{figure.caption.7}}
+\newlabel{fig:overtaking-speeds}{{7}{4}{Longitudinal speed of the overtaking maneuver\relax }{figure.caption.7}{}}
 \newlabel{fig:start-1}{{8a}{5}{first start configuration with model B\relax }{figure.caption.8}{}}
 \newlabel{sub@fig:start-1}{{a}{5}{first start configuration with model B\relax }{figure.caption.8}{}}
 \newlabel{fig:start-2}{{8b}{5}{second start configuration with model B\relax }{figure.caption.8}{}}
 \newlabel{sub@fig:start-2}{{b}{5}{second start configuration with model B\relax }{figure.caption.8}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Example of configurations. The robot must stack the blocks in a given color order. The block colors are not visible from behind\relax }}{5}{figure.caption.8}}
 \newlabel{fig:sussman}{{8}{5}{Example of configurations. The robot must stack the blocks in a given color order. The block colors are not visible from behind\relax }{figure.caption.8}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {V-B}Sussman anomaly under partial observability}{5}{subsection.5.2}}
 \newlabel{fig:look-1}{{9a}{5}{\textit {Look} with the block in hand\relax }{figure.caption.9}{}}
 \newlabel{sub@fig:look-1}{{a}{5}{\textit {Look} with the block in hand\relax }{figure.caption.9}{}}
 \newlabel{fig:look-2}{{9b}{5}{\textit {Look} just after having posed a block\relax }{figure.caption.9}{}}
 \newlabel{sub@fig:look-2}{{b}{5}{\textit {Look} just after having posed a block\relax }{figure.caption.9}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Example of geometric configurations reached after the \textit  {Look} action\relax }}{5}{figure.caption.9}}
 \newlabel{fig:checks}{{9}{5}{Example of geometric configurations reached after the \textit {Look} action\relax }{figure.caption.9}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces Summary of the considered problem variations\relax }}{6}{table.1}}
-\newlabel{table:problems}{{I}{6}{Summary of the considered problem variations\relax }{table.1}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces Summary of the considered problem variations\relax }}{5}{table.1}}
+\newlabel{table:problems}{{I}{5}{Summary of the considered problem variations\relax }{table.1}{}}
 \newlabel{fig:policy-B2}{{10a}{6}{result policy for B2\relax }{figure.caption.10}{}}
 \newlabel{sub@fig:policy-B2}{{a}{6}{result policy for B2\relax }{figure.caption.10}{}}
 \newlabel{fig:policy-A2}{{10b}{6}{result policy for A2\relax }{figure.caption.10}{}}
 \newlabel{sub@fig:policy-A2}{{b}{6}{result policy for A2\relax }{figure.caption.10}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces Number of iterations and planning times\relax }}{6}{table.2}}
 \newlabel{table:times}{{II}{6}{Number of iterations and planning times\relax }{table.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces  Policy improvement over iterations\relax }}{6}{figure.caption.11}}
-\newlabel{fig:convergences}{{11}{6}{Policy improvement over iterations\relax }{figure.caption.11}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {V-B.1}Influence of initial rewards}{6}{subsubsection.5.2.1}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {V-B.1}Influence of $c(a,b)$ initialization}{6}{subsubsection.5.2.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces  Policy improvement over iterations depending on the cost initialization $c(a,b)=C_0$\relax }}{6}{figure.caption.11}}
+\newlabel{fig:convergences}{{11}{6}{Policy improvement over iterations depending on the cost initialization $c(a,b)=C_0$\relax }{figure.caption.11}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {V-B.2}Influence of the action precondition}{6}{subsubsection.5.2.2}}
 \bibcite{c1}{1}
 \bibcite{c2}{2}
 \bibcite{c3}{3}
@@ -89,7 +89,6 @@
 \bibcite{c7}{7}
 \bibcite{c8}{8}
 \bibcite{c9}{9}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {V-B.2}Influence of the action precondition}{7}{subsubsection.5.2.2}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {V-B.3}Execution time and scalability}{7}{subsubsection.5.2.3}}
 \@writefile{toc}{\contentsline {section}{\numberline {VI}Conclusion \& Future Work}{7}{section.6}}
 \@writefile{toc}{\contentsline {section}{References}{7}{section*.12}}

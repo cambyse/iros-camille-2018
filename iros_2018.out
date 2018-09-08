@@ -1,24 +1,23 @@
-\BOOKMARK [1][-]{section.1}{INTRODUCTION}{}% 1
-\BOOKMARK [1][-]{section.2}{RELATED WORK}{}% 2
-\BOOKMARK [1][-]{section.3}{Problem statement}{}% 3
-\BOOKMARK [2][-]{subsection.3.1}{Decision graph}{section.3}% 4
-\BOOKMARK [3][-]{subsubsection.3.1.1}{Example for a decision graph}{subsection.3.1}% 5
-\BOOKMARK [3][-]{subsubsection.3.1.2}{Policy}{subsection.3.1}% 6
-\BOOKMARK [2][-]{subsection.3.2}{Action grounding}{section.3}% 7
-\BOOKMARK [2][-]{subsection.3.3}{Optimal policy}{section.3}% 8
-\BOOKMARK [1][-]{section.4}{TAMP Algorithm}{}% 9
-\BOOKMARK [2][-]{subsection.4.1}{Graph Building}{section.4}% 10
-\BOOKMARK [2][-]{subsection.4.2}{Value Iteration on the decision graph}{section.4}% 11
-\BOOKMARK [2][-]{subsection.4.3}{Piecewise Motion Planning}{section.4}% 12
-\BOOKMARK [3][-]{subsubsection.4.3.1}{Pose level optimization}{subsection.4.3}% 13
-\BOOKMARK [3][-]{subsubsection.4.3.2}{Trajectory optimization}{subsection.4.3}% 14
-\BOOKMARK [2][-]{subsection.4.4}{Rewards initialization and graph exploration}{section.4}% 15
-\BOOKMARK [2][-]{subsection.4.5}{Joint Motion Planning}{section.4}% 16
-\BOOKMARK [1][-]{section.5}{ Experimental Results}{}% 17
-\BOOKMARK [2][-]{subsection.5.1}{Overtaking behavior}{section.5}% 18
-\BOOKMARK [2][-]{subsection.5.2}{Sussman anomaly under partial observability}{section.5}% 19
-\BOOKMARK [3][-]{subsubsection.5.2.1}{Influence of initial rewards}{subsection.5.2}% 20
-\BOOKMARK [3][-]{subsubsection.5.2.2}{Influence of the action precondition}{subsection.5.2}% 21
-\BOOKMARK [3][-]{subsubsection.5.2.3}{Execution time and scalability}{subsection.5.2}% 22
-\BOOKMARK [1][-]{section.6}{Conclusion \046 Future Work}{}% 23
-\BOOKMARK [1][-]{section*.12}{References}{}% 24
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Related Work}{}% 2
+\BOOKMARK [1][-]{section.3}{Problem Formulation}{}% 3
+\BOOKMARK [2][-]{subsection.3.1}{Overview}{section.3}% 4
+\BOOKMARK [2][-]{subsection.3.2}{Decision Process}{section.3}% 5
+\BOOKMARK [3][-]{subsubsection.3.2.1}{Example for a decision graph}{subsection.3.2}% 6
+\BOOKMARK [3][-]{subsubsection.3.2.2}{Policy}{subsection.3.2}% 7
+\BOOKMARK [2][-]{subsection.3.3}{Trajectory Trees}{section.3}% 8
+\BOOKMARK [2][-]{subsection.3.4}{Optimal Policy and Trajectory Tree}{section.3}% 9
+\BOOKMARK [1][-]{section.4}{Solver}{}% 10
+\BOOKMARK [2][-]{subsection.4.1}{Graph Building}{section.4}% 11
+\BOOKMARK [2][-]{subsection.4.2}{Value Iteration on the decision graph}{section.4}% 12
+\BOOKMARK [2][-]{subsection.4.3}{Piece-wise Trajectory Optimization}{section.4}% 13
+\BOOKMARK [2][-]{subsection.4.4}{Initialization of c\(a,b\) and graph exploration}{section.4}% 14
+\BOOKMARK [2][-]{subsection.4.5}{Joint Optimization of the Trajectory Tree}{section.4}% 15
+\BOOKMARK [1][-]{section.5}{ Experimental Results}{}% 16
+\BOOKMARK [2][-]{subsection.5.1}{Overtaking behavior}{section.5}% 17
+\BOOKMARK [2][-]{subsection.5.2}{Sussman anomaly under partial observability}{section.5}% 18
+\BOOKMARK [3][-]{subsubsection.5.2.1}{Influence of c\(a,b\) initialization}{subsection.5.2}% 19
+\BOOKMARK [3][-]{subsubsection.5.2.2}{Influence of the action precondition}{subsection.5.2}% 20
+\BOOKMARK [3][-]{subsubsection.5.2.3}{Execution time and scalability}{subsection.5.2}% 21
+\BOOKMARK [1][-]{section.6}{Conclusion \046 Future Work}{}% 22
+\BOOKMARK [1][-]{section*.12}{References}{}% 23
