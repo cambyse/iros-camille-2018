@@ -14,10 +14,10 @@
 \BOOKMARK [2][-]{subsection.4.4}{Initialization of c\(a,b\) and graph exploration}{section.4}% 14
 \BOOKMARK [2][-]{subsection.4.5}{Joint Optimization of the Trajectory Tree}{section.4}% 15
 \BOOKMARK [1][-]{section.5}{ Experimental Results}{}% 16
-\BOOKMARK [2][-]{subsection.5.1}{Overtaking behavior}{section.5}% 17
-\BOOKMARK [2][-]{subsection.5.2}{Sussman anomaly under partial observability}{section.5}% 18
+\BOOKMARK [2][-]{subsection.5.1}{Block stacking with the Baxter}{section.5}% 17
+\BOOKMARK [2][-]{subsection.5.2}{Overtaking behavior}{section.5}% 18
 \BOOKMARK [3][-]{subsubsection.5.2.1}{Influence of c\(a,b\) initialization}{subsection.5.2}% 19
 \BOOKMARK [3][-]{subsubsection.5.2.2}{Influence of the action precondition}{subsection.5.2}% 20
 \BOOKMARK [3][-]{subsubsection.5.2.3}{Execution time and scalability}{subsection.5.2}% 21
 \BOOKMARK [1][-]{section.6}{Conclusion \046 Future Work}{}% 22
-\BOOKMARK [1][-]{section*.12}{References}{}% 23
+\BOOKMARK [1][-]{section*.11}{References}{}% 23
