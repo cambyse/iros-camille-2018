@@ -541,8 +541,7 @@ The overall planning time is dominated by the motion planning (see table.~\ref{t
 Parameterizing the search with a very exploratory behavior may be feasible for problems of small sizes but suffers from the curse of dimensionality. One way to still enable some exploration while maintaining a bounded planning time is to save the best candidate policy planned so far and interrupt the iterations when a given time limit is reached.
 
 \subsection{Comparison against another TAMP Planner}
-We used the block example introduced above to benchmark the proposed solver against the \textit{TMKit framework} in the fully-observable case. This solver implements the \textit{Incremental Task and Motion Planning} algorithm (IDTMP) (see [10]). We added an 4-th block in the example to further test the scalability. The benchmark was conducted on an 
-Intel\textregistered Core\texttrademark i3-4100M CPU under Ubuntu 16.04.
+We used the block example introduced above to benchmark the proposed solver against the \textit{Task Motion Kit Framework} (TMKit) [10] in the fully-observable case. This solver implements the \textit{Incremental Task and Motion Planning} algorithm (IDTMP) (see [11]). We added an 4-th block in the example to further test the scalability. The benchmark was conducted on an Intel\textregistered Core\texttrademark i3-4100M CPU under Ubuntu 16.04. \ref{table:benchmark} shows planning results obtained by running each planner 100 times on each problem.
 \begin{center}
 \footnotesize
 \begin{tabular}{|c|c|c||c|c|c|}
@@ -555,12 +554,13 @@ Intel\textregistered Core\texttrademark i3-4100M CPU under Ubuntu 16.04.
 \hline 
 \thead{4 blocks\\LGP} & 5.79 & 0.04 & 0.36 & 4.62 & 4.98 \\		    
 \hline 
-\thead{4 blocks\\TMKit} & 11.32 & 1.12 & 11.32 & 20.39 & 31.72 \\		
+\thead{4 blocks\\TMKit} & 7.54 & 1.12 & 11.32 & 20.39 & 31.72 \\		
 \hline 
 \end{tabular}
+\captionof{table}{\label{table:benchmark}Planner comparison}
 \end{center}
-
-\textit{TODO : Complete analysis : explain that the discretization of the table to generate target goal locations are extremely inefficient.}
+The proposed planner is faster than the TMKit for this given problem. The trajectories planned with the LGP are similar across multiple runs (low standard deviation). On the other hand, the paths of the TMKit (obtained with the RRT-Connect algorithm) vary much more. 
+One reason for the longer planning time of the TMKit lies in the interface between the Motion and Task Planner. Motion planning queries are composed of the start and goal pose of a given frame (robot end-effector or object). This requires to know the final pose before motion planning. To generate candidate goal poses, the surfaces where an object can be placed (e.g. the table) are discretized. This increases the branching factor of the search making it less efficient. Within the LGP framework, a motion planning problem is specified by a start pose plus cost and constraints functions. The final pose is naturaly obtained as a result of the trajectory optimization and doesn't rely on a discretization of the scene.
 
 \subsection{Overtaking behavior}
 

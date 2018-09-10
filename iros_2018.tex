@@ -541,8 +541,7 @@ The overall planning time is dominated by the motion planning (see table.~\ref{t
 Parameterizing the search with a very exploratory behavior may be feasible for problems of small sizes but suffers from the curse of dimensionality. One way to still enable some exploration while maintaining a bounded planning time is to save the best candidate policy planned so far and interrupt the iterations when a given time limit is reached.
 
 \subsection{Comparison against another TAMP Planner}
-We used the block example introduced above to benchmark the proposed solver against the \textit{TMKit framework} in the fully-observable case. This solver implements the \textit{Incremental Task and Motion Planning} algorithm (IDTMP) (see [10]). We added an 4-th block in the example to further test the scalability. The benchmark was conducted on an 
-Intel\textregistered Core\texttrademark i3-4100M CPU under Ubuntu 16.04.
+We used the block example introduced above to benchmark the proposed solver against the \textit{Task Motion Kit} (TMKit) [10] in the fully-observable case. This solver implements the \textit{Incremental Task and Motion Planning} algorithm (IDTMP) (see [11]). We added an 4-th block in the example to further test the scalability. The benchmark was conducted on an Intel\textregistered Core\texttrademark i3-4100M CPU under Ubuntu 16.04. \ref{table:benchmark} shows planning metrics obtained by running each planner 100 times on each problem.
 \begin{center}
 \footnotesize
 \begin{tabular}{|c|c|c||c|c|c|}
@@ -558,9 +557,10 @@ Intel\textregistered Core\texttrademark i3-4100M CPU under Ubuntu 16.04.
 \thead{4 blocks\\TMKit} & 7.54 & 1.12 & 11.32 & 20.39 & 31.72 \\		
 \hline 
 \end{tabular}
+\captionof{table}{\label{table:benchmark}Planner comparison}
 \end{center}
-
-\textit{TODO : Complete analysis : explain that the discretization of the table to generate target goal locations are extremely inefficient.}
+The proposed planner is faster than the TMKit for this given problem. The trajectories planned with the LGP are similar across multiple runs (low standard deviation). On the other hand, the paths of the TMKit (obtained with the RRT-Connect algorithm) vary much more. 
+One reason for the longer planning time of the TMKit lies in the interface between the Motion and Task Planner. Motion planning queries are composed of the start and goal pose of a given frame (robot end-effector or object). This requires to know the final pose before motion planning. To generate candidate goal poses, the surfaces where an object can be placed (e.g. the table) are discretized. This increases the branching factor of the search making it less efficient. Within the LGP framework, a motion planning problem is specified by a start pose plus cost and constraints functions. The final poses are naturaly obtained as a result of the trajectory optimization and don't rely on a discretization of the scene.
 
 \subsection{Overtaking behavior}
 
@@ -684,7 +684,8 @@ Our current method computes policies that address every possible outcome of prob
 \bibitem{c7} Paden, B., Cap, M., Yong, S.Z., Yershov, D., Frazzoli, E.: A survey of motion planning and control techniques for self-driving urban vehicles. IEEE Trans. Intell. Veh. 1(1), 33-55, 2016
 \bibitem{c8} F. Lagriffoul, D. Dimitrov, A. Saffiotti, and L. Karlsson. Constraint propagation on interval bounds for dealing with geometric back-tracking. In Intelligent Robots and Systems (IROS), 2012 IEEE/RSJ International Conference on, pages 957-964. IEEE, 2012
 \bibitem{c9} F. Lagriffoul, D. Dimitrov, J. Bidot, A. Saffiotti, and L. Karlsson. Efficiently combining task and motion planning using geometric constraints. The International Journal of Robotics Research, 2014
-\bibitem{c10} N. T. Dantam, Z. K. Kingston, S. Chaudhuri, and L. E. Kavraki, Incremental Task and Motion Planning: A Constraint-Based Approach, in Robotics: Science and Systems, 2016
+\bibitem{c10} N. T. Dantam, S. Chaudhuri, and L. E. Kavraki, Incremental Task and Motion Planning: The Task Motion Kit. IEEE Robotics and Automation Magazine, 2018
+\bibitem{c11} N. T. Dantam, Z. K. Kingston, S. Chaudhuri, and L. E. Kavraki, Incremental Task and Motion Planning: A Constraint-Based Approach, in Robotics: Science and Systems, 2016
 
 
 \end{thebibliography}
