@@ -267,7 +267,7 @@ This procedure is akin to ADMM (Alternating Direction Multiplier Method), where 
 \section{\label{sec:experiments} Experimental Results}
 
 \subsection{Block stacking with the Baxter}
-We consider the Baxter and three blocks a table (see Fig.~\ref{fig:block-world} ). The robot has to stack the blocks in a given color order (blue, green, and red on the top). The blocks just have one side colored (assumed to be the opposite side). The robot knows where the blocks are (referred as $block\_1$, $block\_2$, $block\_3$). However it cannot see the colored side from behind and has explore to identify the blocks and to build the stack in the correct order. Only the robot right arm is assumed to be able to grasp.
+We consider the Baxter and three blocks on a table (see Fig.~\ref{fig:block-world} ). The robot has to stack the blocks in a given color order (blue, green, and red on the top). The blocks just have one side colored (assumed to be the opposite side). The robot knows where the blocks are (referred as $block\_1$, $block\_2$, $block\_3$). However it cannot see the colored side from behind and has explore to identify the blocks and to build the stack in the correct order. Only the robot right arm is assumed to be able to grasp.
 \begin{figure}
 \centering
         \begin{subfigure}[t]{0.18\textwidth}
@@ -292,7 +292,6 @@ We consider the Baxter and three blocks a table (see Fig.~\ref{fig:block-world} 
         \end{subfigure}
         \caption{\label{fig:block-world}Example of configurations. The robot must stack the blocks in a given color order. The block colors are not visible from behind}
 \end{figure}
-%The table is subdivided in 3 different locations (table left, center and right), if a block is already at a location, the location is occupied (no block can be added on the same table part).%
 There are 3 possible actions: 
 \begin{itemize}
 \item \textbf{Look} a block: the robot seeks to align its sensor (assumed to be the robot head) with the colored side of the box. This will typically lead the robot to both move its head and its arm simultaneously (see Fig.~\ref{fig:look-1}). After this action, the robot receives an observation (color of the block).
@@ -300,7 +299,7 @@ There are 3 possible actions:
 \item \textbf{Place} a block at a location: the block is placed on the table location, or onto another block.
 \end{itemize}
 
-We evaluate two different action models. In the first variation (Variation 1), the action \textit{Look} has a symbolic precondition: the robot should be holding a block before checking it. This precondition is not present in the second variation (Variation 2). The \textit{Look} action is possible more often which increases the branching factor and the size of the decision graph. However, most of the time, when the robot doesn't hold a block, the \textit{Look} action is infeasible geometrically: Indeed the robot has to place place its head far ahead and look backwards which is, in most cases, infeasible given the geometrical constraints of the robot. It is however interesting to note, that this is possible in some cases (if the robot has just previously placed the block close to the table border with some orientation see Fig.~\ref{fig:look-2}). In other words, the grasp-precondition is not absolutely necessary to ensure the feasibility of the \textit{Look} action. This variation is used to analyze how our approach works with a more ``free'' albeit not invalid symbolic problem description causing a lot of motion planning failures.
+%We evaluate two different action models. In the first variation (Variation 1), the action \textit{Look} has a symbolic precondition: the robot should be holding a block before checking it. This precondition is not present in the second variation (Variation 2). The \textit{Look} action is possible more often which increases the branching factor and the size of the decision graph. However, most of the time, when the robot doesn't hold a block, the \textit{Look} action is infeasible geometrically: Indeed the robot has to place place its head far ahead and look backwards which is, in most cases, infeasible given the geometrical constraints of the robot. It is however interesting to note, that this is possible in some cases (if the robot has just previously placed the block close to the table border with some orientation see Fig.~\ref{fig:look-2}). In other words, the grasp-precondition is not absolutely necessary to ensure the feasibility of the \textit{Look} action. This variation is used to analyze how our approach works with a more ``free'' albeit not invalid symbolic problem description causing a lot of motion planning failures.%
 
 %\begin{figure}
 %\centering
@@ -318,109 +317,10 @@ We evaluate two different action models. In the first variation (Variation 1), t
 %        \caption{\label{fig:checks}Example of geometric configurations reached after the \textit{Look} action}
 %\end{figure}
 
-To evaluate the scalability, we test with three different initial belief states configurations. In the first configuration (A), the agent has a prior knowledge of the color of each block. This boils down to the fully observable case. To keep the action model unchanged, we still impose that the agent has to look one block to complete its task. In the second configuration (B), 2 blocks are unknown. Fig.~\ref{fig:start-1} and ~\ref{fig:start-2} show the two possible start configurations with this model. In the third case (C), there are no prior knowledge which leads to 6 possible initial configurations. The different start configurations are summed up in the table \ref{table:problems}. In all cases, the initial belief state is uniform (e.g. 1/2 likelihood for each possible start configuration with the model B, 1/6 likelihood for model C).
+To evaluate the scalability, we test with three different initial belief states configurations. In the first configuration (A), the agent has a prior knowledge of the color of each block. This boils down to the fully observable case. In the second configuration (B), 2 blocks are unknown. Fig.~\ref{fig:start-1} and ~\ref{fig:start-2} show the two possible start configurations with this model. In the third case (C), there are no prior knowledge which leads to 6 possible initial configurations. In all cases, the initial belief state is uniform (e.g. 1/2 likelihood for each possible start configuration with the model B, 1/6 likelihood for model C).
 
-\subsection{Overtaking behavior}
-
-We consider the overtaking problem introduced previously. Fig.~\ref{fig:overtaking-decision-graph} is the decision graph and Fig.~\ref{fig:overtaking-start-configurations} shows two start configurations. In the first configuration $(a)$, the opposite lane is free enough to overtake. In $(b)$ overtaking is not possible. The Fig.~\ref{fig:overtaking-policy} shows the optimal policy. The trajectory cost of the action \textit{Look} is implemented as the distance between the car and the center of the road. It tends to move the car toward the center to get sight of the lane (see Fig.~\ref{fig:overtaking-look}). The action \textit{Follow} is implemented as a constraint which is satisfied if the ego-car is behind the truck (with a safety distance) at the end of the action. On the other hand, the action \textit{Overtake truck} is implemented as a constraint satisfied if the ego-car is in front of the truck.
-\begin{figure}[h!]
-  \centering
-      \includegraphics[width=0.5\textwidth]{data/cars/policy.eps}
-  \caption{Overtaking optimal policy}
-  \label{fig:overtaking-policy}
-\end{figure}
-
-\begin{figure}[h!]
-  \centering
-  \begin{subfigure}[t]{0.5\textwidth}
-      \includegraphics[width=\textwidth]{data/cars/start-0.png}
-      \includegraphics[width=\textwidth]{data/cars/start-1.png}
-      \caption{\label{fig:overtaking-start-configurations}two start configurations}
-  \end{subfigure}   
-      
-  \begin{subfigure}[t]{0.5\textwidth}
-      \includegraphics[width=\textwidth]{data/cars/look.png}
-        \caption{\label{fig:overtaking-look}\textit{Look} action, the ego vehicle moved to the road center to observe the lanes}   
-  \end{subfigure} 
-  \begin{subfigure}[t]{0.5\textwidth}
-      \includegraphics[width=\textwidth]{data/cars/overtaking.png}
-        \caption{the ego vehicle overtakes (the opposite vehicle is far enough)}
-  \end{subfigure}
-  \begin{subfigure}[t]{0.5\textwidth}
-      \includegraphics[width=\textwidth]{data/cars/follow.png}
-      \caption{the ego vehicle moves back to its lane (opposite lane not free)}
-  \end{subfigure}
-\end{figure}
-
-This example emphasizes the improvement brought by the joint trajectory optimization. The curves on Fig.~\ref{fig:overtaking-speeds} represent the longitudinal velocities of the trajectory tree for different planning configurations. At $t=6.5 s$, the car receives the percept $[lane\ free]$ or $[NOT\ lane\ free]$. This is the branching point of the trajectory tree. If the lane is free, the car accelerates to overtake and then slows down once the truck is overtaken. Otherwise, the car slows down and move back to follow the truck.
-
-\begin{figure}
-\begin{tikzpicture}
-\begin{axis}[
-    %title={Vehicle Speed},
-    xlabel={Time(s)},
-    ylabel={Speed (m/s)},
-    xmin=0, xmax=15,
-    ymin=17.5, ymax=47.5,
-    xtick={0,5,6.5,10,15},
-    ytick={20, 30, 40, 45},
-    legend pos=north west,
-    legend columns=1,
-    legend style={font=\fontsize{7}{8}\selectfont},
-    legend cell align={left},
-    ymajorgrids=true,
-    grid style=dashed,
-    x label style={at={(axis description cs:0.5,0.05)},anchor=north}
-]
-   \addplot[ 
-    color=purple,
-    style={very thick}
-    ]
-    table [col sep=comma]{data/cars/30-70/0.csv}node[above,pos=0.56] {$overtaking$};
-    \addlegendentry{$ Joint\ Planning\ prior\ of\ p( lane\ free ) = 0.3$}
-    
-    \addplot[ 
-    color=blue,
-    style={very thick}
-    ]
-    table [col sep=comma]{data/cars/70-30/0.csv};
-    \addlegendentry{$ Joint\ Planning\ prior\ of\ p( lane\ free ) = 0.7$}
-    
-    
-    \addplot[ 
-    color=gray,
-    style={very thick}
-    ]
-    table [col sep=comma]{data/cars/fast/0.csv};
-    \addlegendentry{$ Piecewise\ Motion\ Planning\ only$}
-    
-    \addplot[ 
-    color=purple,
-    style={very thick}
-    ]
-    table [col sep=comma]{data/cars/30-70/1.csv}node[below,pos=0.63] {$following\ truck$};
-    %\addlegendentry{$joint 1$}
-    
-    \addplot[ 
-    color=blue,
-    style={very thick}
-    ]
-    table [col sep=comma]{data/cars/70-30/1.csv};
-    %\addlegendentry{$ p( lane\ free ) = 0.7$}
-    
-    \addplot[ 
-    color=gray,
-    style={very thick}
-    ]
-    table [col sep=comma]{data/cars/fast/1.csv};
-    
-\end{axis}
-\end{tikzpicture}
-  \caption{\label{fig:overtaking-speeds}Longitudinal speed of the overtaking maneuver}
-\end{figure}
-
-The gray curve results from the piecewise motion planning. When looking at the lanes, the car keeps exactly the same speed (gray curve is flat for $t<6.5s$). When starting to overtake, the car is, still quite far from the truck and accelerates strongly to overtake. On the other hand, the blue and purple curves (Joint Optimization) are much smoother. To avoid a too strong acceleration, the car anticipates and accelerates slightly when looking. If overtaking is possible, the car pursues its acceleration, otherwise, it slows down and go back in the lane. We think that this mimics what human drivers do in case of ``tense'' overtaking maneuver. The initial belief state also influences the behavior. If it is likely that overtaking is possible ($0.7$ likelihood for the blue curve), the car will accelerate more when looking. In practice, the initial belief state could come from a service providing global information about the traffic in the area.
-
+To evaluate the robustness against motion planning failure, we evaluate two different action models. In the first variation (Variation 1), the action \textit{Look} has a precondition: the robot should be grasping a block before checking it. This precondition is not present in the second variation (Variation 2). This introduces a lot of motion planning failures. Indeed, in most cases, no head movement allows the robot to align with the colored side of the block if the block is not grasped.
+The different start configurations are summed up in the table \ref{table:problems}.
 \begin{center}
 \footnotesize
 \setlength\tabcolsep{3pt} % default value: 6pt
@@ -428,30 +328,28 @@ The gray curve results from the piecewise motion planning. When looking at the l
 \hline
 \thead{} & \thead{Belief state\\ size} & \thead{Blocks\\known} & \thead{Grasp\\ \textit{precondition}} & \thead{Graph\\size} & \thead{Graph\\building time(s)} \\
 \hline
-A1                    &  \thead{3/3} & 1 &\thead{yes} &  192 & 0.20 \\
+A1                    & 1 & \thead{3/3} &\thead{yes} &  192 & 0.20 \\
 \hline
-A2                    &  \thead{3/3} & 1 &\thead{no} &  192 & 0.24 \\
+A2                    & 1 & \thead{3/3} &\thead{no} &  192 & 0.24 \\
 \hline
-B1                    &  \thead{1/3} & 2 &\thead{yes} &  336 & 0.53 \\
+B1                    & 2 & \thead{1/3} &\thead{yes} &  336 & 0.53 \\
 \hline
-B2                    & \thead{1/3} & 2 &\thead{no} &  480 & 1.08 \\
+B2                    & 2 & \thead{1/3} &\thead{no} &  480 & 1.08 \\
 \hline
-C1                    & \thead{0/3} & 6 &\thead{yes} &  2076 & 8.55 \\
+C1                    & 6 & \thead{0/3} &\thead{yes} &  2076 & 8.55 \\
 \hline
-C2                    & \thead{0/3} & 6 & \thead{no} &  4128 & 34.3 \\
+C2                    & 6 & \thead{0/3} & \thead{no} &  4128 & 34.3 \\
 \hline
 \end{tabular}
 \captionof{table}{\label{table:problems}Summary of the considered problem variations} 
 \end{center}
-
-Fig.~\ref{fig:policy-B2} shows an optimized policy for the model B. The agent first grasps a block and looks it. Once the block is identified, the agent pursues the stacking.
 
 \begin{figure}[h!]
   \centering
   \hfill
   \begin{subfigure}[t]{0.31\textwidth}
       \includegraphics[width=\textwidth]{data/2m1/-0.015/10/policy-11-final-arranged.eps}
-  \caption{\label{fig:policy-B2}result policy for B2}
+  \caption{\label{fig:policy-B2}result policy for B2. The block 3 is checked, then the stacking is continued sequentially}
   \end{subfigure}
   \hfill
   \begin{subfigure}[t]{0.15\textwidth}
@@ -465,7 +363,7 @@ Fig.~\ref{fig:policy-B2} shows an optimized policy for the model B. The agent fi
 \setlength\tabcolsep{3pt} % default value: 6pt
 \begin{tabular}{|c|c|c|c|c|c|c|c|}
 \hline
-                  			   & \thead{$C_0$} & \thead{Iter-\\ations} & \thead{N of\\actions*} & \thead{Task\\planning} & \thead{Piecewise\\motion\\planning} & \thead{Joint\\motion\\planning} & Total*\\
+                  			   & \thead{$C_0$} & \thead{Iter-\\ations} & \thead{N of\\actions*} & \thead{Task\\planning} & \thead{Piecewise\\motion\\planning} & \thead{Joint\\motion\\planning} & Total**\\
 \hline
 \multirow{3}{*}{A1}     & 0.25  & 1 & 7 & 0.007 & 1.37 & 11.4 & 13.0 \\
 				        & 0.1   & 2 & 7 & 0.018 & 3.14 & 9.7  & 13.1 \\
@@ -636,10 +534,134 @@ The lowest cost initialization (0.015) is always optimistic and leads to the mos
 
 \subsubsection{Influence of the action precondition}
 
-Removing the precondition increases strongly the decision graph size, more iterations are needed, and a majority of candidate policies are infeasible geometrically. This is visible on Fig.~\ref{fig:convergences} for the model B2 (below), the curves of result policies are very discontinuous because the majority of them are infeasible. Most of the time, Motion planning fails due to one single action. The policy value is  infinity, but the resulting costs of each possible actions still inform the decision graph leading to an overall improvement. The search reaches an optimal policy which is as good as the policy obtained with the model with precondition. We think that this is an important quality of the proposed solution. Adding domain specific knowledge in the task planning (to ensure that motion planning will succeed) speeds up the search. However, in the general case, we think that it is not always possible / convenient to incorporate such geometric reasoning (reachability of a view point, reachability of an object) in the logical reasoning. 
+Removing the precondition increases strongly the decision graph size, more iterations are needed, and a majority of candidate policies are infeasible geometrically. This is visible on Fig.~\ref{fig:convergences} for the model B2 (below), the curves of result policies are very discontinuous because the majority of them are infeasible. Most of the time, Motion planning fails due to one single action. The trajectory costs of the actions that were sucessfully planned still inform the decision graph which enables the search to progress. The search reaches an optimal policy which is as good as the policy obtained with the model with precondition. We think that this is an important quality of the proposed solution. Adding domain specific knowledge in the task planning (to ensure that motion planning will succeed) speeds up the search. However, in the general case, we think that it is not always possible / convenient to incorporate such geometric reasoning (reachability of a view point, reachability of an object) in the logical reasoning. 
 
 \subsubsection{Execution time and scalability}
-The overall planning time is dominated by the motion planning (see table.~\ref{table:times} As long as the model is simple (A or B) or the exploration kept low ($C_0$ = 0.25), motion planning is dominated by the single pass of joint optimization. The execution time of this pass mainly depends on the total number of action steps in the policy and on the belief state size but is independent from the number of iterations occurring before. In the configurations requiring the biggest number of iterations (C1 and C2 with $C_0$ = 0.015), motion planning and the overall planning time are dominated by the piecewise motion planning phases of the policy improvement iterations. It also appears clearly that scalability is a crucial problematic here. All the parameters of the problem increase drastically with the size of the belief state (graph size, required number of iterations, size of the resulting policy, computation time). Parameterizing the search with a very exploratory behavior may be feasible for problems of small sizes but suffers from the curse of dimensionality. One way to still enable some exploration while maintaining a bounded planning time is to save the best candidate policy planned so far and interrupt the iterations when a given time limit is reached.
+The overall planning time is dominated by the motion planning (see table.~\ref{table:times} As long as the model is simple (A or B) or the exploration kept low ($C_0$ = 0.25), motion planning is dominated by the single pass of joint optimization. The execution time of this pass mainly depends on the total number of action steps in the policy and on the belief state size but is independent from the number of iterations occurring before. In the configurations requiring the biggest number of iterations (C1 and C2 with $C_0$ = 0.015), motion planning and the overall planning time are dominated by the piecewise motion planning phases of the policy improvement iterations. %It also appears clearly that scalability is a crucial problematic here. All the parameters of the problem increase drastically with the size of the belief state (graph size, required number of iterations, size of the resulting policy, computation time).%
+Parameterizing the search with a very exploratory behavior may be feasible for problems of small sizes but suffers from the curse of dimensionality. One way to still enable some exploration while maintaining a bounded planning time is to save the best candidate policy planned so far and interrupt the iterations when a given time limit is reached.
+
+\subsection{Comparison against another TAMP Planner}
+We used the block example introduced above to benchmark the proposed solver against the \textit{TMKit framework} in the fully-observable case. This solver implements the \textit{Incremental Task and Motion Planning} algorithm (IDTMP) (see [10]). We added an 4-th block in the example to further test the scalability. The benchmark was conducted on an 
+Intel\textregistered Core\texttrademark i3-4100M CPU under Ubuntu 16.04.
+\begin{center}
+\footnotesize
+\begin{tabular}{|c|c|c||c|c|c|}
+\hline 
+\thead{} & \thead{Avg. path\\length} & \thead{std-dev} & \thead{Task\\Planning} & \thead{Motion\\Planning} & \thead{Total (s)}\\
+\hline 
+\thead{3 blocks\\LGP} & 4.03 & 0.04 & 0.10 & 2.88 & 2.98 \\		    
+\hline 
+\thead{3 blocks\\TMKit} & 3.28 & 1.08 & 1.84 & 6.09 & 6.98 \\	
+\hline 
+\thead{4 blocks\\LGP} & 5.79 & 0.04 & 0.36 & 4.62 & 4.98 \\		    
+\hline 
+\thead{4 blocks\\TMKit} & 11.32 & 1.12 & 11.32 & 20.39 & 31.72 \\		
+\hline 
+\end{tabular}
+\end{center}
+
+%Complete analysis : exaplain that the discretization of the table to generate target goal locations are extremely inefficient. 
+
+\subsection{Overtaking behavior}
+
+We consider the overtaking problem introduced previously. Fig.~\ref{fig:overtaking-decision-graph} is the decision graph and Fig.~\ref{fig:overtaking-start-configurations} shows two start configurations. In the first configuration $(a)$, the opposite lane is free enough to overtake. In $(b)$ overtaking is not possible. The Fig.~\ref{fig:overtaking-policy} shows the optimal policy. The trajectory cost of the action \textit{Look} is implemented as the distance between the car and the center of the road. It tends to move the car toward the center to get sight of the lane (see Fig.~\ref{fig:overtaking-look}). The action \textit{Follow} is implemented as a constraint which is satisfied if the ego-car is behind the truck (with a safety distance) at the end of the action. On the other hand, the action \textit{Overtake truck} is implemented as a constraint which is satisfied if the ego-car is in front of the truck.
+\begin{figure}[h!]
+  \centering
+      \includegraphics[width=0.5\textwidth]{data/cars/policy.eps}
+  \caption{Overtaking optimal policy}
+  \label{fig:overtaking-policy}
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+  \begin{subfigure}[t]{0.5\textwidth}
+      \includegraphics[width=\textwidth]{data/cars/start-0.png}
+      \includegraphics[width=\textwidth]{data/cars/start-1.png}
+      \caption{\label{fig:overtaking-start-configurations}two start configurations}
+  \end{subfigure}   
+      
+  \begin{subfigure}[t]{0.5\textwidth}
+      \includegraphics[width=\textwidth]{data/cars/look.png}
+        \caption{\label{fig:overtaking-look}\textit{Look} action, the ego vehicle moved to the road center to observe the lanes}   
+  \end{subfigure} 
+  \begin{subfigure}[t]{0.5\textwidth}
+      \includegraphics[width=\textwidth]{data/cars/overtaking.png}
+        \caption{the ego vehicle overtakes (the opposite vehicle is far enough)}
+  \end{subfigure}
+  \begin{subfigure}[t]{0.5\textwidth}
+      \includegraphics[width=\textwidth]{data/cars/follow.png}
+      \caption{the ego vehicle moves back to its lane (opposite lane not free)}
+  \end{subfigure}
+\end{figure}
+
+This example emphasizes the improvement brought by the joint trajectory optimization. The curves on Fig.~\ref{fig:overtaking-speeds} represent the longitudinal velocities of the trajectory tree for different planning configurations. At $t=6.5 s$, the car receives the percept $[lane\ free]$ or $[NOT\ lane\ free]$. This is the branching point of the trajectory tree. If the lane is free, the car accelerates to overtake and then slows down once the truck is overtaken. Otherwise, the car slows down and move back to follow the truck.
+
+\begin{figure}
+\begin{tikzpicture}
+\begin{axis}[
+    %title={Vehicle Speed},
+    xlabel={Time(s)},
+    ylabel={Speed (m/s)},
+    xmin=0, xmax=15,
+    ymin=17.5, ymax=47.5,
+    xtick={0,5,6.5,10,15},
+    ytick={20, 30, 40, 45},
+    legend pos=north west,
+    legend columns=1,
+    legend style={font=\fontsize{7}{8}\selectfont},
+    legend cell align={left},
+    ymajorgrids=true,
+    grid style=dashed,
+    x label style={at={(axis description cs:0.5,0.05)},anchor=north}
+]
+   \addplot[ 
+    color=purple,
+    style={very thick}
+    ]
+    table [col sep=comma]{data/cars/30-70/0.csv}node[above,pos=0.56] {$overtaking$};
+    \addlegendentry{$ Joint\ Planning\ prior\ of\ p( lane\ free ) = 0.3$}
+    
+    \addplot[ 
+    color=blue,
+    style={very thick}
+    ]
+    table [col sep=comma]{data/cars/70-30/0.csv};
+    \addlegendentry{$ Joint\ Planning\ prior\ of\ p( lane\ free ) = 0.7$}
+    
+    
+    \addplot[ 
+    color=gray,
+    style={very thick}
+    ]
+    table [col sep=comma]{data/cars/fast/0.csv};
+    \addlegendentry{$ Piecewise\ Motion\ Planning\ only$}
+    
+    \addplot[ 
+    color=purple,
+    style={very thick}
+    ]
+    table [col sep=comma]{data/cars/30-70/1.csv}node[below,pos=0.63] {$following\ truck$};
+    %\addlegendentry{$joint 1$}
+    
+    \addplot[ 
+    color=blue,
+    style={very thick}
+    ]
+    table [col sep=comma]{data/cars/70-30/1.csv};
+    %\addlegendentry{$ p( lane\ free ) = 0.7$}
+    
+    \addplot[ 
+    color=gray,
+    style={very thick}
+    ]
+    table [col sep=comma]{data/cars/fast/1.csv};
+    
+\end{axis}
+\end{tikzpicture}
+  \caption{\label{fig:overtaking-speeds}Longitudinal speed of the overtaking maneuver}
+\end{figure}
+
+The gray curve results from the piecewise motion planning. When looking at the lanes, the car keeps exactly the same speed (gray curve is flat for $t<6.5s$). When starting to overtake, the car is, still quite far from the truck and accelerates strongly to overtake. On the other hand, the blue and purple curves (Joint Optimization) are much smoother. To avoid a too strong acceleration, the car anticipates and accelerates slightly when looking. If overtaking is possible, the car pursues its acceleration, otherwise, it slows down and go back in the lane. We think that this mimics what human drivers do in case of ``tense'' overtaking maneuver. The initial belief state also influences the behavior. If it is likely that overtaking is possible ($0.7$ likelihood for the blue curve), the car will accelerate more when looking. In practice, the initial belief state could come from a service providing global information about the traffic in the area.
 
 \section{Conclusion \& Future Work}
 
