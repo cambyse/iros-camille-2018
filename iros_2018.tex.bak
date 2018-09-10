@@ -560,6 +560,8 @@ Intel\textregistered Core\texttrademark i3-4100M CPU under Ubuntu 16.04.
 \end{tabular}
 \end{center}
 
+\textit{TODO : Complete analysis : explain that the discretization of the table to generate target goal locations are extremely inefficient.}
+
 \subsection{Overtaking behavior}
 
 We consider the overtaking problem introduced previously. Fig.~\ref{fig:overtaking-decision-graph} is the decision graph and Fig.~\ref{fig:overtaking-start-configurations} shows two start configurations. In the first configuration $(a)$, the opposite lane is free enough to overtake. In $(b)$ overtaking is not possible. The Fig.~\ref{fig:overtaking-policy} shows the optimal policy. The trajectory cost of the action \textit{Look} is implemented as the distance between the car and the center of the road. It tends to move the car toward the center to get sight of the lane (see Fig.~\ref{fig:overtaking-look}). The action \textit{Follow} is implemented as a constraint which is satisfied if the ego-car is behind the truck (with a safety distance) at the end of the action. On the other hand, the action \textit{Overtake truck} is implemented as a constraint which is satisfied if the ego-car is in front of the truck.
