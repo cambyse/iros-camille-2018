@@ -317,7 +317,7 @@ There are 3 possible actions:
 %        \caption{\label{fig:checks}Example of geometric configurations reached after the \textit{Look} action}
 %\end{figure}
 
-To evaluate the scalability, we test with three different initial belief states configurations. In the first configuration (A), the agent has a prior knowledge of the color of each block. This boils down to the fully observable case. In the second configuration (B), 2 blocks are unknown. Fig.~\ref{fig:start-1} and ~\ref{fig:start-2} show the two possible start configurations with this model. In the third case (C), there are no prior knowledge which leads to 6 possible initial configurations. In all cases, the initial belief state is uniform (e.g. 1/2 likelihood for each possible start configuration with the model B, 1/6 likelihood for model C).
+To evaluate the scalability, we test with three different initial belief states configurations. In the first configuration (A), the agent has a prior knowledge of the color of each block. This boils down to the fully observable case, to \textit{Look} action is needed. In the second configuration (B), 2 blocks are unknown. Fig.~\ref{fig:start-1} and ~\ref{fig:start-2} show the two possible start configurations with this model. In the third case (C), there are no prior knowledge which leads to 6 possible initial configurations. In all cases, the initial belief state is uniform (e.g. 1/2 likelihood for each possible start configuration with the model B, 1/6 likelihood for model C).
 
 To evaluate the robustness against motion planning failure, we evaluate two different action models. In the first variation (Variation 1), the action \textit{Look} has a precondition: the robot should be grasping a block before checking it. This precondition is not present in the second variation (Variation 2). This introduces a lot of motion planning failures. Indeed, in most cases, no head movement allows the robot to align with the colored side of the block if the block is not grasped.
 The different start configurations are summed up in the table \ref{table:problems}.
@@ -328,17 +328,15 @@ The different start configurations are summed up in the table \ref{table:problem
 \hline
 \thead{} & \thead{Belief state\\ size} & \thead{Blocks\\known} & \thead{Grasp\\ \textit{precondition}} & \thead{Graph\\size} & \thead{Graph\\building time(s)} \\
 \hline
-A1                    & 1 & \thead{3/3} &\thead{yes} &  192 & 0.20 \\
+A                     & 1 & \thead{3/3} &\thead{-} &  63 & 0.023 \\
 \hline
-A2                    & 1 & \thead{3/3} &\thead{no} &  192 & 0.24 \\
+B1                    & 2 & \thead{1/3} &\thead{yes} & 196 & 0.083 \\
 \hline
-B1                    & 2 & \thead{1/3} &\thead{yes} &  336 & 0.53 \\
+B2                    & 2 & \thead{1/3} &\thead{no} &  234 & 0.11 \\
 \hline
-B2                    & 2 & \thead{1/3} &\thead{no} &  480 & 1.08 \\
+C1                    & 6 & \thead{0/3} &\thead{yes} & 1084 & 0.69 \\
 \hline
-C1                    & 6 & \thead{0/3} &\thead{yes} &  2076 & 8.55 \\
-\hline
-C2                    & 6 & \thead{0/3} & \thead{no} &  4128 & 34.3 \\
+C2                    & 6 & \thead{0/3} & \thead{no} & 1486 & 1.18 \\
 \hline
 \end{tabular}
 \captionof{table}{\label{table:problems}Summary of the considered problem variations} 
@@ -365,30 +363,26 @@ C2                    & 6 & \thead{0/3} & \thead{no} &  4128 & 34.3 \\
 \hline
                   			   & \thead{$C_0$} & \thead{Iter-\\ations} & \thead{N of\\actions*} & \thead{Task\\planning} & \thead{Piecewise\\motion\\planning} & \thead{Joint\\motion\\planning} & Total**\\
 \hline
-\multirow{3}{*}{A1}     & 0.25  & 1 & 7 & 0.007 & 1.37 & 11.4 & 13.0 \\
-				        & 0.1   & 2 & 7 & 0.018 & 3.14 & 9.7  & 13.1 \\
-					    & 0.015 & 13 & 7 & 0.10  & 18.5 & 16.3 & 35.1 \\
+\multirow{3}{*}{A}     & 0.25  & 2 & 6 & 0.027 & 1.62 & 3.27 & 4.95 \\
+				        & 0.1   & 2 & 6 & 0.034 & 1.67 & 3.54 & 5.27 \\
+					    & 0.015 & 2 & 6 & 0.029 & 1.67 & 4.02 & 5.75 \\
 \hline
-\multirow{3}{*}{A2}     & 0.25  & 2 & 7 & 0.013 & 1.81 & 8.43 & 10.5 \\
-				        & 0.1   & 3 & 7 & 0.019 & 2.08 & 11.6 & 14.0 \\
-					    & 0.015 & 16 & 7 & 0.10 & 14.8 & 11.4 & 26.6 \\
-\hline
-\multirow{3}{*}{B1}     & 0.25  & 1 & 12 & 0.014 & 2.72 & 26.2 & 29.5 \\
-				        & 0.1   & 1 & 12 & 0.016 & 2.85 & 21.5 & 24.9 \\
-					    & 0.015 & 11 & 12 & 0.13 & 30.6 & 20.6 & 51.9 \\
+\multirow{3}{*}{B1}     & 0.25  & 5 & 12 & 0.10 & 8.83 & 14.1 & 23.1 \\
+				        & 0.1   & 5 & 12 & 0.10 & 8.02 & 15.1 & 23.3 \\
+					    & 0.015 & 7 & 12 & 0.17 & 10.7 & 14.1 & 25.1 \\
 					    
 \hline
-\multirow{3}{*}{B2}     & 0.25  & 7 & 12 & 0.089 & 9.10 & 56.7 & 66.9 \\
-				        & 0.1   & 14 & 12 & 0.17 & 20.4 & 59.9 & 81.4 \\
-					    & 0.015 & 39 & 12 & 0.55 & 69.9 & 38.6 & 110.1 \\
+\multirow{3}{*}{B2}     & 0.25  & 20 & 12 & 0.45 & 8.64 & 23.2 & 32.4 \\
+				        & 0.1   & 23 & 12 & 0.57 & 10.8 & 14.7 & 26.2 \\
+					    & 0.015 & 30 & 12 & 0.75 & 28.2 & 14.3 & 43.4 \\
 \hline
-\multirow{3}{*}{C1}     & 0.25  & 1 & 33 & 0.077 & 11.6 & 172.3 & 192.5 \\
-				        & 0.1   & 8 & 33 & 0.35 & 56.9 & 105.5 & 170.9 \\
+\multirow{3}{*}{C1}     & 0.25  & 11 & 33 & 0.81 & 42.6 & 66.9 & 111.0 \\
+				        & 0.1   & 22 & 33 & 1.69 & 61.8 & 66.9 & 131.1 \\
 					    & 0.015 & 41 & 37 & 2.07 & 321.3 & 112.7 & 444.1\\
 \hline
-\multirow{3}{*}{C2}     & 0.25  & 15 & 33 & 1.16 & 42.4 & 100.8 & 182.8 \\
-				        & 0.1   & 48 & 33 & 3.38 & 146.5 & 250.9 & 436.6 \\
-					    & 0.015 & 303 & 39 & 26.0 & 1188.9 & 261.5 & 1510.9 \\
+\multirow{3}{*}{C2}     & 0.25  & 80 & 33 & 10.2 & 97.2 & 84.9 & 193.6 \\
+				        & 0.1   & 199 & 33 & 27.6 & 234.2 & 86.2 & 349.2 \\
+					    & 0.015 & 252 & 33 & 40.0 & 385.5 & 114.1 & 540.9 \\
 \hline
 \end{tabular}
 \begin{tablenotes}
@@ -461,65 +455,65 @@ C2                    & 6 & \thead{0/3} & \thead{no} &  4128 & 34.3 \\
 \end{axis}
 \end{tikzpicture}
 
-\begin{tikzpicture}
-\begin{axis}[
-    title={Values of candidate and result policies for B2},
-    title style={yshift=-2ex},
-    xlabel={Iterations},
-    ylabel={Value},
-    xmin=0, xmax=40,
-    ymin=-2, ymax=0.6,
-    xtick={0,5,10,15,20,25,30,35,40},
-    ytick={-2,-1.5,-1,-0.5,0,0.5},
-    legend pos=north west,
-    legend columns=2,
-    legend style={font=\fontsize{7}{8}\selectfont},
-    legend cell align={left},
-    ymajorgrids=true,
-    grid style=dashed,
-    x label style={at={(axis description cs:0.5,0.05)},anchor=north}
-]
-   \addplot[ 
-    color=purple,
-    dashed,
-    ]
-    table [col sep=comma]{data/2m2/-0.25/10/policy-candidates.data};
-    \addlegendentry{$candidate, C_0=0.25$}
+%\begin{tikzpicture}
+%\begin{axis}[
+%    title={Values of candidate and result policies for B2},
+%    title style={yshift=-2ex},
+%    xlabel={Iterations},
+%    ylabel={Value},
+%    xmin=0, xmax=40,
+%    ymin=-2, ymax=0.6,
+%    xtick={0,5,10,15,20,25,30,35,40},
+%    ytick={-2,-1.5,-1,-0.5,0,0.5},
+%    legend pos=north west,
+%    legend columns=2,
+%    legend style={font=\fontsize{7}{8}\selectfont},
+%    legend cell align={left},
+%    ymajorgrids=true,
+%    grid style=dashed,
+%    x label style={at={(axis description cs:0.5,0.05)},anchor=north}
+%]
+%   \addplot[ 
+%    color=purple,
+%    dashed,
+%    ]
+%    table [col sep=comma]{data/2m2/-0.25/10/policy-candidates.data};
+%    \addlegendentry{$candidate, C_0=0.25$}
     
-\addplot[ 
-    color=purple,
-    ]
-    table [col sep=comma]{data/2m2/-0.25/10/policy-results.data};
-    \addlegendentry{$result, C_0=0.25$}
+%\addplot[ 
+%    color=purple,
+%    ]
+%    table [col sep=comma]{data/2m2/-0.25/10/policy-results.data};
+%    \addlegendentry{$result, C_0=0.25$}
            
-\addplot[ 
-    color=blue,
-    dashed,
-    ]
-    table [col sep=comma]{data/2m2/-0.1/10/policy-candidates.data};
-    \addlegendentry{$candidate, C_0=0.1$}
+%\addplot[ 
+%    color=blue,
+%    dashed,
+%    ]
+%    table [col sep=comma]{data/2m2/-0.1/10/policy-candidates.data};
+%    \addlegendentry{$candidate, C_0=0.1$}
     
-\addplot[ 
-    color=blue,
-    ]
-    table [col sep=comma]{data/2m2/-0.1/10/policy-results.data};
-    \addlegendentry{$result, C_0=0.1$}
+%\addplot[ 
+%    color=blue,
+%    ]
+%    table [col sep=comma]{data/2m2/-0.1/10/policy-results.data};
+%    \addlegendentry{$result, C_0=0.1$}
      
-\addplot[ 
-    color=orange,
-    dashed,
-    ]
-    table [col sep=comma]{data/2m2/-0.015/10/policy-candidates.data};
-    \addlegendentry{$candidate, C_0=0.015$}
+%\addplot[ 
+%    color=orange,
+%    dashed,
+%    ]
+%    table [col sep=comma]{data/2m2/-0.015/10/policy-candidates.data};
+%    \addlegendentry{$candidate, C_0=0.015$}
     
-\addplot[ 
-    color=orange,
-    ]
-    table [col sep=comma]{data/2m2/-0.015/10/policy-results.data};
-    \addlegendentry{$result, C_0=0.015$}
+%\addplot[ 
+%    color=orange,
+%    ]
+%    table [col sep=comma]{data/2m2/-0.015/10/policy-results.data};
+%    \addlegendentry{$result, C_0=0.015$}
 
-\end{axis}
-\end{tikzpicture}
+%\end{axis}
+%\end{tikzpicture}
 
 \caption{\label{fig:convergences} Policy improvement over iterations depending on the cost initialization $c(a,b)=C_0$}
 
@@ -534,7 +528,8 @@ The lowest cost initialization (0.015) is always optimistic and leads to the mos
 
 \subsubsection{Influence of the action precondition}
 
-Removing the precondition increases strongly the decision graph size, more iterations are needed, and a majority of candidate policies are infeasible geometrically. This is visible on Fig.~\ref{fig:convergences} for the model B2 (below), the curves of result policies are very discontinuous because the majority of them are infeasible. Most of the time, Motion planning fails due to one single action. The trajectory costs of the actions that were sucessfully planned still inform the decision graph which enables the search to progress. The search reaches an optimal policy which is as good as the policy obtained with the model with precondition. We think that this is an important quality of the proposed solution. Adding domain specific knowledge in the task planning (to ensure that motion planning will succeed) speeds up the search. However, in the general case, we think that it is not always possible / convenient to incorporate such geometric reasoning (reachability of a view point, reachability of an object) in the logical reasoning. 
+Removing the precondition increases strongly the decision graph size, more iterations are needed. %, and a majority of candidate policies are infeasible geometrically. This is visible on Fig.~\ref{fig:convergences} for the model B2 (below), the curves of result policies are very discontinuous because the majority of them are infeasible. Most of the time, Motion planning fails due to one single action. The trajectory costs of the actions that were sucessfully planned still inform the decision graph which enables the search to progress.
+The search reaches an optimal policy which is as good as the policy obtained with the model with precondition. We think that this is an important quality of the proposed solution. Adding domain specific knowledge in the task planning (to ensure that motion planning will succeed) speeds up the search. However, in the general case, we think that it is not always possible / convenient to incorporate such geometric reasoning (reachability of a view point, reachability of an object) in the logical reasoning. 
 
 \subsubsection{Execution time and scalability}
 The overall planning time is dominated by the motion planning (see table.~\ref{table:times} As long as the model is simple (A or B) or the exploration kept low ($C_0$ = 0.25), motion planning is dominated by the single pass of joint optimization. The execution time of this pass mainly depends on the total number of action steps in the policy and on the belief state size but is independent from the number of iterations occurring before. In the configurations requiring the biggest number of iterations (C1 and C2 with $C_0$ = 0.015), motion planning and the overall planning time are dominated by the piecewise motion planning phases of the policy improvement iterations. %It also appears clearly that scalability is a crucial problematic here. All the parameters of the problem increase drastically with the size of the belief state (graph size, required number of iterations, size of the resulting policy, computation time).%
@@ -560,7 +555,7 @@ We used the block example introduced above to benchmark the proposed solver agai
 \captionof{table}{\label{table:benchmark}Planner comparison}
 \end{center}
 The proposed planner is faster than the TMKit for this given problem. The trajectories planned with the LGP are similar across multiple runs (low standard deviation). On the other hand, the paths of the TMKit (obtained with the RRT-Connect algorithm) vary much more. 
-One reason for the longer planning time of the TMKit lies in the interface between the Motion and Task Planner. Motion planning queries are composed of the start and goal pose of a given frame (robot end-effector or object). This requires to know the final pose before motion planning. To generate candidate goal poses, the surfaces where an object can be placed (e.g. the table) are discretized. This increases the branching factor of the search making it less efficient. Within the LGP framework, a motion planning problem is specified by a start pose plus cost and constraints functions. The final poses are naturaly obtained as a result of the trajectory optimization and don't rely on a discretization of the scene.
+One reason for the longer planning time of the TMKit lies in the interface between the Motion and Task Planner. Motion planning queries are composed of the start and goal pose of a given frame (robot end-effector or object). This requires to know the final pose before motion planning. To generate candidate goal poses, the surfaces where an object can be placed (e.g. the table) are discretized. This increases the branching factor of the search which makes it less efficient. Within the LGP framework, a motion planning problem is specified by a start pose plus cost and constraints functions. The final poses are naturaly obtained as a result of the trajectory optimization and don't rely on a discretization of the scene.
 
 \subsection{Overtaking behavior}
 
