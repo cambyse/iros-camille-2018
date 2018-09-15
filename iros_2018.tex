@@ -154,9 +154,10 @@ Given the initial belief $b_0$, the decision process spans a decision tree with 
 Every node in the tree corresponds a belief state computed with the standard belief update.
 
 \subsubsection{Example for a decision graph}
+\label{ssec:decision_graph}
 
-Consider a car behind a truck. The car wishes to overtake but cannot see the opposite lane because of the truck, see Fig.~\ref{fig:overtaking}. The car can take three actions: look into the opposite lane, overtake the truck, or continue to follow the truck. After looking into the lane (move slowly toward the center of the road), the car receives an observation (lane free or not). This observation is assumed to be valid one step (a free lane might become non-free, hence edges from 3 to 0 and 4 to 0). Fig.~\ref{fig:overtaking-decision-graph} is the decision graph of this problem. %, assuming loop detection to turn the tree into a graph.
-The blue node is the start belief state. The green nodes are terminal belief states.
+Consider a car behind a truck. The car wishes to overtake but cannot see the opposite lane because of the truck, see Fig.~\ref{fig:overtaking}. The car can take three actions: look into the opposite lane, overtake the truck, or continue to follow the truck. After looking into the lane (move slowly toward the center of the road), the car receives an observation (lane free or not). Fig.~\ref{fig:overtaking-decision-graph} is the decision graph of this problem. %, assuming loop detection to turn the tree into a graph.
+The blue node is the start belief state. The green nodes are terminal belief states. The observations are assumed to be valid only one step (a free lane might become non-free, hence edges from 3 to 0 and 4 to 0).
 %\marc{why is there not all three actions (look, overtake, stay) possible in the blue state??}
 %\marc{why does the (follow truck) go back to the blue initial state? We now know that the lane is free? Or because it might become non-free? And why is the left (follow truck) thing different?}
 
@@ -406,7 +407,7 @@ D                     & 6 & \thead{0/3} & \thead{no} & 1486 & 1.18 \\
 \begin{figure}[h!]
 \begin{tikzpicture}
 \begin{axis}[
-    height=7.5cm,
+    height=6.5cm,
     title={Policy improvement for problem C},
     title style={yshift=-2ex},
     xlabel={Iterations},
@@ -511,7 +512,7 @@ One reason for the longer planning time of the TMKit lies in the interface betwe
 
 \subsection{Overtaking behavior}
 
-We consider the overtaking problem introduced previously. Albeit simple, this example highlights the advantage of the joint (vs. piece-wise) trajectory-tree optimization, which leads to anticipatory optimal trajectories. Fig.~\ref{fig:overtaking-decision-graph} is the decision graph and Fig.~\ref{fig:overtaking-start-configurations} shows two initial configurations. In the first configuration $(a)$, the opposite lane is free enough to overtake. In $(b)$ overtaking is not possible. The Fig.~\ref{fig:overtaking-policy} shows the optimal policy. The trajectory cost of the action \textit{Look} is implemented as the distance between the car and the center of the road. It moves the car toward the center to catch sight of the lane (see Fig.~\ref{fig:overtaking-look}). The action \textit{Follow} is implemented as a constraint, which is satisfied if the ego-car is behind the truck (keeping a safe distance) at the end of the action. The action \textit{Overtake} is a constraint satisfied if the ego-car is in front of the truck.
+We consider the overtaking problem introduced previously (see \ref{ssec:decision_graph}). Albeit simple, this example highlights the advantage of the joint (vs. piece-wise) trajectory-tree optimization, which leads to anticipatory optimal trajectories. Fig.~\ref{fig:overtaking-start-configurations} shows two initial configurations. In the first configuration $(a)$, the opposite lane is free enough to overtake. In $(b)$ overtaking is not possible. The trajectory cost of the action \textit{Look} is implemented as the distance between the car and the center of the road. It moves the car toward the center to catch sight of the lane (see Fig.~\ref{fig:overtaking-look}). The action \textit{Follow} is implemented as a constraint, which is satisfied if the ego-car is behind the truck (keeping a safe distance) at the end of the action. The action \textit{Overtake} is a constraint satisfied if the ego-car is in front of the truck. The Fig.~\ref{fig:overtaking-policy} shows the obtained policy. The solver excluded the possibility of overtaking directly without looking at the lane (edge 0-2 of the decison graph) because the motion planner can't satisfy the collision avoidance constraint in this case. 
 \begin{figure}[h!]
   \centering
       \includegraphics[width=0.5\textwidth]{data/cars/policy.eps}
@@ -539,14 +540,16 @@ We consider the overtaking problem introduced previously. Albeit simple, this ex
       \includegraphics[width=\textwidth]{data/cars/follow.png}
       \caption{the ego vehicle moves back to its lane (opposite lane not free)}
   \end{subfigure}
+  \caption{\label{fig:starts} Geometric configurations for the car example}
 \end{figure}
+
 
 The curves on Fig.~\ref{fig:overtaking-speeds} represent the longitudinal velocities of the trajectory tree for different planning configurations. At $t=6.5 s$, the car receives the observation $[lane\ free]$ or $[NOT\ lane\ free]$. If the lane is free, the car accelerates to overtake and then slows down once the truck is overtaken. Otherwise, the car slows down and moves back to follow the truck.
 
 \begin{figure}
 \begin{tikzpicture}
 \begin{axis}[
-    height=7.5cm,
+    height=6.5cm,
     %title={Vehicle Speed},
     xlabel={Time(s)},
     ylabel={Speed (m/s)},
