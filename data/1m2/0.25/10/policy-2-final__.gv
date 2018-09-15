@@ -1,0 +1,17 @@
+digraph g{
+edge[fontsize = 35];
+0 [style=filled, fillcolor=blue]
+79 [style=filled, fillcolor=green]
+0->3 [ label="(grasp block_3)
+r=-0.0196266" ];
+3->10 [ label="(place block_3 table)
+r=-0.183189" ];
+10->18 [ label="(grasp block_2)
+r=-0.0471104" ];
+18->33 [ label="(place block_2 block_3)
+r=-0.140605" ];
+33->50 [ label="(grasp block_1)
+r=-0.0430731" ];
+50->79 [ label="(place block_1 block_2)
+r=-0.131905" ];
+}

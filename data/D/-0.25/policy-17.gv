@@ -1,0 +1,110 @@
+digraph g{
+bgcolor="transparent"{
+0 [style=filled, fillcolor=blue]
+7 [style=filled, fillcolor=green]
+24 [style=filled, fillcolor=green]
+30 [style=filled, fillcolor=green]
+31 [style=filled, fillcolor=green]
+32 [style=filled, fillcolor=green]
+33 [style=filled, fillcolor=green]
+}
+0->1 [ label="pick-up(block_2,tableC)
+r=-0.25
+" ];
+1->2 [ label="check(block_2)
+r=-0.25
+" ];
+2->3 [ label="check(block_1)
+r=-0.25
+" ];
+3->6 [ label="put-down(block_2,tableC)
+r=-0.25
+" ];
+6->10 [ label="unstack(block_3,block_1)
+r=-0.25
+" ];
+10->13 [ label="put-down(block_3,tableC)
+r=-0.25
+" ];
+13->17 [ label="pick-up(block_1,tableC)
+r=-0.25
+" ];
+17->21 [ label="stack(block_1,block_3)
+r=-0.25
+" ];
+21->26 [ label="pick-up(block_2,tableC)
+r=-0.25
+" ];
+26->30 [ label="stack(block_2,block_1)
+r=-0.25
+" ];
+3->7 [ label="stack(block_2,block_3)
+r=-0.25
+" ];
+2->4 [ label="put-down(block_2,tableC)
+r=-0.25
+" ];
+4->8 [ label="unstack(block_3,block_1)
+r=-0.25
+" ];
+8->11 [ label="put-down(block_3,tableC)
+r=-0.25
+" ];
+11->14 [ label="pick-up(block_2,tableC)
+r=-0.25
+" ];
+14->18 [ label="check(block_1)
+r=-0.25
+" ];
+18->22 [ label="stack(block_2,block_3)
+r=-0.25
+" ];
+22->27 [ label="pick-up(block_1,tableC)
+r=-0.25
+" ];
+27->31 [ label="stack(block_1,block_2)
+r=-0.25
+" ];
+18->23 [ label="stack(block_2,block_1)
+r=-0.25
+" ];
+23->28 [ label="pick-up(block_3,tableC)
+r=-0.25
+" ];
+28->32 [ label="stack(block_3,block_2)
+r=-0.25
+" ];
+2->5 [ label="put-down(block_2,tableC)
+r=-0.25
+" ];
+5->9 [ label="unstack(block_3,block_1)
+r=-0.25
+" ];
+9->12 [ label="check(block_3)
+r=-0.25
+" ];
+12->15 [ label="stack(block_3,block_2)
+r=-0.25
+" ];
+15->19 [ label="pick-up(block_1,tableC)
+r=-0.25
+" ];
+19->24 [ label="stack(block_1,block_3)
+r=-0.25
+" ];
+12->16 [ label="put-down(block_3,tableC)
+r=-0.25
+" ];
+16->20 [ label="pick-up(block_1,tableC)
+r=-0.25
+" ];
+20->25 [ label="stack(block_1,block_2)
+r=-0.25
+" ];
+25->29 [ label="pick-up(block_3,tableC)
+r=-0.25
+" ];
+29->33 [ label="stack(block_3,block_1)
+r=-0.25
+" ];
+}

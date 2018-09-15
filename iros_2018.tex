@@ -91,8 +91,7 @@ Machine Learning \& Robotic Lab, University of Stuttgart\\
 
   We propose a novel approach to Combined Task and Motion Planning
   (TAMP) under partial observability. Previous optimization-based TAMP
-  methods [1][2] compute optimal plans and paths for a deterministic
-  setting. However, partial observability requires the solution to be
+  methods [1][2] compute optimal plans and paths assuming full observability. However, partial observability requires the solution to be
   a policy that reacts to the observations that the agent receives. We
   consider a formulation where observations introduce additional
   branching in the symbolic decision tree. The solution is now given
@@ -103,7 +102,7 @@ Machine Learning \& Robotic Lab, University of Stuttgart\\
   estimated from independent optimizations of trajectory pieces.
 %Under this assumption, the decision process is markovian and policies are optimized using Value Iteration and Rmax algorithm.
 Second, we fix the best symbolic policy and optimize a joint trajectory tree.
-We test our approach on object manipulation and autonomous driving examples. We also compare the algorithm's performance to a state-of-the-art TAMP planner in the fully observable case.
+We test our approach on object manipulation and autonomous driving examples. We also compare the algorithm's performance to a state-of-the-art TAMP planner in fully observable cases.
 \end{abstract}
 
 
@@ -114,14 +113,14 @@ Robots must combine the ability to reason symbolically about discrete actions (t
 With the exception of [4], current TAMP research assumes full observability. However partial observability is pervasive in many real world situations, e.g.\ when objects are hidden or partially hidden. If some objects to manipulate
 are inside containers, the robot has to explore its environment to perform its task. Self driving cars face the same problem when operating in the presence of other vehicles that limit the field of view of the ego vehicle.
 
-In this paper we extend the Logic-Geometric Programming  (LGP) approach [1,2]  to handle partial observability. Under partial observability, policies need to be reactive due to observations. In this paper, rather than focussing on control noise as in stochastic optimal control, we focus on  observations at discrete points in time that reveal essential information for the task. E.g., whether an object is in a container or not, or whether a car is approaching in the opposite lane. In this case, not only the symbolic policy needs to be reactive, also the optimal motion needs to branch at observations. Computing an optimal motion plan now means to compute an optimal trajectory tree. Our TAMP solver works in two stages: First piece-wise optimization and then joint tree optimization. During the first stage, the trajectories of actions are optimized independently (piece-wise).
+In this paper we extend the Logic-Geometric Programming  (LGP) approach [1,2]  to handle partial observability. Under partial observability, policies need to be reactive due to observations. In this paper, rather than focussing on control noise as in stochastic optimal control, we focus on  observations at discrete points in time that reveal essential information for the task. E.g., whether an object is in a container or not, or whether a car is approaching in the opposite lane. In this case, not only does the symbolic policy need to be reactive, but also the optimal motion needs to branch at observations. Computing an optimal motion plan now means to compute an optimal trajectory tree. Our TAMP solver works in two stages: First piece-wise optimization and then joint tree optimization. During the first stage, the trajectories of actions are optimized independently (piece-wise).
 %
 %
-In the second stage, we fix the best symbolic policy obtained in the first stage and optimize the joint trajectory tree that corresponds to this symbolic policy. I.e., instead of optimizing the sequential motion of each action in isolation, the whole trajectory tree is optimized all at once.
+In the second stage, we fix the best symbolic policy obtained in the first stage and optimize the joint trajectory tree that corresponds to this symbolic policy. That is, instead of optimizing the sequential motion of each action in isolation, the whole trajectory tree is optimized all at once.
 
 \section{Related Work}
 
-Concerning Combined Task and Motion Planning, a number of approaches [5][8][9] rely on the discretization of the configuration spaces or action/skeleton parameters to leverage CSP methods. Prior work [1][2] states TAMP problems as an optimization problem. These approaches assume full observability and plan a single sequence of actions together with a single path. To our knowledge, the system in [4] is the only other TAMP planner considering partial observability. A \textit{Look} action is used to actively move the robot sensor to acquire information. This approach (Hierarchical Planning in the Now) interweaves planning with execution (in the now).
+Concerning Combined Task and Motion Planning, a number of approaches [5][8][9] rely on the discretization of the configuration spaces or action/skeleton parameters to leverage CSP methods. Recently, Dantam and al. introduced an off-the-shelf open source TAMP framework [10] combining constraints-based task planning and sampling-based motion planning [11]. Prior work [1][2] states TAMP problems as an optimization problem. All these approaches assume full observability and plan a single sequence of actions together with a single path. To our knowledge, the system in [4] is the only other TAMP planner handling partial observability. A \textit{Look} action is used to actively move the robot sensor to acquire information. This approach (Hierarchical Planning in the Now) interweaves planning with execution (in the now).
 %Sequences of actions are planned by approximating the system dynamics (results of actions and observations).
 Replanning is triggered once the robot ends up in a state not covered by the plan. In contrast, our approach aims at planning a full reactive policy from the starting state to the final state. In addition, we aim for smooth and locally optimal trajectories.
 
@@ -156,9 +155,10 @@ Every node in the tree corresponds a belief state computed with the standard bel
 
 \subsubsection{Example for a decision graph}
 
-Consider a car behind a truck. The car wishes to overtake but cannot see the opposite lane because of the truck, see Fig.~\ref{fig:overtaking}. The car can take three actions: look into the opposite lane, overtake the truck, or continue to follow the truck. After looking into the lane (move slowly toward the center of the road), the car receives an observation (lane free or not). Fig.~\ref{fig:overtaking-decision-graph} is the decision graph of this problem, assuming loop detection to turn the tree into a graph. The blue node is the start belief state. The green nodes are terminal belief states.
-\marc{why is there not all three actions (look, overtake, stay) possible in the blue state??}
-\marc{why does the (follow truck) go back to the blue initial state? We now know that the lane is free? Or because it might become non-free? And why is the left (follow truck) thing different?}
+Consider a car behind a truck. The car wishes to overtake but cannot see the opposite lane because of the truck, see Fig.~\ref{fig:overtaking}. The car can take three actions: look into the opposite lane, overtake the truck, or continue to follow the truck. After looking into the lane (move slowly toward the center of the road), the car receives an observation (lane free or not). This observation is assumed to be valid one step (a free lane might become non-free, hence edges from 3 to 0 and 4 to 0). Fig.~\ref{fig:overtaking-decision-graph} is the decision graph of this problem. %, assuming loop detection to turn the tree into a graph.
+The blue node is the start belief state. The green nodes are terminal belief states.
+%\marc{why is there not all three actions (look, overtake, stay) possible in the blue state??}
+%\marc{why does the (follow truck) go back to the blue initial state? We now know that the lane is free? Or because it might become non-free? And why is the left (follow truck) thing different?}
 
 \begin{figure}\centering
   \includegraphics[width=0.5\textwidth]{images/overtaking.png}
@@ -193,7 +193,7 @@ c(a, x) = \int_{t_k}^{t_{k+1}} & {f_a(x(t), \dot{x}(t), \ddot{x(t)}) ~dt}\\
 \end{align}
 and $c(a,x) = +\infty$ if the constraints are not satisfied by path $x$.
 
-Planning motions in the partially observable case means that we need to have motions pre-computed for all cases, i.e., for all observations that might happen during execution. This means that our planner computes trajectory pieces $x$ for all action edges in the decision tree. Together, they form a trajectory tree. We require this tree to be smooth at its ramifications (which is implicit in smoothness costs and equality constraints). We use $\psi$ to denote a full trajectory tree.
+Planning motions in the partially observable case means that we need to have motions pre-computed for all cases, i.e., for all observations that might happen during execution. This means that our planner computes trajectory pieces $x$ for all action edges in the policy. Together, they form a trajectory tree. We require this tree to be smooth at its ramifications (which is implicit in smoothness costs and equality constraints). We use $\psi$ to denote a full trajectory tree.
 
 \subsection{Optimal Policy and Trajectory Tree}
 
@@ -236,7 +236,7 @@ The decision graph, is expanded from the start belief state using a breadth firs
 
 \subsection{Value Iteration on the decision graph} \label{ssec:dp}
 
-We assume that at any point in time we have cost estimates $c(a,b)$ for each action $a$ in belief state $b$. However, these costs are all initialized with a low, optimistic number, as in Rmax. Only when an optimal policy makes it likely to actually visit $(a,b)$ we compute more precise estimates using piece-wise trajectory optimization, as described below.
+We assume that at any point in time we have cost estimates $c(a,b)$ for each action $a$ in belief state $b$. However, these costs are all initialized with a low, optimistic number $C_0$, as in Rmax. Only when an optimal policy makes it likely to actually visit $(a,b)$ we compute more precise estimates using piece-wise trajectory optimization, as described below.
 
 Given $c(a,b)$ we use Value Iteration
 \begin{equation}
@@ -258,7 +258,7 @@ There may be a strong overlap between candidate policies generated by Value Iter
  
 \subsection{Initialization of $c(a,b)$ and graph exploration}\label{ssec:explo}
 
-The use of optimistic initializations of $c(a,b)$ is analogous to the Rmax algorithm [3] and allows us to control exploration vs.\ exploitation within the policy optimization. An optimistic initial $c(a,b)$ (e.g., zero costs) encourages exploration. This Rmax mechanisms in combination with Value Iteration can be viewed as an alternative to other exploration mechanisms in tree search, such as admissible heuristics, or UCB in the probabilistic case. In our particular use case, we do not have uncertainty about the transitions, but only about the costs (negative rewards) as we were lazy to compute them. This relates well to the notion of ``unknown states'' in Rmax model-based reinforcement learning.
+The use of optimistic initializations $C_0$ of $c(a,b)$ is analogous to the Rmax algorithm [3] and allows us to control exploration vs.\ exploitation within the policy optimization. An optimistic initial $c(a,b)$ (e.g., zero costs) encourages exploration. This Rmax mechanisms in combination with Value Iteration can be viewed as an alternative to other exploration mechanisms in tree search, such as admissible heuristics, or UCB in the probabilistic case. In our particular use case, we do not have uncertainty about the transitions, but only about the costs (negative rewards) as we were lazy to compute them. This relates well to the notion of ``unknown states'' in Rmax model-based reinforcement learning.
 
 On the other hand, when initializing $c(a,b)$ less optimistic, we loose the guarantees that come with admissible heuristics, but may converge faster to reasonable policies. Our experiments will investigate the influence of the cost initialization on the number of iterations.
  
@@ -281,26 +281,26 @@ This procedure is akin to ADMM (Alternating Direction Multiplier Method), where 
 \section{\label{sec:experiments} Experimental Results}
 
 \subsection{Block stacking with the Baxter}
-We consider a Baxter robot wiht three blocks on a table (see Fig.~\ref{fig:block-world}). The robot has to stack the blocks in a given color order (blue, green, and red on the top). The blocks just have one side colored (assumed to be the opposite side). The robot knows where the blocks are (referred as $block\_1$, $block\_2$, $block\_3$). However it cannot see the colored side from behind and has explore to identify the blocks and to build the stack in the correct order. Only the robot right arm is assumed to be able to grasp.
+We consider the Baxter and three blocks on a table (see Fig.~\ref{fig:block-world} ). The robot has to stack the blocks in a given color order (blue, green, and red on the top). The blocks just have one side colored (assumed to be the opposite side). The robot knows where the blocks are (referred to as $block\_1$, $block\_2$, $block\_3$). However it cannot see the colored side from behind and has to explore to identify the blocks and build the stack in the correct order.
 \begin{figure}
 \centering
-        \begin{subfigure}[t]{0.18\textwidth}
+        \begin{subfigure}[t]{0.21\textwidth}
             \includegraphics[width=\textwidth]{images/start-a.png}
             \caption{\label{fig:start-1}first start configuration with model B}
         \end{subfigure}
         \hfill
-        \begin{subfigure}[t]{0.18\textwidth}
+        \begin{subfigure}[t]{0.21\textwidth}
             \includegraphics[width=\textwidth]{images/start-b.png}
             \caption{\label{fig:start-2}second start configuration with model B}
         \end{subfigure}
         %\hfill
         \hfill
-        \begin{subfigure}[t]{0.18\textwidth}
+        \begin{subfigure}[t]{0.21\textwidth}
             \includegraphics[width=\textwidth]{images/look.png}
             \caption{\label{fig:look-1}\textit{Look} with the block in hand}
         \end{subfigure}
         \hfill
-        \begin{subfigure}[t]{0.18\textwidth}
+        \begin{subfigure}[t]{0.21\textwidth}
             \includegraphics[width=\textwidth]{images/goal.png}
             \caption{example of goal configuration}
         \end{subfigure}
@@ -308,9 +308,9 @@ We consider a Baxter robot wiht three blocks on a table (see Fig.~\ref{fig:block
 \end{figure}
 There are 3 possible actions: 
 \begin{itemize}
-\item \textbf{Look} at a block: the robot seeks to align its sensor (assumed to be the robot head) with the colored side of the box. This will typically lead the robot to both move its head and its arm simultaneously (see Fig.~\ref{fig:look-1}). After this action, the robot receives an observation (color of the block).
+\item \textbf{Look} a block: the robot aligns its head with the colored side of the block. This typically leads the robot to move both its head and its arm simultaneously (see Fig.~\ref{fig:look-1}). An observation is received after this action (block's color).
 \item \textbf{Grasp} a block: only the right arm can grasp
-\item \textbf{Place} a block at a location: the block is placed on the table location, or onto another block.
+\item \textbf{Place} a block at a location: the block is placed on the table, or onto another block.
 \end{itemize}
 
 %We evaluate two different action models. In the first variation (Variation 1), the action \textit{Look} has a symbolic precondition: the robot should be holding a block before checking it. This precondition is not present in the second variation (Variation 2). The \textit{Look} action is possible more often which increases the branching factor and the size of the decision graph. However, most of the time, when the robot doesn't hold a block, the \textit{Look} action is infeasible geometrically: Indeed the robot has to place place its head far ahead and look backwards which is, in most cases, infeasible given the geometrical constraints of the robot. It is however interesting to note, that this is possible in some cases (if the robot has just previously placed the block close to the table border with some orientation see Fig.~\ref{fig:look-2}). In other words, the grasp-precondition is not absolutely necessary to ensure the feasibility of the \textit{Look} action. This variation is used to analyze how our approach works with a more ``free'' albeit not invalid symbolic problem description causing a lot of motion planning failures.%
@@ -331,29 +331,28 @@ There are 3 possible actions:
 %        \caption{\label{fig:checks}Example of geometric configurations reached after the \textit{Look} action}
 %\end{figure}
 
-To evaluate the scalability, we test with three different initial belief states configurations. In the first configuration (A), the agent has a prior knowledge of the color of each block. This boils down to the fully observable case, no \textit{Look} action is needed. In the second configuration (B), 2 blocks are unknown. Fig.~\ref{fig:start-1} and ~\ref{fig:start-2} show the two possible start configurations with this model. In the third case (C), there are no prior knowledge which leads to 6 possible initial configurations. In all cases, the initial belief state is uniform (e.g. 1/2 likelihood for each possible start configuration with the model B, 1/6 likelihood for model C).
+To evaluate the scalability, three different initial belief states configurations are tested.
+In the planning problem A, the agent has prior knowledge of the blocks color. This boils down to the fully observable case. In the problem B, 2 blocks are unknown (see Fig.~\ref{fig:start-1} and ~\ref{fig:start-2}). In problem C, no prior knowledge is assumed, leading to 6 possible initial states. The initial belief state is uniform (1/6 likelihood for each possible state).
 
-To evaluate the robustness against motion planning failure, we evaluate two different action models. In the first variation (Variation 1), the action \textit{Look} has a precondition: the robot should be grasping a block before checking it. This precondition is not present in the second variation (Variation 2). This introduces a lot of motion planning failures. Indeed, in most cases, no head movement allows the robot to align with the colored side of the block if the block is not grasped.
-The different start configurations are summed up in the table \ref{table:problems}.
+To evaluate the robustness against motion planning failures, another problem (D) is considered. In B and C, the \textit{Look} action has a precondition: the robot should have a block in hand before looking at it. This precondition is removed in the variation D. This causes the \textit{Look} action to be symbolically possible more often. However, in most cases, if the robot doesn't hold the block, no robot motion allows the robot to align its head with the colored side of the block causing the motion planning to fail. 
+The planning problems are summed up in the table \ref{table:problems}.
 \begin{center}
 \footnotesize
 \setlength\tabcolsep{3pt} % default value: 6pt
 \begin{tabular}[ht]{|c|c|c|c||c|c|c|}
 \hline
-\thead{} & \thead{Belief state\\ size} & \thead{Blocks\\known} & \thead{Grasp\\ \textit{precondition}} & \thead{Graph\\size} & \thead{Graph\\building time(s)} \\
+\thead{} & \thead{Belief state\\ size} & \thead{Blocks\\known} & \thead{ \textit{precondition} \\ for \textit{Look} action} & \thead{Graph\\size} & \thead{Graph\\building time(s)} \\
 \hline
-A                     & 1 & \thead{3/3} &\thead{-} &  63 & 0.023 \\
+A                     & 1 & \thead{3/3} &\thead{no \textit{Look} action \\ fully observable} &  63 & 0.023 \\
 \hline
-B1                    & 2 & \thead{1/3} &\thead{yes} & 196 & 0.083 \\
+B                     & 2 & \thead{1/3} &\thead{yes} & 196 & 0.083 \\
 \hline
-B2                    & 2 & \thead{1/3} &\thead{no} &  234 & 0.11 \\
+C                     & 6 & \thead{0/3} &\thead{yes} & 1084 & 0.69 \\
 \hline
-C1                    & 6 & \thead{0/3} &\thead{yes} & 1084 & 0.69 \\
-\hline
-C2                    & 6 & \thead{0/3} & \thead{no} & 1486 & 1.18 \\
+D                     & 6 & \thead{0/3} & \thead{no} & 1486 & 1.18 \\
 \hline
 \end{tabular}
-\captionof{table}{\label{table:problems}Summary of the considered problem variations} 
+\captionof{table}{\label{table:problems}Summary problem variations} 
 \end{center}
 
 \begin{figure}[h!]
@@ -361,229 +360,158 @@ C2                    & 6 & \thead{0/3} & \thead{no} & 1486 & 1.18 \\
   \hfill
   \begin{subfigure}[t]{0.31\textwidth}
       \includegraphics[width=\textwidth]{data/2m1/-0.015/10/policy-11-final-arranged.eps}
-  \caption{\label{fig:policy-B2}result policy for B2. The block 3 is checked, then the stacking is continued sequentially}
+  \caption{\label{fig:policy-B2}result policy for B}
   \end{subfigure}
   \hfill
   \begin{subfigure}[t]{0.15\textwidth}
-      \includegraphics[width=\textwidth]{data/1m2/-0.25/10/policy-2-final.eps}
-  \caption{\label{fig:policy-A2}result policy for A2}
+      \includegraphics[width=\textwidth]{data/1m2/0.25/10/policy-2-final.eps}
+  \caption{\label{fig:policy-A2}policy for A}
   \end{subfigure}
 \end{figure}
 
 \begin{center}
 \footnotesize
 \setlength\tabcolsep{3pt} % default value: 6pt
-\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\begin{tabular}{|c|c|c|c||c|c|c|c|}
 \hline
-                  			   & \thead{$C_0$} & \thead{Iter-\\ations} & \thead{N of\\actions*} & \thead{Task\\planning} & \thead{Piecewise\\motion\\planning} & \thead{Joint\\motion\\planning} & Total**\\
+                  			   & \thead{$C_0$} & \thead{Iter-\\ations} & \thead{Final\\traj-cost} & \thead{Task\\planning} & \thead{Piecewise\\motion\\planning} & \thead{Joint\\motion\\planning} & Total**\\
 \hline
-\multirow{3}{*}{A}     & 0.25  & 2 & 6 & 0.027 & 1.62 & 3.27 & 4.95 \\
-				        & 0.1   & 2 & 6 & 0.034 & 1.67 & 3.54 & 5.27 \\
-					    & 0.015 & 2 & 6 & 0.029 & 1.67 & 4.02 & 5.75 \\
+\multirow{3}{*}{A}     & 0.25  & 1 & 0.15 & 0.05 & 1.47 & 2.60 & 4.17 \\
+				        & 0.1   & 1 & 0.15 & 0.05 & 2.54 & 2.33 & 4.98 \\
+					    & 0.015 & 1 & 0.15 & 0.04 & 1.46 & 2.24 & 3.80 \\
 \hline
-\multirow{3}{*}{B1}     & 0.25  & 5 & 12 & 0.10 & 8.83 & 14.1 & 23.1 \\
-				        & 0.1   & 5 & 12 & 0.10 & 8.02 & 15.1 & 23.3 \\
-					    & 0.015 & 7 & 12 & 0.17 & 10.7 & 14.1 & 25.1 \\
+\multirow{3}{*}{B}     & 0.25  & 2 & 1.23 & 0.069 & 4.53 & 7.07 & 11.7 \\
+				       & 0.1   & 5 & 0.74 & 0.16 & 14.4 & 9.42 & 24.1 \\
+					   & 0.015 & 5 & 0.74 & 0.17 & 10.7 & 14.1 & 25.1 \\
 					    
 \hline
-\multirow{3}{*}{B2}     & 0.25  & 20 & 12 & 0.45 & 8.64 & 23.2 & 32.4 \\
-				        & 0.1   & 23 & 12 & 0.57 & 10.8 & 14.7 & 26.2 \\
-					    & 0.015 & 30 & 12 & 0.75 & 28.2 & 14.3 & 43.4 \\
+\multirow{3}{*}{C}     & 0.25  & 2 & 1.52 & 0.36 & 26.9 & 56.3 & 84.4 \\
+				        & 0.1   & 13 & 1.17 & 1.35 & 133.3 & 74.4 & 209.8 \\
+					    & 0.015 & 15 & 1.14 & 1.59 & 153.1 & 76.5 & 231.9 \\
 \hline
-\multirow{3}{*}{C1}     & 0.25  & 11 & 33 & 0.81 & 42.6 & 66.9 & 111.0 \\
-				        & 0.1   & 22 & 33 & 1.69 & 61.8 & 66.9 & 131.1 \\
-					    & 0.015 & 41 & 37 & 2.07 & 321.3 & 112.7 & 444.1\\
-\hline
-\multirow{3}{*}{C2}     & 0.25  & 80 & 33 & 10.2 & 97.2 & 84.9 & 193.6 \\
-				        & 0.1   & 199 & 33 & 27.6 & 234.2 & 86.2 & 349.2 \\
-					    & 0.015 & 252 & 33 & 40.0 & 385.5 & 114.1 & 540.9 \\
+\multirow{3}{*}{D}     & 0.25  & 60 & 1.54 & 7.39 & 69.7 & 74.4 & 152.8 \\
+				        & 0.1   & 187 & 1.17 & 26.5 & 323.2 & 83.2 & 434.2 \\
+					    & 0.015 & 209 & 1.16 & 31.4 & 400.2 & 80.5 & 513.4 \\
 \hline
 \end{tabular}
 \begin{tablenotes}
       \footnotesize
-      \item * Number of actions of the final policy
-      \item ** The total planning time also includes the graph building time given in the table \ref{table:problems}
+      \item ** Also includes the graph building time of table \ref{table:problems}
     \end{tablenotes}
 \captionof{table}{\label{table:times}Number of iterations and planning times} 
 
 \end{center}
 
+\begin{center}
 \begin{figure}[h!]
 \begin{tikzpicture}
 \begin{axis}[
-    title={Values of candidate and result policies for B1},
+    height=7.5cm,
+    title={Policy improvement for problem C},
     title style={yshift=-2ex},
     xlabel={Iterations},
-    ylabel={Value},
-    xmin=0, xmax=14,
-    ymin=-2, ymax=0.6,
+    ylabel={Trajectory cost},
+    xmin=0, xmax=16,
+    ymin=0, ymax=7,
     xtick={0,1,5,10,15,20},
-    ytick={-2,-1.5,-1,-0.5,0,0.5},
-    legend pos=north west,
-    legend columns=2, 
+    ytick={0,0.5,1.0,1.5, 2.0, 2.5, 3, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5, 7.0},
+    legend pos=south west,
+    legend columns=3, 
     legend style={font=\fontsize{7}{8}\selectfont},
     legend cell align={left},
     ymajorgrids=true,
     grid style=dashed,
     x label style={at={(axis description cs:0.5,0.05)},anchor=north}
 ]
-   \addplot[ 
-    color=purple,
-    dashed,
-    ]
-    table [col sep=comma]{data/2m1/-0.25/10/policy-candidates.data};
-    \addlegendentry{$candidate, C_0=0.25$}
-    
+   
 \addplot[ 
     color=purple,
     ]
-    table [col sep=comma]{data/2m1/-0.25/10/policy-results.data};
-    \addlegendentry{$results, C_0=0.25$}
+    table [col sep=comma]{data/C/0.25/policy-results.data};
+    \addlegendentry{$C_0=0.25$}
     
+    \addplot[ 
+    color=purple,
+    dashed
+    ]
+    table [col sep=comma]{data/C/0.25/policy-add-line.data};
+      
 \addplot[ 
     color=blue,
-    dashed,
     ]
-    table [col sep=comma]{data/2m1/-0.1/10/policy-candidates.data};
-    \addlegendentry{$candidate, C_0=0.1$}
+    table [col sep=comma]{data/C/0.1/policy-results.data};
+    \addlegendentry{$C_0=0.1$}    
     
-\addplot[ 
+    \addplot[ 
     color=blue,
+    dashed
     ]
-    table [col sep=comma]{data/2m1/-0.1/10/policy-results.data};
-    \addlegendentry{$results, C_0=0.1$}    
- 
-\addplot[ 
-    color=orange,
-    dashed,
-    ]
-    table [col sep=comma]{data/2m1/-0.015/10/policy-candidates.data};
-    \addlegendentry{$candidate, C_0=0.015$}
-    
+    table [col sep=comma]{data/C/0.1/policy-add-line.data};
+
 \addplot[ 
     color=orange,
     ]
-    table [col sep=comma]{data/2m1/-0.015/10/policy-results.data};
-    \addlegendentry{$result, C_0=0.015$}
+    table [col sep=comma]{data/C/0.015/policy-results.data};
+    \addlegendentry{$C_0=0.015$}
+    
+    \addplot[ 
+    color=orange,
+    dashed
+    ]
+    table [col sep=comma]{data/C/0.015/policy-add-line.data};
              
 \end{axis}
 \end{tikzpicture}
 
-%\begin{tikzpicture}
-%\begin{axis}[
-%    title={Values of candidate and result policies for B2},
-%    title style={yshift=-2ex},
-%    xlabel={Iterations},
-%    ylabel={Value},
-%    xmin=0, xmax=40,
-%    ymin=-2, ymax=0.6,
-%    xtick={0,5,10,15,20,25,30,35,40},
-%    ytick={-2,-1.5,-1,-0.5,0,0.5},
-%    legend pos=north west,
-%    legend columns=2,
-%    legend style={font=\fontsize{7}{8}\selectfont},
-%    legend cell align={left},
-%    ymajorgrids=true,
-%    grid style=dashed,
-%    x label style={at={(axis description cs:0.5,0.05)},anchor=north}
-%]
-%   \addplot[ 
-%    color=purple,
-%    dashed,
-%    ]
-%    table [col sep=comma]{data/2m2/-0.25/10/policy-candidates.data};
-%    \addlegendentry{$candidate, C_0=0.25$}
-    
-%\addplot[ 
-%    color=purple,
-%    ]
-%    table [col sep=comma]{data/2m2/-0.25/10/policy-results.data};
-%    \addlegendentry{$result, C_0=0.25$}
-           
-%\addplot[ 
-%    color=blue,
-%    dashed,
-%    ]
-%    table [col sep=comma]{data/2m2/-0.1/10/policy-candidates.data};
-%    \addlegendentry{$candidate, C_0=0.1$}
-    
-%\addplot[ 
-%    color=blue,
-%    ]
-%    table [col sep=comma]{data/2m2/-0.1/10/policy-results.data};
-%    \addlegendentry{$result, C_0=0.1$}
-     
-%\addplot[ 
-%    color=orange,
-%    dashed,
-%    ]
-%    table [col sep=comma]{data/2m2/-0.015/10/policy-candidates.data};
-%    \addlegendentry{$candidate, C_0=0.015$}
-    
-%\addplot[ 
-%    color=orange,
-%    ]
-%    table [col sep=comma]{data/2m2/-0.015/10/policy-results.data};
-%    \addlegendentry{$result, C_0=0.015$}
-
-%\end{axis}
-%\end{tikzpicture}
-
-\caption{\label{fig:convergences} Policy improvement over Value Iterations depending on the cost initialization $C_0$. The dashed line shows the cost estimates used by the algorithm, which use the prior cost $C_0$ for yet non-evaluated actions. The solid line shows the true costs, not known to the algorithm. (Red is a pessimistic initialization, where the true cost is lower than the prior cost $C_0=0.25$.)
+\caption{\label{fig:convergences} Policy improvement over iterations depending on the cost initialization $c(a,b)=C_0$.% The dashed line shows the cost estimates used by the algorithm, which uses the prior cost $C_0$ for yet non-evaluated actions. The solid line shows the true costs, not known to the algorithm. (Red is a pessimistic initialization, where the true cost is lower than the prior cost $C_0=0.25$.)
 }
-
 \end{figure}
+\end{center}
 
+\subsubsection{Influence of $C_0$}
 
-\subsubsection{Influence of $c(a,b)$ initialization}
+With $C_0=0.25$, planning time is minimized. The search even stops after one single iteration for A. However, this is at the expense of optimality. With lower values of $C_0$, the search explores more potential policies (more iterations) and the final policy costs are lower. In particular, deeper policies are considered (with a higher number of actions). Deeper policies are not necessarily more costly, this depends on the trajectory cost functions. In this example, the squared acceleration is minimized and slightly deeper policies allowing the robot arm to move more smoothly lead to better costs.
 
-\marc{Please only ever talk about costs, and lower is better. Please flip Fig. 7 to become a cost plot, not Value. It's confusing otherwise.}
+%With a cost initialization of 0.25 (pessimistic), the search finishes as soon as a first policy is found. This happens after one single iteration with the B1. With the B2, the search encounters infeasible actions, afterwhich the first possible policy is found at the 7th iteration. This policy is less optimal than the policy obtained with the other initializations.
 
-Fig.~\ref{fig:convergences} displays the cost of policies over Value Iterations in two versions: the true costs (solid line), and the cost estimates that are used in the algorithm and use $C_0$ for actions that have not been optimized yet (dashed line). For strictly optimistic (admissible) $C_0$, the dashed line goes upward as more an more actions are evaluated.
-
-With a pessimistic cost initialization of $C_0=0.25$, the search finishes as soon as a first policy is found. This happens after one single iteration with the B1. With the B2, the search encounters infeasible actions, the first possible policy is found at the 7th iteration. This policy is less optimal than the results found with the other initializations.
-
-The lowest cost initialization of $C_0=0.015$ is always optimistic and leads to the most exploratory behavior. The cost of candidate policies (containing at least one unexplored action) are consequently always lower than the true cost. It requires the largest number of iterations. In particular, task planning also explores deeper policies (with more steps). In some cases a slightly deeper policy results in a better trajectory costs (see B2 with $C_0$ = 0.015). \marc{there is no plot for B2} The search converges to a better policy than with the other cost initializations. The small improvements in the last iterations are due to small rearrangements of the target location when placing blocks (e.g.\ place a block on table-left instead of table-center).
+%The lowest cost initialization (0.015) is always optimistic and leads to the most exploratory behavior. The value of candidate policies (containing at least one unexplored action) are consequently always higher than the result policies (see the orange curves on Fig.~\ref{fig:convergences}. It requires the largest number of iterations. In particular, task planning also explores deeper policies (with more steps). In some cases a slightly deeper policy results in better trajectory costs (see B2 with $C_0$ = 0.015). The search converges to a better policy than with the other cost initializations. The small improvements in the last iterations are due to small rearrangements of the target location when placing blocks (e.g. place a block on table-left instead of table-center).
 
 \subsubsection{Influence of the action precondition}
+Removing the precondition increases the decision graph size. Much more iterations are needed. However, the search reaches a policy, which is as good as the policy obtained with precondition. This is an important quality of the proposed solution. Adding domain specific knowledge in the task planning (to ensure that motion planning will succeed) speeds up the search. However, generally speaking, we think that is it not always possible, nor convenient to incorporate geometric reasoning (reachability of a view point, reachability of an object) in the logical reasoning. %, and a majority of candidate policies are infeasible geometrically. This is visible on Fig.~\ref{fig:convergences} for the model B2 (below), the curves of result policies are very discontinuous because the majority of them are infeasible. Most of the time, Motion planning fails due to one single action. The trajectory costs of the actions that were sucessfully planned still inform the decision graph which enables the search to progress.
 
-\marc{which plot should I look at??}
-
-Removing the precondition increases strongly the decision graph size, and more iterations are needed.
-%, and a majority of candidate policies are infeasible geometrically. This is visible on Fig.~\ref{fig:convergences} for the model B2 (below), the curves of result policies are very discontinuous because the majority of them are infeasible. Most of the time, Motion planning fails due to one single action. The trajectory costs of the actions that were sucessfully planned still inform the decision graph which enables the search to progress.
-The search reaches an optimal policy which is as good as the policy obtained with the model with precondition. We think that this is an important quality of the proposed solution. Adding domain specific knowledge in the task planning (to ensure that motion planning will succeed) speeds up the search. However, in the general case, we think that it is not always possible / convenient to incorporate such geometric reasoning (reachability of a view point, reachability of an object) in the logical reasoning. 
 
 \subsubsection{Execution time and scalability}
 
-The overall planning time is dominated by the motion planning (see table.~\ref{table:times}). As long as the model is simple (A or B) or the exploration kept low ($C_0= 0.25$), motion planning is dominated by the single pass of joint optimization. The execution time of this pass mainly depends on the total number of action steps in the policy and on the belief state size but is independent from the number of iterations occurring before. In the configurations requiring the largest number of iterations (C1 and C2 with $C_0 = 0.015$), motion planning and the overall planning time are dominated by the piecewise motion planning phases of the policy improvement iterations. %It also appears clearly that scalability is a crucial problematic here. All the parameters of the problem increase drastically with the size of the belief state (graph size, required number of iterations, size of the resulting policy, computation time).%
-Parameterizing the search with a very exploratory behavior may be feasible for problems of small sizes but suffers from the curse of dimensionality. One way to still enable some exploration while maintaining a bounded planning time is to save the best candidate policy planned so far and interrupt the iterations when a given time limit is reached.
+The planning time is dominated by the motion planning (see table.~\ref{table:times}). For the simplest problems requiring the smallest number of iterations (A or B), joint optimization is the longest step. The execution time of this step depends on the total number of actions (typically around 33 for C or D) and on the belief state size, but it is independent from the number of iterations having occurred before. When more iterations take place (C, D), the planning time is dominated by the piecewise motion planning. %It also appears clearly that scalability is a crucial problematic here. All the parameters of the problem increase drastically with the size of the belief state (graph size, required number of iterations, size of the resulting policy, computation time).%
+%For maintaining a bounded planning time while still enabling some exploration, an improvement would be to save the best policy planned so far and interrupt the search when a time limit is reached.
 
 \subsection{Comparison against another TAMP Planner}
 
-We used the block example introduced above to benchmark the proposed solver against the \textit{Task Motion Kit} (TMKit) [10] in the fully-observable case. This solver implements the \textit{Incremental Task and Motion Planning} algorithm (IDTMP) (see [11]). We added a 4-th block in the example to further test the scalability. The benchmark was conducted on an Intel\textregistered Core\texttrademark i3-4100M CPU under Ubuntu 16.04. \ref{table:benchmark} shows planning metrics obtained by running each planner 100 times on each problem.
+We used the block example introduced above to benchmark the proposed solver against the \textit{Task Motion Kit} (TMKit) [10] in the fully-observable case. This solver implements the \textit{Incremental Task and Motion Planning} algorithm (IDTMP) (see [11]). We added a 4th block in the example to further test the scalability. The benchmark was conducted on an Intel\textregistered Core\texttrademark i3-4100M CPU under Ubuntu 16.04. \ref{table:benchmark} shows planning metrics obtained by running each planner 100 times on each problem.
 \begin{center}
 \footnotesize
+\setlength\tabcolsep{4pt} % default value: 6pt
 \begin{tabular}{|c|c|c||c|c|c|}
 \hline 
-\thead{} & \thead{Avg. path\\length} & \thead{std-dev} & \thead{Task\\Planning} & \thead{Motion\\Planning} & \thead{Total (s)}\\
+\thead{} & \thead{Avg. path\\length (m)} & \thead{std-dev} & \thead{Task\\Planning} & \thead{Motion\\Planning} & \thead{Total\\(s)}\\
 \hline 
-\thead{3 blocks\\LGP} & 4.03 & 0.04 & 0.10 & 2.88 & 2.98 \\		    
+\thead{3 blocks - LGP} & 4.03 & 0.04 & 0.10 & 2.88 & 2.98 \\		    
 \hline 
-\thead{3 blocks\\TMKit} & 3.28 & 1.08 & 1.84 & 6.09 & 6.98 \\	
+\thead{3 blocks - TMKit} & 3.28 & 1.08 & 1.84 & 6.09 & 6.98 \\	
 \hline 
-\thead{4 blocks\\LGP} & 5.79 & 0.04 & 0.36 & 4.62 & 4.98 \\		    
+\thead{4 blocks - LGP} & 5.79 & 0.04 & 0.36 & 4.62 & 4.98 \\		    
 \hline 
-\thead{4 blocks\\TMKit} & 7.54 & 1.12 & 11.32 & 20.39 & 31.72 \\		
+\thead{4 blocks - TMKit} & 7.54 & 1.12 & 11.32 & 20.39 & 31.72 \\		
 \hline 
 \end{tabular}
 \captionof{table}{\label{table:benchmark}Planner comparison}
 \end{center}
 The proposed planner is faster than the TMKit for this given problem. We also report on path length but note that LGP actually optimizes for path smoothness (TMKit paths are not smooth). The trajectories planned with the LGP are similar across multiple runs (low standard deviation). On the other hand, the paths of the TMKit (obtained with the RRT-Connect algorithm) vary much more. 
-One reason for the longer planning time of the TMKit lies in the interface between the Motion and Task Planner. Motion planning queries are composed of the start and goal pose of a given frame (robot end-effector or object). This requires to know the final pose before motion planning. To generate candidate goal poses, the surfaces where an object can be placed (e.g. the table) are discretized. This increases the branching factor of the search which makes it less efficient. Within the LGP framework, a motion planning problem is specified by a start pose plus cost and constraints functions. The final poses are naturaly obtained as a result of the trajectory optimization and don't rely on a discretization of the scene.
+One reason for the longer planning time of the TMKit lies in the interface between the Motion and Task Planner. Motion planning queries are composed of the start and goal poses of a given frame (robot end-effector or object). This requires knowledge of the final pose before motion planning. To generate candidate goal poses, the surfaces where an object can be placed (e.g. the table) are discretized. This increases the branching factor of the search, which makes it less efficient. Within the LGP framework, a motion planning problem is specified by a start pose plus cost and constraints functions. The final poses are naturaly obtained as a result of the trajectory optimization and don't rely on a discretization of the scene.
 
 \subsection{Overtaking behavior}
 
-We consider the overtaking problem introduced previously. Albeit simple, this example highlights the advantage of the joint (vs. piece-wise) trajectory-tree optimization which leads to anticipatory optimal trajectories. Fig.~\ref{fig:overtaking-decision-graph} is the decision graph and Fig.~\ref{fig:overtaking-start-configurations} shows two start configurations. In the first configuration $(a)$, the opposite lane is free enough to overtake. In $(b)$ overtaking is not possible. The Fig.~\ref{fig:overtaking-policy} shows the optimal policy. The trajectory cost of the action \textit{Look} is implemented as the distance between the car and the center of the road. It moves the car toward the center to get sight of the lane (see Fig.~\ref{fig:overtaking-look}). The action \textit{Follow} is implemented as a constraint which is satisfied if the ego-car is behind the truck (with a safety distance) at the end of the action. The action \textit{Overtake truck} is a constraint satisfied if the ego-car is in front of the truck.
+We consider the overtaking problem introduced previously. Albeit simple, this example highlights the advantage of the joint (vs. piece-wise) trajectory-tree optimization, which leads to anticipatory optimal trajectories. Fig.~\ref{fig:overtaking-decision-graph} is the decision graph and Fig.~\ref{fig:overtaking-start-configurations} shows two initial configurations. In the first configuration $(a)$, the opposite lane is free enough to overtake. In $(b)$ overtaking is not possible. The Fig.~\ref{fig:overtaking-policy} shows the optimal policy. The trajectory cost of the action \textit{Look} is implemented as the distance between the car and the center of the road. It moves the car toward the center to catch sight of the lane (see Fig.~\ref{fig:overtaking-look}). The action \textit{Follow} is implemented as a constraint, which is satisfied if the ego-car is behind the truck (keeping a safe distance) at the end of the action. The action \textit{Overtake} is a constraint satisfied if the ego-car is in front of the truck.
 \begin{figure}[h!]
   \centering
       \includegraphics[width=0.5\textwidth]{data/cars/policy.eps}
@@ -613,11 +541,12 @@ We consider the overtaking problem introduced previously. Albeit simple, this ex
   \end{subfigure}
 \end{figure}
 
-This example emphasizes the improvement brought by the joint trajectory optimization. The curves on Fig.~\ref{fig:overtaking-speeds} represent the longitudinal velocities of the trajectory tree for different planning configurations. At $t=6.5 s$, the car receives the observation $[lane\ free]$ or $[NOT\ lane\ free]$. If the lane is free, the car accelerates to overtake and then slows down once the truck is overtaken. Otherwise, the car slows down and move back to follow the truck.
+The curves on Fig.~\ref{fig:overtaking-speeds} represent the longitudinal velocities of the trajectory tree for different planning configurations. At $t=6.5 s$, the car receives the observation $[lane\ free]$ or $[NOT\ lane\ free]$. If the lane is free, the car accelerates to overtake and then slows down once the truck is overtaken. Otherwise, the car slows down and moves back to follow the truck.
 
 \begin{figure}
 \begin{tikzpicture}
 \begin{axis}[
+    height=7.5cm,
     %title={Vehicle Speed},
     xlabel={Time(s)},
     ylabel={Speed (m/s)},
@@ -680,18 +609,20 @@ This example emphasizes the improvement brought by the joint trajectory optimiza
   \caption{\label{fig:overtaking-speeds}Longitudinal speed of the overtaking maneuver}
 \end{figure}
 
-The gray curve results from the piecewise motion planning. When looking at the lanes, the car keeps exactly the same speed (gray curve is flat for $t<6.5s$). When starting to overtake, the car is, still quite far from the truck and accelerates strongly to overtake. On the other hand, the blue and purple curves (Joint Optimization) are much smoother. To avoid a too strong acceleration, the car anticipates and accelerates slightly when looking. If overtaking is possible, the car pursues its acceleration, otherwise, it slows down and go back in the lane. We think that this mimics what human drivers do in case of ``tense'' overtaking maneuver. The initial belief state also influences the behavior. If it is likely that overtaking is possible ($0.7$ likelihood for the blue curve), the car will accelerate more when looking. In practice, the initial belief state could come from a service providing global information about the traffic in the area.
+The gray curve stems from the piecewise motion planning. When looking at the lanes, the car maintains exactly the same velocity (gray curve is flat for $t<6.5s$). When the overtaking kicks in, the car - still quite far from the truck - accelerates vigorously. On the other hand, the blue and purple curves (Joint Optimization) are much smoother. To avoid a too strong acceleration, the car anticipates and accelerates slightly when looking. We think that this mimics what human drivers do in case of ``tense'' overtaking maneuver. The initial belief state also influences the behavior. If it is likely that overtaking is possible ($0.7$ likelihood for the blue curve), the car will accelerate more when looking. In practice, the initial belief state could come from a service providing global information about the traffic in the area.
 
 \section{Conclusion \& Future Work}
 
-\marc{perhaps shorten}
-
 We proposed a new, optimization-based approach to TAMP problems under partial observability.
-It computes a reactive policy in the belief space, spanned by a symbolic decision graph, and a trajectory tree that allows the agent to reactively choose from pre-computed motion options depending on the observations. Thereby it can plan policies that combine exploratory actions (mostly sensor trajectories) and exploitative actions (e.g.\ grasp, place). Within planning, the degree of exploration over the space of all possible manipulations policies can be controlled by the cost initialization parameter, akin to Rmax.
+It computes a reactive policy in the belief space, spanned by a symbolic
+decision graph and its corresponding trajectory tree that allow the agent
+to reactively choose from pre-computed motion options
+depending on the observations. Thereby it can plan policies that combine exploratory actions (mostly sensor trajectories) and exploitative actions (e.g.\ grasp, place). The degree of exploration over the space of all possible manipulation policies is controlled by the cost initialization parameter.
+We are currently working on extending the approach to multi-agent domains (see [12]).
+%Scalability becomes an issue when the number of manipulations and or the size of the belief state increases. An efficient way to speed-up the search is to have a task-level model that is accurately tailored for the problem to solve (example of the grasp precondition), this prevents too many motion planning failures and limits the branching factor. In future work, we intend to explore, how the task-level model can be refined and learned using the results from multiple planning queries.
 
-Scalability becomes an issue when the number of manipulations and or the size of the belief state increases. An efficient way to speed-up the search is to have a task-level model that is accurately tailored for the problem to solve (example of the grasp precondition), this prevents too many motion planning failures and limits the branching factor. In future work, we intend to explore, how the task-level model can be refined and learned using the results from multiple planning queries.
-
-Our current method computes policies that address every possible outcome of probabilistic observations. To scale better, we plan to investigate in an approach where the policy is planned only to handle the most probable belief state trajectories. As such a policy couldn't handle every outcome at execution time, re-planning would be triggered once the execution layer detects that the system is evolving toward a belief state which is not covered by the current policy.
+%Our current method computes policies that address every possible outcome of probabilistic observations.
+%To scale better, we plan to investigate in an approach where the policy is planned only to handle the most probable belief state trajectories. As such a policy couldn't handle every outcome at execution time, re-planning would be triggered once the execution layer detects that the system is evolving toward a belief state which is not covered by the current policy.
 
 %biblio
 \begin{thebibliography}{99}
@@ -707,6 +638,7 @@ Our current method computes policies that address every possible outcome of prob
 \bibitem{c9} F. Lagriffoul, D. Dimitrov, J. Bidot, A. Saffiotti, and L. Karlsson. Efficiently combining task and motion planning using geometric constraints. The International Journal of Robotics Research, 2014
 \bibitem{c10} N. T. Dantam, S. Chaudhuri, and L. E. Kavraki, Incremental Task and Motion Planning: The Task Motion Kit. IEEE Robotics and Automation Magazine, 2018
 \bibitem{c11} N. T. Dantam, Z. K. Kingston, S. Chaudhuri, and L. E. Kavraki, Incremental Task and Motion Planning: A Constraint-Based Approach, in Robotics: Science and Systems, 2016
+\bibitem{c12} C. Phiquepal and M. Toussaint, Multi-Agent Task and Motion Planning: An Optimization based Approach. RSS, Workshop on Integrated Task and Motion Planning, 2018.
 
 
 \end{thebibliography}

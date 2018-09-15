@@ -30,9 +30,9 @@
 \newlabel{fig:overtaking-decision-graph}{{2}{2}{Decision graph for overtaking, the thick edges represent a possible policy\relax }{figure.caption.2}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {III-C}Trajectory Trees}{2}{subsection.3.3}}
 \newlabel{eqCost}{{1}{2}{Trajectory Trees}{equation.3.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {III-D}Optimal Policy and Trajectory Tree}{2}{subsection.3.4}}
 \@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces TAMP algorithm\relax }}{3}{figure.caption.3}}
 \newlabel{fig:algo}{{3}{3}{TAMP algorithm\relax }{figure.caption.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {III-D}Optimal Policy and Trajectory Tree}{3}{subsection.3.4}}
 \@writefile{toc}{\contentsline {section}{\numberline {IV}Solver}{3}{section.4}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {IV-A}Graph Building}{3}{subsection.4.1}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {IV-B}Value Iteration on the decision graph}{3}{subsection.4.2}}
@@ -41,7 +41,7 @@
 \newlabel{ssec:top}{{IV-C}{3}{Piece-wise Trajectory Optimization}{subsection.4.3}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {IV-D}Initialization of $c(a,b)$ and graph exploration}{3}{subsection.4.4}}
 \newlabel{ssec:explo}{{IV-D}{3}{Initialization of $c(a,b)$ and graph exploration}{subsection.4.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {IV-E}Joint Optimization of the Trajectory Tree}{4}{subsection.4.5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {IV-E}Joint Optimization of the Trajectory Tree}{3}{subsection.4.5}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Joint optimization\relax }}{4}{figure.caption.4}}
 \newlabel{fig:joint}{{4}{4}{Joint optimization\relax }{figure.caption.4}{}}
 \newlabel{sec:experiments}{{V}{4}{Experimental Results}{section.5}{}}
@@ -55,22 +55,23 @@
 \newlabel{sub@fig:look-1}{{c}{4}{\textit {Look} with the block in hand\relax }{figure.caption.5}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Example of configurations. The robot must stack the blocks in a given color order. The block colors are not visible from behind\relax }}{4}{figure.caption.5}}
 \newlabel{fig:block-world}{{5}{4}{Example of configurations. The robot must stack the blocks in a given color order. The block colors are not visible from behind\relax }{figure.caption.5}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces Summary of the considered problem variations\relax }}{5}{table.1}}
-\newlabel{table:problems}{{I}{5}{Summary of the considered problem variations\relax }{table.1}{}}
-\newlabel{fig:policy-B2}{{6a}{5}{result policy for B2. The block 3 is checked, then the stacking is continued sequentially\relax }{figure.caption.6}{}}
-\newlabel{sub@fig:policy-B2}{{a}{5}{result policy for B2. The block 3 is checked, then the stacking is continued sequentially\relax }{figure.caption.6}{}}
-\newlabel{fig:policy-A2}{{6b}{5}{result policy for A2\relax }{figure.caption.6}{}}
-\newlabel{sub@fig:policy-A2}{{b}{5}{result policy for A2\relax }{figure.caption.6}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces Summary problem variations\relax }}{4}{table.1}}
+\newlabel{table:problems}{{I}{4}{Summary problem variations\relax }{table.1}{}}
+\newlabel{fig:policy-B2}{{6a}{5}{result policy for B\relax }{figure.caption.6}{}}
+\newlabel{sub@fig:policy-B2}{{a}{5}{result policy for B\relax }{figure.caption.6}{}}
+\newlabel{fig:policy-A2}{{6b}{5}{policy for A\relax }{figure.caption.6}{}}
+\newlabel{sub@fig:policy-A2}{{b}{5}{policy for A\relax }{figure.caption.6}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces Number of iterations and planning times\relax }}{5}{table.2}}
 \newlabel{table:times}{{II}{5}{Number of iterations and planning times\relax }{table.2}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {V-A.1}Influence of $c(a,b)$ initialization}{5}{subsubsection.5.1.1}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces  Policy improvement over Value Iterations depending on the cost initialization $C_0$. The dashed line shows the cost estimates used by the algorithm, which use the prior cost $C_0$ for yet non-evaluated actions. The solid line shows the true costs, not known to the algorithm. (Red is a pessimistic initialization, where the true cost is lower than the prior cost $C_0=0.25$.) \relax }}{5}{figure.caption.7}}
-\newlabel{fig:convergences}{{7}{5}{Policy improvement over Value Iterations depending on the cost initialization $C_0$. The dashed line shows the cost estimates used by the algorithm, which use the prior cost $C_0$ for yet non-evaluated actions. The solid line shows the true costs, not known to the algorithm. (Red is a pessimistic initialization, where the true cost is lower than the prior cost $C_0=0.25$.) \relax }{figure.caption.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces  Policy improvement over iterations depending on the cost initialization $c(a,b)=C_0$.\relax }}{5}{figure.caption.7}}
+\newlabel{fig:convergences}{{7}{5}{Policy improvement over iterations depending on the cost initialization $c(a,b)=C_0$.\relax }{figure.caption.7}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {V-A.1}Influence of $C_0$}{5}{subsubsection.5.1.1}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {V-A.2}Influence of the action precondition}{5}{subsubsection.5.1.2}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {V-A.3}Execution time and scalability}{6}{subsubsection.5.1.3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {V-B}Comparison against another TAMP Planner}{6}{subsection.5.2}}
-\@writefile{lot}{\contentsline {table}{\numberline {III}{\ignorespaces Planner comparison\relax }}{6}{table.3}}
-\newlabel{table:benchmark}{{III}{6}{Planner comparison\relax }{table.3}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {V-A.3}Execution time and scalability}{5}{subsubsection.5.1.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {V-B}Comparison against another TAMP Planner}{5}{subsection.5.2}}
+\@writefile{lot}{\contentsline {table}{\numberline {III}{\ignorespaces Planner comparison\relax }}{5}{table.3}}
+\newlabel{table:benchmark}{{III}{5}{Planner comparison\relax }{table.3}{}}
+\bibcite{c1}{1}
 \@writefile{toc}{\contentsline {subsection}{\numberline {V-C}Overtaking behavior}{6}{subsection.5.3}}
 \@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Overtaking optimal policy\relax }}{6}{figure.caption.8}}
 \newlabel{fig:overtaking-policy}{{8}{6}{Overtaking optimal policy\relax }{figure.caption.8}{}}
@@ -78,7 +79,9 @@
 \newlabel{sub@fig:overtaking-start-configurations}{{a}{6}{two start configurations\relax }{figure.caption.9}{}}
 \newlabel{fig:overtaking-look}{{9b}{6}{\textit {Look} action, the ego vehicle moved to the road center to observe the lanes\relax }{figure.caption.9}{}}
 \newlabel{sub@fig:overtaking-look}{{b}{6}{\textit {Look} action, the ego vehicle moved to the road center to observe the lanes\relax }{figure.caption.9}{}}
-\bibcite{c1}{1}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Longitudinal speed of the overtaking maneuver\relax }}{6}{figure.caption.10}}
+\newlabel{fig:overtaking-speeds}{{10}{6}{Longitudinal speed of the overtaking maneuver\relax }{figure.caption.10}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {VI}Conclusion \& Future Work}{6}{section.6}}
 \bibcite{c2}{2}
 \bibcite{c3}{3}
 \bibcite{c4}{4}
@@ -89,7 +92,5 @@
 \bibcite{c9}{9}
 \bibcite{c10}{10}
 \bibcite{c11}{11}
-\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Longitudinal speed of the overtaking maneuver\relax }}{7}{figure.caption.10}}
-\newlabel{fig:overtaking-speeds}{{10}{7}{Longitudinal speed of the overtaking maneuver\relax }{figure.caption.10}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {VI}Conclusion \& Future Work}{7}{section.6}}
+\bibcite{c12}{12}
 \@writefile{toc}{\contentsline {section}{References}{7}{section*.11}}

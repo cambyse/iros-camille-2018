@@ -1,0 +1,118 @@
+digraph g{
+bgcolor="transparent"{
+0 [style=filled, fillcolor=blue]
+24 [style=filled, fillcolor=green]
+28 [style=filled, fillcolor=green]
+32 [style=filled, fillcolor=green]
+34 [style=filled, fillcolor=green]
+36 [style=filled, fillcolor=green]
+}
+0->1 [ label="unstack(block_3,block_1)
+r=-0.000734915
+" ];
+1->2 [ label="put-down(block_3,tableC)
+r=-0.015
+" ];
+2->3 [ label="pick-up(block_1,tableC)
+r=-0.015
+" ];
+3->4 [ label="check(block_1)
+r=-0.015
+" ];
+4->5 [ label="put-down(block_1,tableC)
+r=-0.015
+" ];
+5->8 [ label="pick-up(block_2,tableC)
+r=-0.015
+" ];
+8->11 [ label="check(block_2)
+r=-0.015
+" ];
+11->14 [ label="stack(block_2,block_3)
+r=-0.0498787
+" ];
+14->19 [ label="pick-up(block_1,tableC)
+r=-0.000547179
+" ];
+19->24 [ label="stack(block_1,block_2)
+r=-0.0560656
+" ];
+11->15 [ label="put-down(block_2,tableC)
+r=-0.015
+" ];
+15->20 [ label="pick-up(block_3,tableC)
+r=-0.015
+" ];
+20->25 [ label="stack(block_3,block_2)
+r=-0.0435454
+" ];
+25->29 [ label="pick-up(block_1,tableC)
+r=-0.000349296
+" ];
+29->32 [ label="stack(block_1,block_3)
+r=-0.0499475
+" ];
+4->6 [ label="stack(block_1,block_2)
+r=-0.015
+" ];
+6->9 [ label="pick-up(block_3,tableC)
+r=-0.015
+" ];
+9->12 [ label="stack(block_3,block_1)
+r=-0.015
+" ];
+12->16 [ label="check(block_3)
+r=-0.015
+" ];
+16->21 [ label="unstack(block_3,block_1)
+r=-0.015
+" ];
+21->26 [ label="put-down(block_3,tableC)
+r=-0.015
+" ];
+26->30 [ label="unstack(block_1,block_2)
+r=-0.015
+" ];
+30->33 [ label="stack(block_1,block_3)
+r=-0.0543323
+" ];
+33->35 [ label="pick-up(block_2,tableC)
+r=-0.000233974
+" ];
+35->36 [ label="stack(block_2,block_1)
+r=-0.041357
+" ];
+4->7 [ label="put-down(block_1,tableC)
+r=-0.015
+" ];
+7->10 [ label="pick-up(block_2,tableC)
+r=-0.015
+" ];
+10->13 [ label="check(block_2)
+r=-0.015
+" ];
+13->17 [ label="put-down(block_2,tableC)
+r=-0.015
+" ];
+17->22 [ label="pick-up(block_3,tableC)
+r=-0.015
+" ];
+22->27 [ label="stack(block_3,block_1)
+r=-0.0757287
+" ];
+27->31 [ label="pick-up(block_2,tableC)
+r=-0.00034207
+" ];
+31->34 [ label="stack(block_2,block_3)
+r=-0.0684321
+" ];
+13->18 [ label="stack(block_2,block_1)
+r=-0.0520817
+" ];
+18->23 [ label="pick-up(block_3,tableC)
+r=-0.000328775
+" ];
+23->28 [ label="stack(block_3,block_2)
+r=-0.0478518
+" ];
+}

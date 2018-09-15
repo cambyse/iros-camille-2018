@@ -1,13 +1,14 @@
 digraph g{
 rankdir="LR"
 edge[fontsize = 20];
-5 [style=filled, fillcolor=green]
-4 [style=filled, fillcolor=green]
 0 [style=filled, fillcolor=blue]
+2 [label="4"]
+4 [label="0'", style=filled, fillcolor=green]
+5 [style=filled, fillcolor=green]
 1 [ shape=box ] ;
-0->1 [ label="(look lane_2)" ];
-1->2 [ label="[NOT free lane_2]" ];
+0->1 [ label="(look lane)" ];
+1->2 [ label="[NOT free lane]" ];
 2->4 [ label="(follow truck)" ];
-1->3 [ label="[free lane_2]" ];
-3->5 [ label="(overtake truck)" ];
+1->3 [ label="[free lane]" ];
+3->5 [ label="(overtake)" ];
 }

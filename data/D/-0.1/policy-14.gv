@@ -1,0 +1,113 @@
+digraph g{
+bgcolor="transparent"{
+0 [style=filled, fillcolor=blue]
+25 [style=filled, fillcolor=green]
+27 [style=filled, fillcolor=green]
+28 [style=filled, fillcolor=green]
+29 [style=filled, fillcolor=green]
+33 [style=filled, fillcolor=green]
+34 [style=filled, fillcolor=green]
+}
+0->1 [ label="unstack(block_3,block_1)
+r=-0.1
+" ];
+1->2 [ label="check(block_3)
+r=-0.1
+" ];
+2->3 [ label="put-down(block_3,tableC)
+r=-0.1
+" ];
+3->6 [ label="pick-up(block_1,tableC)
+r=-0.1
+" ];
+6->9 [ label="check(block_1)
+r=-0.1
+" ];
+9->13 [ label="stack(block_1,block_2)
+r=-0.1
+" ];
+13->19 [ label="pick-up(block_3,tableC)
+r=-0.1
+" ];
+19->25 [ label="stack(block_3,block_1)
+r=-0.1
+" ];
+9->14 [ label="put-down(block_1,tableC)
+r=-0.1
+" ];
+14->20 [ label="pick-up(block_2,tableC)
+r=-0.1
+" ];
+20->26 [ label="stack(block_2,block_1)
+r=-0.1
+" ];
+26->31 [ label="pick-up(block_3,tableC)
+r=-0.1
+" ];
+31->33 [ label="stack(block_3,block_2)
+r=-0.1
+" ];
+2->4 [ label="put-down(block_3,tableC)
+r=-0.1
+" ];
+4->7 [ label="check(block_1)
+r=-0.1
+" ];
+7->10 [ label="pick-up(block_3,tableC)
+r=-0.1
+" ];
+10->15 [ label="stack(block_3,block_2)
+r=-0.1
+" ];
+15->21 [ label="pick-up(block_1,tableC)
+r=-0.1
+" ];
+21->27 [ label="stack(block_1,block_3)
+r=-0.1
+" ];
+7->11 [ label="pick-up(block_3,tableC)
+r=-0.1
+" ];
+11->16 [ label="stack(block_3,block_1)
+r=-0.1
+" ];
+16->22 [ label="pick-up(block_2,tableC)
+r=-0.1
+" ];
+22->28 [ label="stack(block_2,block_3)
+r=-0.1
+" ];
+2->5 [ label="put-down(block_3,tableC)
+r=-0.1
+" ];
+5->8 [ label="pick-up(block_2,tableC)
+r=-0.1
+" ];
+8->12 [ label="check(block_2)
+r=-0.1
+" ];
+12->17 [ label="stack(block_2,block_3)
+r=-0.1
+" ];
+17->23 [ label="pick-up(block_1,tableC)
+r=-0.1
+" ];
+23->29 [ label="stack(block_1,block_2)
+r=-0.1
+" ];
+12->18 [ label="put-down(block_2,tableC)
+r=-0.1
+" ];
+18->24 [ label="pick-up(block_1,tableC)
+r=-0.1
+" ];
+24->30 [ label="stack(block_1,block_3)
+r=-0.1
+" ];
+30->32 [ label="pick-up(block_2,tableC)
+r=-0.1
+" ];
+32->34 [ label="stack(block_2,block_1)
+r=-0.1
+" ];
+}

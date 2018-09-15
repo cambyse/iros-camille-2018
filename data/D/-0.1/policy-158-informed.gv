@@ -1,0 +1,164 @@
+digraph g{
+bgcolor="transparent"{
+0 [style=filled, fillcolor=blue]
+31 [style=filled, fillcolor=green]
+39 [style=filled, fillcolor=green]
+40 [style=filled, fillcolor=green]
+45 [style=filled, fillcolor=green]
+50 [style=filled, fillcolor=green]
+51 [style=filled, fillcolor=green]
+}
+0->1 [ label="unstack(block_3,block_1)
+r=-0.000732547
+" ];
+1->2 [ label="put-down(block_3,tableC)
+r=-0.0360425
+" ];
+2->3 [ label="pick-up(block_1,tableC)
+r=-0.00033832
+" ];
+3->4 [ label="stack(block_1,block_3)
+r=-0.1
+" ];
+4->5 [ label="pick-up(block_2,tableC)
+r=-0.1
+" ];
+5->6 [ label="check(block_2)
+r=-0.1
+" ];
+6->7 [ label="put-down(block_2,tableC)
+r=-0.1
+" ];
+7->10 [ label="unstack(block_1,block_3)
+r=-0.1
+" ];
+10->14 [ label="stack(block_1,block_2)
+r=-0.1
+" ];
+14->18 [ label="pick-up(block_3,tableC)
+r=-0.1
+" ];
+18->22 [ label="check(block_3)
+r=-0.1
+" ];
+22->26 [ label="put-down(block_3,tableC)
+r=-0.1
+" ];
+26->32 [ label="unstack(block_1,block_2)
+r=-0.1
+" ];
+32->37 [ label="stack(block_1,block_3)
+r=-0.0563228
+" ];
+37->42 [ label="pick-up(block_2,tableC)
+r=-0.000273288
+" ];
+42->45 [ label="stack(block_2,block_1)
+r=-0.0429904
+" ];
+22->27 [ label="put-down(block_3,tableC)
+r=-0.1
+" ];
+27->33 [ label="unstack(block_1,block_2)
+r=-0.1
+" ];
+33->38 [ label="put-down(block_1,tableC)
+r=-0.0807382
+" ];
+38->43 [ label="pick-up(block_3,tableC)
+r=-0.000303219
+" ];
+43->46 [ label="stack(block_3,block_1)
+r=-0.0757786
+" ];
+46->48 [ label="pick-up(block_2,tableC)
+r=-0.000368884
+" ];
+48->50 [ label="stack(block_2,block_3)
+r=-0.0863848
+" ];
+6->8 [ label="check(block_1)
+r=-1.79769e+308
+" ];
+8->11 [ label="put-down(block_2,tableC)
+r=-0.0374535
+" ];
+11->15 [ label="unstack(block_1,block_3)
+r=-0.000393407
+" ];
+15->19 [ label="put-down(block_1,tableC)
+r=-0.067948
+" ];
+19->23 [ label="pick-up(block_2,tableC)
+r=-0.000458836
+" ];
+23->28 [ label="stack(block_2,block_3)
+r=-0.0893733
+" ];
+28->34 [ label="pick-up(block_1,tableC)
+r=-0.00050233
+" ];
+34->39 [ label="stack(block_1,block_2)
+r=-0.0559754
+" ];
+8->12 [ label="put-down(block_2,tableC)
+r=-0.0366654
+" ];
+12->16 [ label="unstack(block_1,block_3)
+r=-0.000376021
+" ];
+16->20 [ label="put-down(block_1,tableC)
+r=-0.0739507
+" ];
+20->24 [ label="pick-up(block_2,tableC)
+r=-0.000390712
+" ];
+24->29 [ label="stack(block_2,block_1)
+r=-0.0520783
+" ];
+29->35 [ label="pick-up(block_3,tableC)
+r=-0.000302205
+" ];
+35->40 [ label="stack(block_3,block_2)
+r=-0.0479521
+" ];
+6->9 [ label="put-down(block_2,tableC)
+r=-0.1
+" ];
+9->13 [ label="unstack(block_1,block_3)
+r=-0.1
+" ];
+13->17 [ label="stack(block_1,block_2)
+r=-0.1
+" ];
+17->21 [ label="pick-up(block_3,tableC)
+r=-0.1
+" ];
+21->25 [ label="check(block_3)
+r=-0.1
+" ];
+25->30 [ label="put-down(block_3,tableC)
+r=-0.1
+" ];
+30->36 [ label="unstack(block_1,block_2)
+r=-0.1
+" ];
+36->41 [ label="put-down(block_1,tableC)
+r=-0.0808731
+" ];
+41->44 [ label="pick-up(block_3,tableC)
+r=-0.00029143
+" ];
+44->47 [ label="stack(block_3,block_2)
+r=-0.0476742
+" ];
+47->49 [ label="pick-up(block_1,tableC)
+r=-0.000414353
+" ];
+49->51 [ label="stack(block_1,block_3)
+r=-0.0540422
+" ];
+25->31 [ label="stack(block_3,block_1)
+r=-0.051302
+" ];
+}
