@@ -540,8 +540,9 @@ We consider the overtaking problem introduced previously (see \ref{ssec:decision
       \includegraphics[width=\textwidth]{data/cars/follow.png}
       \caption{the ego vehicle moves back to its lane (opposite lane not free)}
   \end{subfigure}
+  \caption{\label{fig:starts} Geometric configurations for the car example}
 \end{figure}
-\caption{\label{fig:overtaking-speeds}Longitudinal speed of the overtaking maneuver}
+
 
 The curves on Fig.~\ref{fig:overtaking-speeds} represent the longitudinal velocities of the trajectory tree for different planning configurations. At $t=6.5 s$, the car receives the observation $[lane\ free]$ or $[NOT\ lane\ free]$. If the lane is free, the car accelerates to overtake and then slows down once the truck is overtaken. Otherwise, the car slows down and moves back to follow the truck.
 
